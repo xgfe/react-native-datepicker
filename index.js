@@ -194,30 +194,34 @@ class DatePicker extends Component {
               underlayColor={'#00000077'}
               onPress={this.onPressCancel}
             >
-              <View style={Style.datePickerCon}>
-                <DatePickerIOS
-                  date={this.state.date}
-                  mode={this.mode}
-                  minimumDate={this.props.minDate && this.getDate(this.props.minDate)}
-                  maximumDate={this.props.maxDate && this.getDate(this.props.maxDate)}
-                  onDateChange={(date) => this.setState({date: date})}
-                  style={Style.datePicker}
-                />
-                <TouchableHighlight
-                  underlayColor={'transparent'}
-                  onPress={this.onPressCancel}
-                  style={[Style.btnText, Style.btnCancel]}
-                >
-                  <Text style={[Style.btnTextText, Style.btnTextCancel]}>取消</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  underlayColor={'transparent'}
-                  onPress={this.onPressConfirm}
-                  style={[Style.btnText, Style.btnConfirm]}
-                >
-                  <Text style={Style.btnTextText}>确定</Text>
-                </TouchableHighlight>
-              </View>
+              <TouchableHighlight
+                underlayColor={'#fff'}
+              >
+                <View style={Style.datePickerCon}>
+                  <DatePickerIOS
+                    date={this.state.date}
+                    mode={this.mode}
+                    minimumDate={this.props.minDate && this.getDate(this.props.minDate)}
+                    maximumDate={this.props.maxDate && this.getDate(this.props.maxDate)}
+                    onDateChange={(date) => this.setState({date: date})}
+                    style={Style.datePicker}
+                  />
+                  <TouchableHighlight
+                    underlayColor={'transparent'}
+                    onPress={this.onPressCancel}
+                    style={[Style.btnText, Style.btnCancel]}
+                  >
+                    <Text style={[Style.btnTextText, Style.btnTextCancel]}>取消</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight
+                    underlayColor={'transparent'}
+                    onPress={this.onPressConfirm}
+                    style={[Style.btnText, Style.btnConfirm]}
+                  >
+                    <Text style={Style.btnTextText}>确定</Text>
+                  </TouchableHighlight>
+                </View>
+              </TouchableHighlight>
             </TouchableHighlight>
           </Modal>}
         </View>
