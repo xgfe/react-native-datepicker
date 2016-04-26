@@ -5,8 +5,10 @@ import React, {
 
 let style = StyleSheet.create({
   dateTouch: {
+    width: 142
+  },
+  dateTouchBody: {
     flexDirection: 'row',
-    width: 142,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center'
@@ -14,7 +16,8 @@ let style = StyleSheet.create({
   dateIcon: {
     width: 32,
     height: 32,
-    marginLeft: 5
+    marginLeft: 5,
+    marginRight: 5
   },
   dateInput: {
     flex: 1,
@@ -62,6 +65,9 @@ let style = StyleSheet.create({
   datePicker: {
     borderTopColor: '#ccc',
     borderTopWidth: 1
+  },
+  disabled: {
+    backgroundColor: '#eee'
   }
 });
 

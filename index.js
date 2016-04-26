@@ -39,7 +39,7 @@ class DatePicker extends Component {
   state = {
     date: this.getDate(),
     modalVisible: false,
-    disabled: false
+    disabled: this.props.disabled
   };
 
   componentWillMount() {
@@ -171,11 +171,12 @@ class DatePicker extends Component {
 
     return (
       <TouchableHighlight
+        style={[Style.dateTouch, this.props.style]}
         underlayColor={'transparent'}
         onPress={this.onPressDate}
       >
-        <View style={[Style.dateTouch, this.props.style]}>
-          <View style={[Style.dateInput]}>
+        <View style={Style.dateTouchBody}>
+          <View style={[Style.dateInput, this.state.disabled && Style.disabled]}>
             <Text style={Style.dateText}>{this.getDateStr()}</Text>
           </View>
           <Image
