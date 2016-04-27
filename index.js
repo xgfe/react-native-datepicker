@@ -9,7 +9,8 @@ import React, {
   DatePickerAndroid,
   TimePickerAndroid,
   DatePickerIOS,
-  Platform
+  Platform,
+  Animated
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
@@ -35,11 +36,16 @@ class DatePicker extends Component {
 
   format = this.props.format;
   mode = this.props.mode || 'date';
+  // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
+  height = 259;
+  // slide animation duration time, default to 300ms, IOS only
+  duration = this.props.duration || 300;
 
   state = {
     date: this.getDate(),
     modalVisible: false,
-    disabled: this.props.disabled
+    disabled: this.props.disabled,
+    animatedHeight: new Animated.Value(0)
   };
 
   componentWillMount() {
@@ -57,6 +63,21 @@ class DatePicker extends Component {
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
+
+    // slide animation
+    if (visible) {
+      Animated.timing(
+        this.state.animatedHeight,
+        {
+          toValue: this.height,
+          duration: this.duration
+        }
+      ).start();
+    } else {
+      this.setState({
+        animatedHeight: new Animated.Value(0)
+      })
+    }
   }
 
   onPressCancel() {
@@ -184,7 +205,6 @@ class DatePicker extends Component {
             source={require('./date_icon.png')}
           />
           {Platform.OS === 'ios' && <Modal
-            animated={true}
             transparent={true}
             visible={this.state.modalVisible}
             onRequestClose={() => {this.setModalVisible(false)}}
@@ -197,7 +217,7 @@ class DatePicker extends Component {
               <TouchableHighlight
                 underlayColor={'#fff'}
               >
-                <View style={Style.datePickerCon}>
+                <Animated.View style={[Style.datePickerCon, {height: this.state.animatedHeight}]}>
                   <DatePickerIOS
                     date={this.state.date}
                     mode={this.mode}
@@ -220,7 +240,7 @@ class DatePicker extends Component {
                   >
                     <Text style={Style.btnTextText}>确定</Text>
                   </TouchableHighlight>
-                </View>
+                </Animated.View>
               </TouchableHighlight>
             </TouchableHighlight>
           </Modal>}

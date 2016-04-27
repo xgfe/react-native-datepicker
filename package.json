@@ -22,5 +22,13 @@
   "homepage": "https://github.com/xgfe/react-native-datepicker#readme",
   "dependencies": {
     "moment": "2.x.x"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^1.1.6"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
