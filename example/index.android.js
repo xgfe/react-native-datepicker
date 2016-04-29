@@ -36,7 +36,7 @@ class example extends Component {
           maxDate="2016-06-01"
           onDateChange={(date) => {this.setState({date: date})}}
         />
-        <Text style={styles.instructions}>{this.state.date}</Text>
+        <Text style={styles.instructions}>date: {this.state.date}</Text>
         <DatePicker
           style={{width: 200}}
           date={this.state.time}
@@ -44,7 +44,7 @@ class example extends Component {
           format="HH:mm"
           onDateChange={(time) => {this.setState({time: time})}}
         />
-        <Text style={styles.instructions}>{this.state.time}</Text>
+        <Text style={styles.instructions}>time: {this.state.time}</Text>
         <DatePicker
           style={{width: 200}}
           date={this.state.datetime}
@@ -52,7 +52,7 @@ class example extends Component {
           format="YYYY-MM-DD HH:mm"
           onDateChange={(datetime) => {this.setState({datetime: datetime})}}
         />
-        <Text style={styles.instructions}>{this.state.datetime}</Text>
+        <Text style={styles.instructions}>datetime: {this.state.datetime}</Text>
       </View>
     );
   }
