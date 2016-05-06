@@ -45,6 +45,7 @@ class DatePicker extends Component {
   cancelBtnText = this.props.cancelBtnText || '取消';
 
   iconSource = this.props.iconSource || require('./date_icon.png');
+  customStyles = this.props.customStyles || {};
 
   state = {
     date: this.getDate(),
@@ -201,12 +202,12 @@ class DatePicker extends Component {
         underlayColor={'transparent'}
         onPress={this.onPressDate}
       >
-        <View style={Style.dateTouchBody}>
-          <View style={[Style.dateInput, this.state.disabled && Style.disabled]}>
-            <Text style={Style.dateText}>{this.getDateStr()}</Text>
+        <View style={[Style.dateTouchBody, this.customStyles.dateTouchBody]}>
+          <View style={[Style.dateInput, this.customStyles.dateInput, this.state.disabled && Style.disabled]}>
+            <Text style={[Style.dateText, this.customStyles.dateText]}>{this.getDateStr()}</Text>
           </View>
           <Image
-            style={Style.dateIcon}
+            style={[Style.dateIcon, this.customStyles.dateIcon]}
             source={this.iconSource}
           />
           {Platform.OS === 'ios' && <Modal
@@ -216,34 +217,35 @@ class DatePicker extends Component {
           >
             <TouchableHighlight
               style={Style.datePickerMask}
+              activeOpacity={1}
               underlayColor={'#00000077'}
               onPress={this.onPressCancel}
             >
               <TouchableHighlight
                 underlayColor={'#fff'}
               >
-                <Animated.View style={[Style.datePickerCon, {height: this.state.animatedHeight}]}>
+                <Animated.View style={[Style.datePickerCon, {height: this.state.animatedHeight}, this.customStyles.datePickerCon]}>
                   <DatePickerIOS
                     date={this.state.date}
                     mode={this.mode}
                     minimumDate={this.props.minDate && this.getDate(this.props.minDate)}
                     maximumDate={this.props.maxDate && this.getDate(this.props.maxDate)}
                     onDateChange={(date) => this.setState({date: date})}
-                    style={Style.datePicker}
+                    style={[Style.datePicker, this.customStyles.datePicker]}
                   />
                   <TouchableHighlight
                     underlayColor={'transparent'}
                     onPress={this.onPressCancel}
-                    style={[Style.btnText, Style.btnCancel]}
+                    style={[Style.btnText, Style.btnCancel, this.customStyles.btnCancel]}
                   >
-                    <Text style={[Style.btnTextText, Style.btnTextCancel]}>{this.cancelBtnText}</Text>
+                    <Text style={[Style.btnTextText, Style.btnTextCancel, this.customStyles.btnTextCancel]}>{this.cancelBtnText}</Text>
                   </TouchableHighlight>
                   <TouchableHighlight
                     underlayColor={'transparent'}
                     onPress={this.onPressConfirm}
-                    style={[Style.btnText, Style.btnConfirm]}
+                    style={[Style.btnText, Style.btnConfirm, this.customStyles.btnConfirm]}
                   >
-                    <Text style={Style.btnTextText}>{this.confirmBtnText}</Text>
+                    <Text style={[Style.btnTextText, this.customStyles.btnTextConfirm]}>{this.confirmBtnText}</Text>
                   </TouchableHighlight>
                 </Animated.View>
               </TouchableHighlight>

@@ -39,12 +39,13 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | date | - | `string | date` | Specify the display date of DatePicker. `string` type value must match the specified format  |
 | mode | 'date' | `enum` | The `enum` of `date`, `datetime` and `time` |
 | format | 'YYYY-MM-DD' | `string` | Specify the display format of the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
-| confirmBtnText | - | `string` | Specify the text of confirm btn in ios. |
-| cancelBtnText | - | `string` | Specify the text of cancel btn in ios. |
+| confirmBtnText | '确定' | `string` | Specify the text of confirm btn in ios. |
+| cancelBtnText | '取消' | `string` | Specify the text of cancel btn in ios. |
 | iconSource | - | `{uri: string} | number` | Specify the icon. Same as the `source` of Image, always using `require()` |
 | minDate | - | `string | date` | Restricts the range of possible date values. |
 | maxDate | - | `string | date` | Restricts the range of possible date values. |
-| duration | 300 | `number` | Specify the animation duration of datepicker.
+| duration | 300 | `number` | Specify the animation duration of datepicker.|
+| customStyles | - | `number` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
 
 ## Methods
 
