@@ -34,6 +34,8 @@ class example extends Component {
           format="YYYY-MM-DD"
           minDate="2016-05-01"
           maxDate="2016-06-01"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           onDateChange={(date) => {this.setState({date: date})}}
         />
         <Text style={styles.instructions}>date: {this.state.date}</Text>
@@ -42,6 +44,8 @@ class example extends Component {
           date={this.state.time}
           mode="time"
           format="HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           onDateChange={(time) => {this.setState({time: time})}}
         />
         <Text style={styles.instructions}>time: {this.state.time}</Text>
@@ -50,6 +54,8 @@ class example extends Component {
           date={this.state.datetime}
           mode="datetime"
           format="YYYY-MM-DD HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           onDateChange={(datetime) => {this.setState({datetime: datetime})}}
         />
         <Text style={styles.instructions}>datetime: {this.state.datetime}</Text>

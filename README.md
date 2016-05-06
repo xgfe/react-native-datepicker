@@ -23,6 +23,8 @@ Check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/exa
   format="YYYY-MM-DD"
   minDate="2016-05-01"
   maxDate="2016-06-01"
+  confirmBtnText="Confirm"
+  cancelBtnText="Cancel"
   onDateChange={(date) => {this.setState({date: date})}}
 />
 ```
@@ -37,6 +39,8 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | date | - | `string | date` | Specify the display date of DatePicker. `string` type value must match the specified format  |
 | mode | 'date' | `enum` | The `enum` of `date`, `datetime` and `time` |
 | format | 'YYYY-MM-DD' | `string` | Specify the display format of the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
+| confirmBtnText | - | `string` | Specify the text of confirm btn in ios. |
+| cancelBtnText | - | `string` | Specify the text of cancel btn in ios. |
 | minDate | - | `string | date` | Restricts the range of possible date values. |
 | maxDate | - | `string | date` | Restricts the range of possible date values. |
 | duration | 300 | `number` | Specify the animation duration of datepicker.

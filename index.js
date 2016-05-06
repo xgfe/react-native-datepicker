@@ -41,6 +41,9 @@ class DatePicker extends Component {
   // slide animation duration time, default to 300ms, IOS only
   duration = this.props.duration || 300;
 
+  confirmBtnText = this.props.confirmBtnText || '确定';
+  cancelBtnText = this.props.cancelBtnText || '取消';
+
   state = {
     date: this.getDate(),
     modalVisible: false,
@@ -231,14 +234,14 @@ class DatePicker extends Component {
                     onPress={this.onPressCancel}
                     style={[Style.btnText, Style.btnCancel]}
                   >
-                    <Text style={[Style.btnTextText, Style.btnTextCancel]}>取消</Text>
+                    <Text style={[Style.btnTextText, Style.btnTextCancel]}>{this.cancelBtnText}</Text>
                   </TouchableHighlight>
                   <TouchableHighlight
                     underlayColor={'transparent'}
                     onPress={this.onPressConfirm}
                     style={[Style.btnText, Style.btnConfirm]}
                   >
-                    <Text style={Style.btnTextText}>确定</Text>
+                    <Text style={Style.btnTextText}>{this.confirmBtnText}</Text>
                   </TouchableHighlight>
                 </Animated.View>
               </TouchableHighlight>
