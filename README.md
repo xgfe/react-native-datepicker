@@ -41,6 +41,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | format | 'YYYY-MM-DD' | `string` | Specify the display format of the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
 | confirmBtnText | - | `string` | Specify the text of confirm btn in ios. |
 | cancelBtnText | - | `string` | Specify the text of cancel btn in ios. |
+| iconSource | - | `{uri: string} | number` | Specify the icon. Same as the `source` of Image, always using `require()` |
 | minDate | - | `string | date` | Restricts the range of possible date values. |
 | maxDate | - | `string | date` | Restricts the range of possible date values. |
 | duration | 300 | `number` | Specify the animation duration of datepicker.

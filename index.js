@@ -44,6 +44,8 @@ class DatePicker extends Component {
   confirmBtnText = this.props.confirmBtnText || '确定';
   cancelBtnText = this.props.cancelBtnText || '取消';
 
+  iconSource = this.props.iconSource || require('./date_icon.png');
+
   state = {
     date: this.getDate(),
     modalVisible: false,
@@ -205,7 +207,7 @@ class DatePicker extends Component {
           </View>
           <Image
             style={Style.dateIcon}
-            source={require('./date_icon.png')}
+            source={this.iconSource}
           />
           {Platform.OS === 'ios' && <Modal
             transparent={true}

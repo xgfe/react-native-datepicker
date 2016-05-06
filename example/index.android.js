@@ -36,6 +36,7 @@ class example extends Component {
           maxDate="2016-06-01"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
+          iconSource={require('./google_calendar.png')}
           onDateChange={(date) => {this.setState({date: date})}}
         />
         <Text style={styles.instructions}>date: {this.state.date}</Text>
