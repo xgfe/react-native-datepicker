@@ -1,3 +1,10 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/xgfe/react-native-datepicker/compare/v1.1.0...v1.2.0) (2016-05-17)
+
+### Breaking Change
+
+* Upgrade Requiring React API, Requiring from react-native is now deprecated. Work after 0.24.[53b0846](https://github.com/xgfe/react-native-datepicker/commit/53b0846)
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/xgfe/react-native-datepicker/compare/v1.0.3...v1.1.0) (2016-05-06)
 
