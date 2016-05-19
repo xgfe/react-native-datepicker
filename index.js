@@ -223,6 +223,7 @@ class DatePicker extends Component {
             >
               <TouchableHighlight
                 underlayColor={'#fff'}
+                style={{flex:1}}
               >
                 <Animated.View style={[Style.datePickerCon, {height: this.state.animatedHeight}, this.customStyles.datePickerCon]}>
                   <DatePickerIOS
