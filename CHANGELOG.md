@@ -1,3 +1,13 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/xgfe/react-native-datepicker/compare/v1.2.0...v1.2.1) (2016-05-19)
+
+
+### Bug Fixes
+
+* **datepicker:** fix datepicker Modal adaptation with different width on ios([b3234bd](https://github.com/xgfe/react-native-datepicker/commit/b3234bd))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/xgfe/react-native-datepicker/compare/v1.1.0...v1.2.0) (2016-05-17)
 
