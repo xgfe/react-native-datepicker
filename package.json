@@ -4,7 +4,8 @@
   "description": "react native datePicker component for both Android and IOS, useing DatePikcerAndroid, TimePickerAndroid and DatePickerIOS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha ./test/*.test.js",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "repository": {
@@ -25,7 +26,18 @@
     "moment": "2.x.x"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^1.1.6"
+    "babel": "^6.5.2",
+    "babel-preset-react-native": "^1.8.0",
+    "chai": "^3.5.0",
+    "cz-conventional-changelog": "^1.1.6",
+    "enzyme": "^2.3.0",
+    "istanbul": "^1.0.0-alpha.2",
+    "mocha": "^2.5.2",
+    "react": "^0.14.8",
+    "react-addons-test-utils": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "react-native": "^0.24.1",
+    "react-native-mock": "^0.2.0"
   },
   "config": {
     "commitizen": {
