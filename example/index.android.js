@@ -15,10 +15,14 @@ import DatePicker from 'react-native-datepicker';
 
 class example extends Component {
 
-  state = {
-    date: '2016-05-06',
-    time: '20:00',
-    datetime: '2016-05-05 20:00'
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      date: '2016-05-06',
+      time: '20:00',
+      datetime: '2016-05-05 20:00'
+    };
   }
 
   render() {
