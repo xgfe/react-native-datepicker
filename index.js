@@ -21,8 +21,6 @@ const FORMATS = {
 };
 
 class DatePicker extends Component {
-
-  // 构造
   constructor(props) {
     super(props);
 
@@ -81,7 +79,7 @@ class DatePicker extends Component {
     } else {
       this.setState({
         animatedHeight: new Animated.Value(0)
-      })
+      });
     }
   }
 
@@ -112,7 +110,7 @@ class DatePicker extends Component {
 
   datePicked() {
     if (typeof this.props.onDateChange === 'function') {
-      this.props.onDateChange(this.getDateStr(this.state.date))
+      this.props.onDateChange(this.getDateStr(this.state.date));
     }
   }
 
@@ -177,8 +175,8 @@ class DatePicker extends Component {
               hour: timeMoment.hour(),
               minute: timeMoment.minutes(),
               is24Hour: !this.format.match(/h|a/)
-            }).then(({action, hour, minute}) => {
-              if (action !== DatePickerAndroid.dismissedAction) {
+            }).then(({timeAction, hour, minute}) => {
+              if (timeAction !== DatePickerAndroid.dismissedAction) {
                 this.setState({
                   date: new Date(year, month, day, hour, minute)
                 });
@@ -188,7 +186,7 @@ class DatePicker extends Component {
           }
         });
       } else {
-        new Error('The specified mode is not supported');
+        throw new Error('The specified mode is not supported');
       }
     }
   }
@@ -212,7 +210,7 @@ class DatePicker extends Component {
           {Platform.OS === 'ios' && <Modal
             transparent={true}
             visible={this.state.modalVisible}
-            onRequestClose={() => {this.setModalVisible(false)}}
+            onRequestClose={() => {this.setModalVisible(false);}}
           >
             <TouchableHighlight
               style={Style.datePickerMask}
@@ -222,9 +220,11 @@ class DatePicker extends Component {
             >
               <TouchableHighlight
                 underlayColor={'#fff'}
-                style={{flex:1}}
+                style={{flex: 1}}
               >
-                <Animated.View style={[Style.datePickerCon, {height: this.state.animatedHeight}, this.customStyles.datePickerCon]}>
+                <Animated.View
+                  style={[Style.datePickerCon, {height: this.state.animatedHeight}, this.customStyles.datePickerCon]}
+                >
                   <DatePickerIOS
                     date={this.state.date}
                     mode={this.mode}
@@ -238,7 +238,11 @@ class DatePicker extends Component {
                     onPress={this.onPressCancel}
                     style={[Style.btnText, Style.btnCancel, this.customStyles.btnCancel]}
                   >
-                    <Text style={[Style.btnTextText, Style.btnTextCancel, this.customStyles.btnTextCancel]}>{this.cancelBtnText}</Text>
+                    <Text
+                      style={[Style.btnTextText, Style.btnTextCancel, this.customStyles.btnTextCancel]}
+                    >
+                      {this.cancelBtnText}
+                    </Text>
                   </TouchableHighlight>
                   <TouchableHighlight
                     underlayColor={'transparent'}
@@ -255,6 +259,6 @@ class DatePicker extends Component {
       </TouchableHighlight>
     );
   }
-};
+}
 
 export default DatePicker;

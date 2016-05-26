@@ -3,13 +3,12 @@
  * https://github.com/facebook/react-native
  */
 
-import React, {
+import React, {Component} from 'react';
+import {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
-  View,
-  TouchableHighlight
+  View
 } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
@@ -41,7 +40,7 @@ class example extends Component {
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           iconSource={require('./google_calendar.png')}
-          onDateChange={(date) => {this.setState({date: date})}}
+          onDateChange={(date) => {this.setState({date: date});}}
         />
         <Text style={styles.instructions}>date: {this.state.date}</Text>
         <DatePicker
@@ -51,7 +50,7 @@ class example extends Component {
           format="HH:mm"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
-          onDateChange={(time) => {this.setState({time: time})}}
+          onDateChange={(time) => {this.setState({time: time});}}
         />
         <Text style={styles.instructions}>time: {this.state.time}</Text>
         <DatePicker
@@ -61,7 +60,7 @@ class example extends Component {
           format="YYYY-MM-DD HH:mm"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
-          onDateChange={(datetime) => {this.setState({datetime: datetime})}}
+          onDateChange={(datetime) => {this.setState({datetime: datetime});}}
         />
         <Text style={styles.instructions}>datetime: {this.state.datetime}</Text>
       </View>
@@ -74,18 +73,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 10
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
-  },
+    marginBottom: 5
+  }
 });
 
 AppRegistry.registerComponent('example', () => example);
