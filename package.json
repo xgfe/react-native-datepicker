@@ -26,7 +26,6 @@
     "moment": "2.x.x"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
     "babel-core": "^6.5.2",
     "babel-preset-react-native": "^1.8.0",
     "chai": "^3.5.0",

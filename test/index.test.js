@@ -1,4 +1,8 @@
-import React, { View, Text, StyleSheet } from 'react-native';
+import React, {Component} from 'react';
+import {
+  View,
+  Text
+} from 'react-native';
 import { shallow } from 'enzyme';
 import Moment from 'moment';
 import DatePicker from '../index';
