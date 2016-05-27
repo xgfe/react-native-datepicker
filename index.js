@@ -28,6 +28,10 @@ class DatePicker extends Component {
     this.onPressDate = this.onPressDate.bind(this);
     this.onPressCancel = this.onPressCancel.bind(this);
     this.onPressConfirm = this.onPressConfirm.bind(this);
+    this.onDatePicked = this.onDatePicked.bind(this);
+    this.onTimePicked = this.onTimePicked.bind(this);
+    this.onDatetimePicked = this.onDatetimePicked.bind(this);
+    this.onDatetimeTimePicked = this.onDatetimeTimePicked.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
   }
 
@@ -114,6 +118,45 @@ class DatePicker extends Component {
     }
   }
 
+  onDatePicked({action, year, month, day}) {
+    if (action !== DatePickerAndroid.dismissedAction) {
+      this.setState({
+        date: new Date(year, month, day)
+      });
+      this.datePicked();
+    }
+  }
+
+  onTimePicked({action, hour, minute}) {
+    if (action !== DatePickerAndroid.dismissedAction) {
+      this.setState({
+        date: Moment().hour(hour).minute(minute).toDate()
+      });
+      this.datePicked();
+    }
+  }
+
+  onDatetimePicked({action, year, month, day}) {
+    if (action !== DatePickerAndroid.dismissedAction) {
+      let timeMoment = Moment(this.state.date);
+
+      TimePickerAndroid.open({
+        hour: timeMoment.hour(),
+        minute: timeMoment.minutes(),
+        is24Hour: !this.format.match(/h|a/)
+      }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
+    }
+  }
+
+  onDatetimeTimePicked(year, month, day, {action, hour, minute}) {
+    if (action !== DatePickerAndroid.dismissedAction) {
+      this.setState({
+        date: new Date(year, month, day, hour, minute)
+      });
+      this.datePicked();
+    }
+  }
+
   onPressDate() {
     if (this.state.disabled) {
       return true;
@@ -134,14 +177,7 @@ class DatePicker extends Component {
           date: this.state.date,
           minDate: this.props.minDate && this.getDate(this.props.minDate),
           maxDate: this.props.maxDate && this.getDate(this.props.maxDate)
-        }).then(({action, year, month, day}) => {
-          if (action !== DatePickerAndroid.dismissedAction) {
-            this.setState({
-              date: new Date(year, month, day)
-            });
-            this.datePicked();
-          }
-        });
+        }).then(this.onDatePicked);
       } else if (this.mode === 'time') {
         // 选时间
 
@@ -151,15 +187,7 @@ class DatePicker extends Component {
           hour: timeMoment.hour(),
           minute: timeMoment.minutes(),
           is24Hour: !this.format.match(/h|a/)
-        }).then(({action, hour, minute}) => {
-          if (action !== DatePickerAndroid.dismissedAction) {
-            console.log(Moment().hour(hour).minute(minute).toDate());
-            this.setState({
-              date: Moment().hour(hour).minute(minute).toDate()
-            });
-            this.datePicked();
-          }
-        });
+        }).then(this.onTimePicked);
       } else if (this.mode === 'datetime') {
         // 选日期和时间
 
@@ -167,24 +195,7 @@ class DatePicker extends Component {
           date: this.state.date,
           minDate: this.props.minDate && this.getDate(this.props.minDate),
           maxDate: this.props.maxDate && this.getDate(this.props.maxDate)
-        }).then(({action, year, month, day}) => {
-          if (action !== DatePickerAndroid.dismissedAction) {
-            let timeMoment = Moment(this.state.date);
-
-            TimePickerAndroid.open({
-              hour: timeMoment.hour(),
-              minute: timeMoment.minutes(),
-              is24Hour: !this.format.match(/h|a/)
-            }).then(({timeAction, hour, minute}) => {
-              if (timeAction !== DatePickerAndroid.dismissedAction) {
-                this.setState({
-                  date: new Date(year, month, day, hour, minute)
-                });
-                this.datePicked();
-              }
-            });
-          }
-        });
+        }).then(this.onDatetimePicked);
       } else {
         throw new Error('The specified mode is not supported');
       }

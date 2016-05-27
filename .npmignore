@@ -1,2 +1,6 @@
 example
-.idea
+android
+ios
+.*
+coverage
+index.android.js

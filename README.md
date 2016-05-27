@@ -8,7 +8,7 @@ npm install react-native-datepicker --save
 ```
 
 ## Example
-Check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/example/index.android.js) in the Example folder.
+Check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/example/index.js) in the Example folder.
 
 ![android](http://7xtixz.com2.z0.glb.clouddn.com/react-native-datepicker-android.gif)
 ![android](http://7xtixz.com2.z0.glb.clouddn.com/react-native-datepicker-ios.gif)
@@ -29,7 +29,7 @@ Check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/exa
 />
 ```
 
-You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/example/index.android.js) in the Example folder for detail.
+You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/example/index.js) in the Example folder for detail.
 
 ## Properties
 
