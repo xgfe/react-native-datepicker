@@ -10,7 +10,7 @@ import {
   Text,
   View
 } from 'react-native';
-import DatePicker from 'react-native-datepicker';
+import DatePicker from '../index';
 
 class example extends Component {
 

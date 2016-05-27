@@ -1,8 +1,7 @@
 import React from 'react';
 import {
   Animated,
-  Platform,
-  TimePickerAndroid
+  Platform
 } from 'react-native';
 import {shallow} from 'enzyme';
 import DatePicker from '../index';
@@ -55,7 +54,7 @@ describe('DatePicker', () => {
 describe('DatePicker: ios', () => {
 
   it('Create DatePicker Component', () => {
-    Platform.OS= 'ios';
+    Platform.OS = 'ios';
     const wrapper = shallow(<DatePicker />);
     const datePicker = wrapper.instance();
 
@@ -66,7 +65,7 @@ describe('DatePicker: ios', () => {
   });
 
   it('Function: setModalVisible(true)', () => {
-    Platform.OS= 'ios';
+    Platform.OS = 'ios';
     const wrapper = shallow(<DatePicker />);
     const datePicker = wrapper.instance();
 
@@ -77,7 +76,7 @@ describe('DatePicker: ios', () => {
   });
 
   it('Function: setModalVisible(false)', () => {
-    Platform.OS= 'ios';
+    Platform.OS = 'ios';
     const wrapper = shallow(<DatePicker />);
     const datePicker = wrapper.instance();
 
@@ -88,7 +87,7 @@ describe('DatePicker: ios', () => {
   });
 
   it('Function: onPressDate() -> onPressCancel()', () => {
-    Platform.OS= 'ios';
+    Platform.OS = 'ios';
     const wrapper = shallow(<DatePicker />);
     const datePicker = wrapper.instance();
 
@@ -104,7 +103,7 @@ describe('DatePicker: ios', () => {
   });
 
   it('Function: onPressDate() -> onPressConfirm()', () => {
-    Platform.OS= 'ios';
+    Platform.OS = 'ios';
     const onDateChange = sinon.spy();
     const wrapper = shallow(<DatePicker onDateChange={onDateChange} />);
     const datePicker = wrapper.instance();
@@ -125,7 +124,7 @@ describe('DatePicker: ios', () => {
 describe('DatePicker: android', () => {
 
   it('Create DatePicker Component', () => {
-    Platform.OS= 'android';
+    Platform.OS = 'android';
     const wrapper = shallow(<DatePicker />);
     const datePicker = wrapper.instance();
 
@@ -136,7 +135,7 @@ describe('DatePicker: android', () => {
   });
 
   it('Function: onPressDate() -> onPressConfirm()', () => {
-    Platform.OS= 'android';
+    Platform.OS = 'android';
     const onDateChange = sinon.spy();
     const wrapper = shallow(<DatePicker onDateChange={onDateChange} />);
     const datePicker = wrapper.instance();
@@ -149,7 +148,7 @@ describe('DatePicker: android', () => {
   });
 
   it('mode: time Function: onPressDate() -> onPressConfirm()', () => {
-    Platform.OS= 'android';
+    Platform.OS = 'android';
     const onDateChange = sinon.spy();
     const wrapper = shallow(<DatePicker mode="time" onDateChange={onDateChange} />);
     const datePicker = wrapper.instance();
@@ -162,7 +161,7 @@ describe('DatePicker: android', () => {
   });
 
   it('mode: datetime Function: onPressDate() -> onPressConfirm()', () => {
-    Platform.OS= 'android';
+    Platform.OS = 'android';
     const onDateChange = sinon.spy();
     const wrapper = shallow(<DatePicker mode="datetime" onDateChange={onDateChange} />);
     const datePicker = wrapper.instance();
