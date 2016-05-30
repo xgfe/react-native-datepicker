@@ -4,4 +4,4 @@
  * @flow
  */
 
-require('./example/index.js');
+require('./index.android.js');

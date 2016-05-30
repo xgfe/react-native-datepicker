@@ -10,7 +10,7 @@ import {
   Text,
   View
 } from 'react-native';
-import DatePicker from '../index';
+import DatePicker from 'react-native-datepicker';
 
 class example extends Component {
 
@@ -18,7 +18,7 @@ class example extends Component {
     super(props);
 
     this.state = {
-      date: '2016-05-06',
+      date: '2016-05-11',
       time: '20:00',
       datetime: '2016-05-05 20:00'
     };

@@ -1,6 +1,3 @@
 example
-android
-ios
 .*
 coverage
-index.android.js
