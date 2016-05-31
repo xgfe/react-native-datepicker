@@ -31,6 +31,7 @@
     "babel-core": "^6.5.2",
     "babel-preset-react-native": "^1.8.0",
     "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
     "cz-conventional-changelog": "^1.1.6",
     "enzyme": "^2.3.0",
     "istanbul": "^1.0.0-alpha.2",

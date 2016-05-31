@@ -13,7 +13,7 @@ import sinon from 'sinon';
 var m = require('module');
 var originalLoader = m._load;
 
-m._load = function hookedLoader(request, parent, isMain) {
+m._load = function (request, parent, isMain) {
   var file = m._resolveFilename(request, parent);
   if (file.match(/.jpeg|.jpg|.png$/)) {
     return {uri: file};
