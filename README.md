@@ -1,4 +1,4 @@
-# react-native-datepicker [![Build Status](https://travis-ci.org/xgfe/react-native-datepicker.svg)](https://github.com/xgfe/react-native-datepicker)
+# react-native-datepicker [![Build Status](https://travis-ci.org/xgfe/react-native-datepicker.svg)](https://github.com/xgfe/react-native-datepicker) [![Coverage Status](https://coveralls.io/repos/github/xgfe/react-native-datepicker/badge.svg?branch=master)](https://coveralls.io/github/xgfe/react-native-datepicker?branch=master)
 react native datePicker component for both Android and IOS, useing DatePikcerAndroid, TimePickerAndroid and DatePickerIOS
 
 ## Install
