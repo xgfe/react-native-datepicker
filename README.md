@@ -46,10 +46,10 @@ You can check [index.js](example/index.android.js) in the Example folder for det
 | maxDate | - | `string | date` | Restricts the range of possible date values. |
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
 | customStyles | - | `number` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
+| onDateChange | - | `function(date:string)` | This is called when the user confirm the picked date or time in the UI. The first and only argument is a date or time string representing the new date and time formatted by [moment.js](http://momentjs.com/) with the given format property. |
 
 ## Methods
 
-
 | Method  | Params  | Description |
 | :------------ |:---------------:| :---------------:|
-| onDateChange | date:string | This is called when the user confirm the picked date or time in the UI. The first and only argument is a date or time string representing the new date and time formatted by [moment.js](http://momentjs.com/) with the given format property. |
+| onPressDate | - | Manual call this method could open the DatePicker with js. |
