@@ -176,7 +176,7 @@ describe('DatePicker:', () => {
     const datePicker = wrapper.instance();
 
     datePicker.onDatetimePicked({action: 'dismissedAction', year: 2016, month: 12, day: 12});
-    // datePicker.onDatetimePicked({action: '', year: 2016, month: 12, day: 12});
+    datePicker.onDatetimePicked({action: '', year: 2016, month: 12, day: 12});
     datePicker.onDatetimeTimePicked(2016, 6, 1, {action: 'dismissedAction', hour: 12, minute: 10});
     datePicker.onDatetimeTimePicked(2016, 6, 1, {action: '', hour: 12, minute: 10});
 
@@ -212,7 +212,7 @@ describe('DatePicker:', () => {
     expect(datePicker.onPressDate).to.not.throw(Error);
 
     datePicker.mode = 'time';
-    // expect(datePicker.onPressDate).to.not.throw(Error);
+    expect(datePicker.onPressDate).to.not.throw(Error);
 
     datePicker.mode = 'tttt';
     expect(datePicker.onPressDate).to.throw(Error);
