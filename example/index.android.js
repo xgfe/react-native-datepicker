@@ -60,6 +60,7 @@ class example extends Component {
           format="YYYY-MM-DD HH:mm"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
+          showIcon={false}
           onDateChange={(datetime) => {this.setState({datetime: datetime});}}
         />
         <Text style={styles.instructions}>datetime: {this.state.datetime}</Text>

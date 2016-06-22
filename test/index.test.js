@@ -35,6 +35,8 @@ describe('DatePicker:', () => {
     expect(datePicker.cancelBtnText).to.equal('取消');
     expect(datePicker.iconSource).to.deep.equal(require('../date_icon.png'));
     expect(datePicker.customStyles).to.deep.equal({});
+    expect(datePicker.showIcon).to.equal(true);
+    expect(wrapper.find('Image').length).to.equal(1);
 
     expect(wrapper.state('date')).to.be.a('date');
     expect(wrapper.state('disabled')).to.equal(undefined);
@@ -52,6 +54,7 @@ describe('DatePicker:', () => {
         iconSource={{}}
         customStyles={{testStyle: 123}}
         disabled={true}
+        showIcon={false}
       />
     );
     const datePicker1 = wrapper1.instance();
@@ -64,6 +67,8 @@ describe('DatePicker:', () => {
     expect(datePicker1.cancelBtnText).to.equal('Cancel');
     expect(datePicker1.iconSource).to.deep.equal({});
     expect(datePicker1.customStyles).to.deep.equal({testStyle: 123});
+    expect(datePicker1.showIcon).to.equal(false);
+    expect(wrapper1.find('Image').length).to.equal(0);
 
     expect(wrapper1.state('date')).to.deep.equal(Moment('2016-05-11', 'YYYY-MM-DD').toDate());
     expect(wrapper1.state('disabled')).to.equal(true);

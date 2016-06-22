@@ -1,5 +1,5 @@
-# react-native-datepicker [![Build Status](https://travis-ci.org/xgfe/react-native-datepicker.svg)](https://travis-ci.org/xgfe/react-native-datepicker) [![Coverage Status](https://coveralls.io/repos/github/xgfe/react-native-datepicker/badge.svg?branch=master)](https://coveralls.io/github/xgfe/react-native-datepicker?branch=master)
-React Native datePicker component for both Android and iOS, using DatePickerAndroid, TimePickerAndroid and DatePickeriOS.
+# react-native-datepicker
+react native datePicker component for both Android and IOS, useing DatePikcerAndroid, TimePickerAndroid and DatePickerIOS
 
 ## Install
 
@@ -8,7 +8,7 @@ npm install react-native-datepicker --save
 ```
 
 ## Example
-Check [index.android.js](example/index.android.js) in the Example folder.
+Check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/example/index.android.js) in the Example folder.
 
 ![android](http://7xtixz.com2.z0.glb.clouddn.com/react-native-datepicker-android.gif)
 ![android](http://7xtixz.com2.z0.glb.clouddn.com/react-native-datepicker-ios.gif)
@@ -29,7 +29,7 @@ Check [index.android.js](example/index.android.js) in the Example folder.
 />
 ```
 
-You can check [index.js](example/index.android.js) in the Example folder for detail.
+You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/example/index.android.js) in the Example folder for detail.
 
 ## Properties
 
@@ -46,10 +46,11 @@ You can check [index.js](example/index.android.js) in the Example folder for det
 | maxDate | - | `string | date` | Restricts the range of possible date values. |
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
 | customStyles | - | `number` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
-| onDateChange | - | `function(date:string)` | This is called when the user confirm the picked date or time in the UI. The first and only argument is a date or time string representing the new date and time formatted by [moment.js](http://momentjs.com/) with the given format property. |
+| showIcon | true | `boolean` | Controller whether or not show the icon |
 
 ## Methods
 
+
 | Method  | Params  | Description |
 | :------------ |:---------------:| :---------------:|
-| onPressDate | - | Manual call this method could open the DatePicker with js. |
+| onDateChange | date:string | This is called when the user confirm the picked date or time in the UI. The first and only argument is a date or time string representing the new date and time formatted by [moment.js](http://momentjs.com/) with the given format property. |
