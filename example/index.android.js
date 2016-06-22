@@ -20,7 +20,8 @@ class example extends Component {
     this.state = {
       date: '2016-05-11',
       time: '20:00',
-      datetime: '2016-05-05 20:00'
+      datetime: '2016-05-05 20:00',
+      datetime1: '2016-05-05 20:00'
     };
   }
 
@@ -64,6 +65,27 @@ class example extends Component {
           onDateChange={(datetime) => {this.setState({datetime: datetime});}}
         />
         <Text style={styles.instructions}>datetime: {this.state.datetime}</Text>
+        <DatePicker
+          style={{width: 200}}
+          date={this.state.datetime1}
+          mode="datetime"
+          format="YYYY-MM-DD HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
+        />
+        <Text style={styles.instructions}>datetime: {this.state.datetime1}</Text>
       </View>
     );
   }
