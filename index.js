@@ -223,6 +223,7 @@ class DatePicker extends Component {
           />}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
+            animationType={'fade'}
             visible={this.state.modalVisible}
             onRequestClose={() => {this.setModalVisible(false);}}
           >
