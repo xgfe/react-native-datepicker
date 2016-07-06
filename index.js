@@ -76,15 +76,17 @@ class DatePicker extends Component {
 
     // slide animation
     if (visible) {
-      Animated.timing(
-        this.state.animatedHeight,
-        {
-          toValue: this.height,
-          duration: this.duration
-        }
-      ).start();
-
       this.setState({modalVisible: visible});
+
+      setTimeout(() => {
+        Animated.timing(
+          this.state.animatedHeight,
+          {
+            toValue: this.height,
+            duration: this.duration
+          }
+        ).start();
+      }, 200);
     } else {
       Animated.timing(
         this.state.animatedHeight,
