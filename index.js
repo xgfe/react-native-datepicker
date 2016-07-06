@@ -9,7 +9,8 @@ import {
   TimePickerAndroid,
   DatePickerIOS,
   Platform,
-  Animated
+  Animated,
+  InteractionManager
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
@@ -72,7 +73,6 @@ class DatePicker extends Component {
   }
 
   setModalVisible(visible) {
-    this.setState({modalVisible: visible});
 
     // slide animation
     if (visible) {
@@ -83,9 +83,19 @@ class DatePicker extends Component {
           duration: this.duration
         }
       ).start();
+
+      this.setState({modalVisible: visible});
     } else {
-      this.setState({
-        animatedHeight: new Animated.Value(0)
+      Animated.timing(
+        this.state.animatedHeight,
+        {
+          toValue: 0,
+          duration: this.duration
+        }
+      ).start();
+
+      InteractionManager.runAfterInteractions(() => {
+        this.setState({modalVisible: visible});
       });
     }
   }
