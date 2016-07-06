@@ -81,12 +81,17 @@ describe('DatePicker:', () => {
     datePicker.setModalVisible(true);
 
     expect(wrapper.state('modalVisible')).to.equal(true);
-    expect(wrapper.state('animatedHeight')._animation._toValue).to.above(200);
+    setTimeout(() => {
+      expect(wrapper.state('animatedHeight')._animation._toValue).to.above(200);
+    }, 300);
 
     datePicker.setModalVisible(false);
 
-    expect(wrapper.state('modalVisible')).to.equal(false);
-    expect(wrapper.state('animatedHeight')).to.deep.equal(new Animated.Value(0));
+    setTimeout(() => {
+      expect(wrapper.state('modalVisible')).to.equal(false);
+      expect(wrapper.state('animatedHeight')).to.deep.equal(new Animated.Value(0));
+    }, 300);
+
   });
 
   it('onPressCancel', () => {
