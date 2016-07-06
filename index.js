@@ -9,8 +9,7 @@ import {
   TimePickerAndroid,
   DatePickerIOS,
   Platform,
-  Animated,
-  InteractionManager
+  Animated
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
@@ -86,7 +85,7 @@ class DatePicker extends Component {
             duration: this.duration
           }
         ).start();
-      }, 200);
+      }, this.duration);
     } else {
       Animated.timing(
         this.state.animatedHeight,
@@ -96,9 +95,9 @@ class DatePicker extends Component {
         }
       ).start();
 
-      InteractionManager.runAfterInteractions(() => {
+      setTimeout(() => {
         this.setState({modalVisible: visible});
-      });
+      }, this.duration);
     }
   }
 
