@@ -1,4 +1,0 @@
---colors
---require ./node_modules/react-native-mock/mock.js
---compilers js:./node_modules/babel-core/register
---recursive
