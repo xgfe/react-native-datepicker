@@ -222,6 +222,21 @@ describe('DatePicker:', () => {
     datePicker.mode = 'tttt';
     expect(datePicker.onPressDate).to.throw(Error);
   });
+  
+  it('getTitle - with defaultText', () => {
+    const defaultText = 'Please pick a date';
+    const wrapper = shallow(<DatePicker defaultText={defaultText} />);
+    const datePicker = wrapper.instance();
+
+    expect(datePicker.getTitle()).to.equal(defaultText);
+  });
+
+  it('getTitle - without defaultText', () => {
+    const wrapper = shallow(<DatePicker date="2016-06-04" />);
+    const datePicker = wrapper.instance();
+
+    expect(datePicker.getTitle()).to.equal(datePicker.getDateStr());
+  });
 });
 
 
