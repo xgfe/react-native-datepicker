@@ -141,13 +141,12 @@ describe('DatePicker:', () => {
     const onDateChange = sinon.spy();
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);
     const datePicker = wrapper.instance();
-    wrapper.setState({
-      date: new Date('2016-06-06')
-    });
+    const date = new Date('2016-06-06');
+    wrapper.setState({date});
 
     datePicker.datePicked();
 
-    expect(onDateChange.calledWith('2016-06-06')).to.equal(true);
+    expect(onDateChange.calledWith('2016-06-06', date)).to.equal(true);
   });
 
   it('onDatePicked', () => {
