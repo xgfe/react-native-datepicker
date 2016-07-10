@@ -122,8 +122,8 @@ class DatePicker extends Component {
   }
   
   getTitle() {
-      if (!this.props.date && this.props.defaultText) {
-          return this.props.defaultText;
+      if (!this.props.date && this.props.placeholder) {
+          return this.props.placeholder;
       }
       return this.getDateStr();
   }
