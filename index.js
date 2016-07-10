@@ -120,7 +120,14 @@ class DatePicker extends Component {
       this.props.onDateChange(this.getDateStr(this.state.date));
     }
   }
-
+  
+  getTitle() {
+      if (!this.props.date && this.props.defaultText) {
+          return this.props.defaultText;
+      }
+      return this.getDateStr();
+  }
+  
   onDatePicked({action, year, month, day}) {
     if (action !== DatePickerAndroid.dismissedAction) {
       this.setState({
@@ -215,7 +222,7 @@ class DatePicker extends Component {
       >
         <View style={[Style.dateTouchBody, this.customStyles.dateTouchBody]}>
           <View style={[Style.dateInput, this.customStyles.dateInput, this.state.disabled && Style.disabled]}>
-            <Text style={[Style.dateText, this.customStyles.dateText]}>{this.getDateStr()}</Text>
+            <Text style={[Style.dateText, this.customStyles.dateText]}>{this.getTitle()}</Text>
           </View>
           {this.showIcon && <Image
             style={[Style.dateIcon, this.customStyles.dateIcon]}
