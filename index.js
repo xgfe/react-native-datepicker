@@ -121,11 +121,12 @@ class DatePicker extends Component {
     }
   }
   
-  getTitle() {
-      if (!this.props.date && this.props.placeholder) {
-          return this.props.placeholder;
-      }
-      return this.getDateStr();
+  getTitleElement() {
+    const {date, placeholder} = this.props;
+    if (!date && placeholder) {
+      return (<Text style={[Style.placeholderText, this.customStyles.placeholderText]}>{placeholder}</Text>);
+    }
+    return (<Text style={[Style.dateText, this.customStyles.dateText]}>{this.getDateStr()}</Text>);
   }
   
   onDatePicked({action, year, month, day}) {
@@ -222,7 +223,7 @@ class DatePicker extends Component {
       >
         <View style={[Style.dateTouchBody, this.customStyles.dateTouchBody]}>
           <View style={[Style.dateInput, this.customStyles.dateInput, this.state.disabled && Style.disabled]}>
-            <Text style={[Style.dateText, this.customStyles.dateText]}>{this.getTitle()}</Text>
+            {this.getTitleElement()}
           </View>
           {this.showIcon && <Image
             style={[Style.dateIcon, this.customStyles.dateIcon]}
