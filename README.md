@@ -65,4 +65,4 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 
 | Method  | Params  | Description |
 | :------------ |:---------------:| :---------------:|
-| onDateChange | date:string | This is called when the user confirm the picked date or time in the UI. The first and only argument is a date or time string representing the new date and time formatted by [moment.js](http://momentjs.com/) with the given format property. |
+| onDateChange | dateStr:string, date:date | This is called when the user confirm the picked date or time in the UI. The first and only argument is a date or time string representing the new date and time formatted by [moment.js](http://momentjs.com/) with the given format property. |
