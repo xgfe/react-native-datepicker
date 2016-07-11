@@ -117,7 +117,7 @@ class DatePicker extends Component {
 
   datePicked() {
     if (typeof this.props.onDateChange === 'function') {
-      this.props.onDateChange(this.getDateStr(this.state.date));
+      this.props.onDateChange(this.getDateStr(this.state.date), this.state.date);
     }
   }
 
