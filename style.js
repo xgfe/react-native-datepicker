@@ -61,7 +61,6 @@ let style = StyleSheet.create({
     right: 0
   },
   datePicker: {
-    alignItems: 'center',
     marginTop: 42,
     borderTopColor: '#ccc',
     borderTopWidth: 1
