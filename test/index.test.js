@@ -223,19 +223,19 @@ describe('DatePicker:', () => {
     expect(datePicker.onPressDate).to.throw(Error);
   });
   
-  it('getTitle - with placeholder', () => {
+  it('getTitleElement - with placeholder', () => {
     const placeholder = 'Please pick a date';
     const wrapper = shallow(<DatePicker placeholder={placeholder} />);
     const datePicker = wrapper.instance();
 
-    expect(datePicker.getTitle()).to.equal(placeholder);
+    expect(datePicker.getTitleElement().props.children).to.equal(placeholder);
   });
 
-  it('getTitle - without placeholder', () => {
+  it('getTitleElement - without placeholder', () => {
     const wrapper = shallow(<DatePicker date="2016-06-04" />);
     const datePicker = wrapper.instance();
 
-    expect(datePicker.getTitle()).to.equal(datePicker.getDateStr());
+    expect(datePicker.getTitleElement().props.children).to.equal(datePicker.getDateStr());
   });
 });
 
