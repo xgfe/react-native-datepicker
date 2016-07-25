@@ -20,6 +20,7 @@ Check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/exa
   style={{width: 200}}
   date={this.state.date}
   mode="date"
+  placeholder="select date"
   format="YYYY-MM-DD"
   minDate="2016-05-01"
   maxDate="2016-06-01"
@@ -59,6 +60,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
 | customStyles | - | `number` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
 | showIcon | true | `boolean` | Controller whether or not show the icon |
+| placeholder | '' | `string` | The placeholder show when this.props.date is falsy |
 
 ## Methods
 
