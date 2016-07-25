@@ -287,11 +287,7 @@ DatePicker.defaultProps = {
 
 DatePicker.propTypes = {
   mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
-  date: React.PropTypes.oneOfType([React.PropTypes.string, function(props, propName) {
-    if (!(props[propName] instanceof Date)) {
-      return new Error('Should be string or Date');
-    }
-  }]),
+  date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   height: React.PropTypes.number,
   duration: React.PropTypes.number,
   confirmBtnText: React.PropTypes.string,
