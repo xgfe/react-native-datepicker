@@ -1,3 +1,15 @@
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/xgfe/react-native-datepicker/compare/v1.3.0...v1.3.1) (2016-07-25)
+
+
+### Features
+
+* **datepicker:** add placeholder when this.props.date is falsy([1430f06](https://github.com/xgfe/react-native-datepicker/commit/1430f06906906d408217bae8183395969f3cf51f))
+
+### Refactor
+
+* **datepicker:** refactor datepicker with official ES6 Classes pattern([fb5f6e2](https://github.com/xgfe/react-native-datepicker/commit/fb5f6e2))
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/xgfe/react-native-datepicker/compare/v1.2.2...v1.3.0) (2016-07-11)
 
