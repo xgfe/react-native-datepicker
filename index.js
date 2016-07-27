@@ -197,6 +197,11 @@ class DatePicker extends Component {
   render() {
     let customStyles = this.props.customStyles;
     this.format = this.props.format || FORMATS[this.props.mode];
+    const dateInputStyle = [
+      Style.dateInput, customStyles.dateInput,
+      this.state.disabled && Style.disabled,
+      this.state.disabled && customStyles.disabled
+    ]
 
     return (
       <TouchableHighlight
@@ -205,7 +210,7 @@ class DatePicker extends Component {
         onPress={this.onPressDate}
       >
         <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
-          <View style={[Style.dateInput, customStyles.dateInput, this.state.disabled && Style.disabled]}>
+          <View style={dateInputStyle}>
             {this.getTitleElement()}
           </View>
           {this.props.showIcon && <Image
