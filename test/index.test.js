@@ -106,6 +106,53 @@ describe('DatePicker:', () => {
     expect(wrapper3.instance().getDateStr()).to.equal('Invalid date');
   });
 
+  it('default selected Date', () => {
+    var dateStr = null;
+    const wrapper = shallow(<DatePicker date="" onDateChange={(date) => {
+      dateStr = date
+    }}/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onPressConfirm();
+
+    expect(dateStr).to.equal(Moment().format('YYYY-MM-DD'));
+  });
+
+  it('default selected Date with minDate and maxDate', () => {
+    var dateStr = null;
+    var dateStrMax = null;
+    var dateStrNormal = null
+
+    const wrapper = shallow(<DatePicker date="" minDate="3000-09-09" onDateChange={(date) => {
+      dateStr = date
+    }}/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onPressConfirm();
+
+    expect(dateStr).to.equal('3000-09-09');
+
+
+    const wrapperMax = shallow(<DatePicker date="" maxDate="2016-07-07" onDateChange={(date) => {
+      dateStrMax = date
+    }}/>);
+    const datePickerMax = wrapperMax.instance();
+
+    datePickerMax.onPressConfirm();
+
+    expect(dateStrMax).to.equal('2016-07-07');
+
+
+    const wrapperNormal = shallow(<DatePicker date="" minDate="2016-07-07" maxDate="3000-09-09" onDateChange={(date) => {
+      dateStrNormal = date
+    }}/>);
+    const datePickerNormal = wrapperNormal.instance();
+
+    datePickerNormal.onPressConfirm();
+
+    expect(dateStrNormal).to.equal(Moment().format('YYYY-MM-DD'));
+  });
+
   it('setModalVisible', () => {
     const wrapper = shallow(<DatePicker />);
     const datePicker = wrapper.instance();

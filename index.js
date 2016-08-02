@@ -81,11 +81,33 @@ class DatePicker extends Component {
   }
 
   getDate(date = this.props.date) {
+    // date默认值
+    if (!date) {
+      let now = new Date();
+      if (this.props.minDate) {
+        let minDate = this.getDate(this.props.minDate);
+
+        if (now < minDate) {
+          return minDate;
+        }
+      }
+
+      if (this.props.maxDate) {
+        let maxDate = this.getDate(this.props.maxDate);
+
+        if (now > maxDate) {
+          return maxDate;
+        }
+      }
+
+      return now;
+    }
+
     if (date instanceof Date) {
       return date;
-    } else {
-      return Moment(date, this.format).toDate();
     }
+
+    return Moment(date, this.format).toDate();
   }
 
   getDateStr(date = this.props.date) {
@@ -201,7 +223,7 @@ class DatePicker extends Component {
       Style.dateInput, customStyles.dateInput,
       this.state.disabled && Style.disabled,
       this.state.disabled && customStyles.disabled
-    ]
+    ];
 
     return (
       <TouchableHighlight
@@ -293,6 +315,8 @@ DatePicker.defaultProps = {
 DatePicker.propTypes = {
   mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
   date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
+  minDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
+  maxDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   height: React.PropTypes.number,
   duration: React.PropTypes.number,
   confirmBtnText: React.PropTypes.string,
