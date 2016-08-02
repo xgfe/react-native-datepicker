@@ -1,3 +1,13 @@
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/xgfe/react-native-datepicker/compare/v1.3.1...v1.3.2) (2016-08-02)
+
+
+### Bug Fixes
+
+* **datepicker:** fix default date bug without selecting ([b08fb7e](https://github.com/xgfe/react-native-datepicker/commit/b08fb7e))
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/xgfe/react-native-datepicker/compare/v1.3.0...v1.3.1) (2016-07-25)
 
