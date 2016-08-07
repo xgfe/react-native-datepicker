@@ -62,23 +62,23 @@ class DatePicker extends Component {
         Animated.timing(
           this.state.animatedHeight,
           {
-            toValue: this.height,
-            duration: this.duration
+            toValue: this.props.height,
+            duration: this.props.duration
           }
         ).start();
-      }, this.duration);
+      }, this.props.duration);
     } else {
       Animated.timing(
         this.state.animatedHeight,
         {
           toValue: 0,
-          duration: this.duration
+          duration: this.props.duration
         }
       ).start();
 
       setTimeout(() => {
         this.setState({modalVisible: visible});
-      }, this.duration);
+      }, this.props.duration);
     }
   }
 
