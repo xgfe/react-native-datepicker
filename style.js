@@ -27,6 +27,9 @@ let style = StyleSheet.create({
   dateText: {
     color: '#333'
   },
+  placeholderText: {
+    color: '#c9c9c9'
+  },
   datePickerMask: {
     flex: 1,
     alignItems: 'flex-end',
@@ -61,7 +64,6 @@ let style = StyleSheet.create({
     right: 0
   },
   datePicker: {
-    alignItems: 'center',
     marginTop: 42,
     borderTopColor: '#ccc',
     borderTopWidth: 1

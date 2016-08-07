@@ -1,3 +1,38 @@
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/xgfe/react-native-datepicker/compare/v1.3.1...v1.3.2) (2016-08-02)
+
+
+### Bug Fixes
+
+* **datepicker:** fix default date bug without selecting ([b08fb7e](https://github.com/xgfe/react-native-datepicker/commit/b08fb7e))
+
+
+
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/xgfe/react-native-datepicker/compare/v1.3.0...v1.3.1) (2016-07-25)
+
+
+### Features
+
+* **datepicker:** add placeholder when this.props.date is falsy([1430f06](https://github.com/xgfe/react-native-datepicker/commit/1430f06906906d408217bae8183395969f3cf51f))
+
+### Refactor
+
+* **datepicker:** refactor datepicker with official ES6 Classes pattern([fb5f6e2](https://github.com/xgfe/react-native-datepicker/commit/fb5f6e2))
+
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/xgfe/react-native-datepicker/compare/v1.2.2...v1.3.0) (2016-07-11)
+
+
+### Bug Fixes
+
+* **datepicker:** fix the DatepickerIOS align bug above 0.28.0 with the removing of width ([b51b9ca](https://github.com/xgfe/react-native-datepicker/commit/b51b9ca))
+* **readme:** fix readme gif img   [#17](https://github.com/xgfe/react-native-datepicker/issues/17) ([49e310e](https://github.com/xgfe/react-native-datepicker/commit/49e310e)), closes [#17](https://github.com/xgfe/react-native-datepicker/issues/17)
+
+### Breaking Change
+
+* can't be center automatic below 0.28.0([b51b9ca](https://github.com/xgfe/react-native-datepicker/commit/b51b9ca)).
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/xgfe/react-native-datepicker/compare/v1.2.1...v1.2.2) (2016-06-22)
 

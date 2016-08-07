@@ -18,7 +18,7 @@ class example extends Component {
     super(props);
 
     this.state = {
-      date: '2016-05-11',
+      date: '',
       time: '20:00',
       datetime: '2016-05-05 20:00',
       datetime1: '2016-05-05 20:00'
@@ -35,6 +35,7 @@ class example extends Component {
           style={{width: 200}}
           date={this.state.date}
           mode="date"
+          placeholder="placeholder"
           format="YYYY-MM-DD"
           minDate="2016-05-01"
           maxDate="2016-06-01"

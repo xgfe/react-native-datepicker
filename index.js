@@ -24,26 +24,7 @@ class DatePicker extends Component {
   constructor(props) {
     super(props);
 
-    this.mode = this.props.mode || 'date';
-
-    this.format = this.props.format || FORMATS[this.mode];
-    // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
-    this.height = 259;
-    // slide animation duration time, default to 300ms, IOS only
-    this.duration = this.props.duration || 300;
-
-    this.confirmBtnText = this.props.confirmBtnText || '确定';
-    this.cancelBtnText = this.props.cancelBtnText || '取消';
-
-    this.iconSource = this.props.iconSource || require('./date_icon.png');
-    this.customStyles = this.props.customStyles || {};
-
-    // whether or not show the icon
-    if (typeof this.props.showIcon === 'boolean') {
-      this.showIcon = this.props.showIcon;
-    } else {
-      this.showIcon = true;
-    }
+    this.format = this.props.format || FORMATS[this.props.mode];
 
     this.state = {
       date: this.getDate(),
@@ -111,11 +92,33 @@ class DatePicker extends Component {
   }
 
   getDate(date = this.props.date) {
+    // date默认值
+    if (!date) {
+      let now = new Date();
+      if (this.props.minDate) {
+        let minDate = this.getDate(this.props.minDate);
+
+        if (now < minDate) {
+          return minDate;
+        }
+      }
+
+      if (this.props.maxDate) {
+        let maxDate = this.getDate(this.props.maxDate);
+
+        if (now > maxDate) {
+          return maxDate;
+        }
+      }
+
+      return now;
+    }
+
     if (date instanceof Date) {
       return date;
-    } else {
-      return Moment(date, this.format).toDate();
     }
+
+    return Moment(date, this.format).toDate();
   }
 
   getDateStr(date = this.props.date) {
@@ -128,8 +131,16 @@ class DatePicker extends Component {
 
   datePicked() {
     if (typeof this.props.onDateChange === 'function') {
-      this.props.onDateChange(this.getDateStr(this.state.date));
+      this.props.onDateChange(this.getDateStr(this.state.date), this.state.date);
     }
+  }
+
+  getTitleElement() {
+    const {date, placeholder} = this.props;
+    if (!date && placeholder) {
+      return (<Text style={[Style.placeholderText, this.props.customStyles.placeholderText]}>{placeholder}</Text>);
+    }
+    return (<Text style={[Style.dateText, this.props.customStyles.dateText]}>{this.getDateStr()}</Text>);
   }
 
   onDatePicked({action, year, month, day}) {
@@ -186,13 +197,13 @@ class DatePicker extends Component {
     } else {
 
       // 选日期
-      if (this.mode === 'date') {
+      if (this.props.mode === 'date') {
         DatePickerAndroid.open({
           date: this.state.date,
           minDate: this.props.minDate && this.getDate(this.props.minDate),
           maxDate: this.props.maxDate && this.getDate(this.props.maxDate)
         }).then(this.onDatePicked);
-      } else if (this.mode === 'time') {
+      } else if (this.props.mode === 'time') {
         // 选时间
 
         let timeMoment = Moment(this.state.date);
@@ -202,7 +213,7 @@ class DatePicker extends Component {
           minute: timeMoment.minutes(),
           is24Hour: !this.format.match(/h|a/)
         }).then(this.onTimePicked);
-      } else if (this.mode === 'datetime') {
+      } else if (this.props.mode === 'datetime') {
         // 选日期和时间
 
         DatePickerAndroid.open({
@@ -217,6 +228,13 @@ class DatePicker extends Component {
   }
 
   render() {
+    let customStyles = this.props.customStyles;
+    this.format = this.props.format || FORMATS[this.props.mode];
+    const dateInputStyle = [
+      Style.dateInput, customStyles.dateInput,
+      this.state.disabled && Style.disabled,
+      this.state.disabled && customStyles.disabled
+    ];
 
     return (
       <TouchableHighlight
@@ -224,13 +242,13 @@ class DatePicker extends Component {
         underlayColor={'transparent'}
         onPress={this.onPressDate}
       >
-        <View style={[Style.dateTouchBody, this.customStyles.dateTouchBody]}>
-          <View style={[Style.dateInput, this.customStyles.dateInput, this.state.disabled && Style.disabled]}>
-            <Text style={[Style.dateText, this.customStyles.dateText]}>{this.getDateStr()}</Text>
+        <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
+          <View style={dateInputStyle}>
+            {this.getTitleElement()}
           </View>
-          {this.showIcon && <Image
-            style={[Style.dateIcon, this.customStyles.dateIcon]}
-            source={this.iconSource}
+          {this.props.showIcon && <Image
+            style={[Style.dateIcon, customStyles.dateIcon]}
+            source={this.props.iconSource}
           />}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
@@ -249,33 +267,33 @@ class DatePicker extends Component {
                 style={{flex: 1}}
               >
                 <Animated.View
-                  style={[Style.datePickerCon, {height: this.state.animatedHeight}, this.customStyles.datePickerCon]}
+                  style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
                 >
                   <DatePickerIOS
                     date={this.state.date}
-                    mode={this.mode}
+                    mode={this.props.mode}
                     minimumDate={this.props.minDate && this.getDate(this.props.minDate)}
                     maximumDate={this.props.maxDate && this.getDate(this.props.maxDate)}
                     onDateChange={(date) => this.setState({date: date})}
-                    style={[Style.datePicker, this.customStyles.datePicker]}
+                    style={[Style.datePicker, customStyles.datePicker]}
                   />
                   <TouchableHighlight
                     underlayColor={'transparent'}
                     onPress={this.onPressCancel}
-                    style={[Style.btnText, Style.btnCancel, this.customStyles.btnCancel]}
+                    style={[Style.btnText, Style.btnCancel, customStyles.btnCancel]}
                   >
                     <Text
-                      style={[Style.btnTextText, Style.btnTextCancel, this.customStyles.btnTextCancel]}
+                      style={[Style.btnTextText, Style.btnTextCancel, customStyles.btnTextCancel]}
                     >
-                      {this.cancelBtnText}
+                      {this.props.cancelBtnText}
                     </Text>
                   </TouchableHighlight>
                   <TouchableHighlight
                     underlayColor={'transparent'}
                     onPress={this.onPressConfirm}
-                    style={[Style.btnText, Style.btnConfirm, this.customStyles.btnConfirm]}
+                    style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
                   >
-                    <Text style={[Style.btnTextText, this.customStyles.btnTextConfirm]}>{this.confirmBtnText}</Text>
+                    <Text style={[Style.btnTextText, customStyles.btnTextConfirm]}>{this.props.confirmBtnText}</Text>
                   </TouchableHighlight>
                 </Animated.View>
               </TouchableHighlight>
@@ -286,5 +304,41 @@ class DatePicker extends Component {
     );
   }
 }
+
+DatePicker.defaultProps = {
+  mode: 'date',
+  date: '',
+  // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
+  height: 259,
+
+  // slide animation duration time, default to 300ms, IOS only
+  duration: 300,
+  confirmBtnText: '确定',
+  cancelBtnText: '取消',
+  iconSource: require('./date_icon.png'),
+  customStyles: {},
+
+  // whether or not show the icon
+  showIcon: true,
+  disabled: false,
+  placeholder: ''
+};
+
+DatePicker.propTypes = {
+  mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
+  date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
+  minDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
+  maxDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
+  height: React.PropTypes.number,
+  duration: React.PropTypes.number,
+  confirmBtnText: React.PropTypes.string,
+  cancelBtnText: React.PropTypes.string,
+  iconSource: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.object]),
+  customStyles: React.PropTypes.object,
+  showIcon: React.PropTypes.bool,
+  disabled: React.PropTypes.bool,
+  onDateChange: React.PropTypes.func,
+  placeholder: React.PropTypes.string
+};
 
 export default DatePicker;

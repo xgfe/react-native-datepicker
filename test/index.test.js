@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   Animated,
-  Platform
+  Platform,
+  Image,
+  Text,
+  View
 } from 'react-native';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import Moment from 'moment';
-import DatePicker from '../index';
 import {expect} from 'chai';
 import sinon from 'sinon';
 
@@ -21,29 +23,52 @@ m._load = function (request, parent, isMain) {
   return originalLoader(request, parent, isMain);
 };
 
+/*---------------- mock DOM ----------------*/
+import {jsdom} from 'jsdom';
+var exposedProperties = ['window', 'navigator', 'document'];
+
+global.document = jsdom('');
+global.window = document.defaultView;
+Object.keys(document.defaultView).forEach((property) => {
+  if (typeof global[property] === 'undefined') {
+    exposedProperties.push(property);
+    global[property] = document.defaultView[property];
+  }
+});
+
+global.navigator = {
+  userAgent: 'node.js'
+};
+
+global.ErrorUtils = {
+  setGlobalHandler: () => {}
+};
+
+var DatePicker = require('../index').default;
+
 describe('DatePicker:', () => {
 
   it('initialize', () => {
-    const wrapper = shallow(<DatePicker />);
+
+    const wrapper = mount(<DatePicker />);
     const datePicker = wrapper.instance();
 
-    expect(datePicker.mode).to.equal('date');
+    expect(wrapper.prop('mode')).to.equal('date');
     expect(datePicker.format).to.equal('YYYY-MM-DD');
-    expect(datePicker.duration).to.equal(300);
-    expect(datePicker.height).to.above(200);
-    expect(datePicker.confirmBtnText).to.equal('确定');
-    expect(datePicker.cancelBtnText).to.equal('取消');
-    expect(datePicker.iconSource).to.deep.equal(require('../date_icon.png'));
-    expect(datePicker.customStyles).to.deep.equal({});
-    expect(datePicker.showIcon).to.equal(true);
-    expect(wrapper.find('Image').length).to.equal(1);
+    expect(wrapper.prop('duration')).to.equal(300);
+    expect(wrapper.prop('height')).to.above(200);
+    expect(wrapper.prop('confirmBtnText')).to.equal('确定');
+    expect(wrapper.prop('cancelBtnText')).to.equal('取消');
+    expect(wrapper.prop('iconSource')).to.deep.equal(require('../date_icon.png'));
+    expect(wrapper.prop('customStyles')).to.deep.equal({});
+    expect(wrapper.prop('showIcon')).to.equal(true);
 
     expect(wrapper.state('date')).to.be.a('date');
-    expect(wrapper.state('disabled')).to.equal(undefined);
+    expect(wrapper.state('disabled')).to.equal(false);
     expect(wrapper.state('modalVisible')).to.equal(false);
     expect(wrapper.state('animatedHeight')).to.deep.equal(new Animated.Value(0));
 
-    const wrapper1 = shallow(
+    const wrapper1 = mount(
       <DatePicker
         date="2016-05-11"
         format="YYYY/MM/DD"
@@ -59,19 +84,73 @@ describe('DatePicker:', () => {
     );
     const datePicker1 = wrapper1.instance();
 
-
-    expect(datePicker1.mode).to.equal('datetime');
+    expect(wrapper1.prop('mode')).to.equal('datetime');
     expect(datePicker1.format).to.equal('YYYY/MM/DD');
-    expect(datePicker1.duration).to.equal(400);
-    expect(datePicker1.confirmBtnText).to.equal('Confirm');
-    expect(datePicker1.cancelBtnText).to.equal('Cancel');
-    expect(datePicker1.iconSource).to.deep.equal({});
-    expect(datePicker1.customStyles).to.deep.equal({testStyle: 123});
-    expect(datePicker1.showIcon).to.equal(false);
-    expect(wrapper1.find('Image').length).to.equal(0);
+    expect(wrapper1.prop('duration')).to.equal(400);
+    expect(wrapper1.prop('confirmBtnText')).to.equal('Confirm');
+    expect(wrapper1.prop('cancelBtnText')).to.equal('Cancel');
+    expect(wrapper1.prop('iconSource')).to.deep.equal({});
+    expect(wrapper1.prop('customStyles')).to.deep.equal({testStyle: 123});
+    expect(wrapper1.prop('showIcon')).to.equal(false);
 
     expect(wrapper1.state('date')).to.deep.equal(Moment('2016-05-11', 'YYYY-MM-DD').toDate());
     expect(wrapper1.state('disabled')).to.equal(true);
+
+    // find not work with mount, and defaultProps not work with shallow...
+    const wrapper2 = shallow(<DatePicker date={new Date('2016/09/09')}/>);
+    expect(wrapper2.find('Image')).to.have.length(1);
+    expect(wrapper2.instance().getDateStr()).to.equal('2016-09-09');
+
+    const wrapper3 = shallow(<DatePicker showIcon={false} date={{test: 123}}/>);
+    expect(wrapper3.find('Image')).to.have.length(0);
+    expect(wrapper3.instance().getDateStr()).to.equal('Invalid date');
+  });
+
+  it('default selected Date', () => {
+    var dateStr = null;
+    const wrapper = shallow(<DatePicker date="" onDateChange={(date) => {
+      dateStr = date
+    }}/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onPressConfirm();
+
+    expect(dateStr).to.equal(Moment().format('YYYY-MM-DD'));
+  });
+
+  it('default selected Date with minDate and maxDate', () => {
+    var dateStr = null;
+    var dateStrMax = null;
+    var dateStrNormal = null
+
+    const wrapper = shallow(<DatePicker date="" minDate="3000-09-09" onDateChange={(date) => {
+      dateStr = date
+    }}/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onPressConfirm();
+
+    expect(dateStr).to.equal('3000-09-09');
+
+
+    const wrapperMax = shallow(<DatePicker date="" maxDate="2016-07-07" onDateChange={(date) => {
+      dateStrMax = date
+    }}/>);
+    const datePickerMax = wrapperMax.instance();
+
+    datePickerMax.onPressConfirm();
+
+    expect(dateStrMax).to.equal('2016-07-07');
+
+
+    const wrapperNormal = shallow(<DatePicker date="" minDate="2016-07-07" maxDate="3000-09-09" onDateChange={(date) => {
+      dateStrNormal = date
+    }}/>);
+    const datePickerNormal = wrapperNormal.instance();
+
+    datePickerNormal.onPressConfirm();
+
+    expect(dateStrNormal).to.equal(Moment().format('YYYY-MM-DD'));
   });
 
   it('setModalVisible', () => {
@@ -146,13 +225,12 @@ describe('DatePicker:', () => {
     const onDateChange = sinon.spy();
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);
     const datePicker = wrapper.instance();
-    wrapper.setState({
-      date: new Date('2016-06-06')
-    });
+    const date = new Date('2016-06-06');
+    wrapper.setState({date});
 
     datePicker.datePicked();
 
-    expect(onDateChange.calledWith('2016-06-06')).to.equal(true);
+    expect(onDateChange.calledWith('2016-06-06', date)).to.equal(true);
   });
 
   it('onDatePicked', () => {
@@ -218,14 +296,29 @@ describe('DatePicker:', () => {
     Platform.OS = 'android';
     expect(datePicker.onPressDate).to.not.throw(Error);
 
-    datePicker.mode = 'datetime';
+    wrapper.setProps({mode: 'datetime'});
     expect(datePicker.onPressDate).to.not.throw(Error);
 
-    datePicker.mode = 'time';
+    wrapper.setProps({mode: 'time'});
     expect(datePicker.onPressDate).to.not.throw(Error);
 
-    datePicker.mode = 'tttt';
+    wrapper.setProps({mode: 'tttt'});
     expect(datePicker.onPressDate).to.throw(Error);
+  });
+
+  it('getTitleElement - with placeholder', () => {
+    const placeholder = 'Please pick a date';
+    const wrapper = mount(<DatePicker placeholder={placeholder} />);
+    const datePicker = wrapper.instance();
+
+    expect(datePicker.getTitleElement().props.children).to.equal(placeholder);
+  });
+
+  it('getTitleElement - without placeholder', () => {
+    const wrapper = mount(<DatePicker date="2016-06-04" />);
+    const datePicker = wrapper.instance();
+
+    expect(datePicker.getTitleElement().props.children).to.equal(datePicker.getDateStr());
   });
 });
 

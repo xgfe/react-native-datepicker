@@ -32,5 +32,4 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-example/android/
-example/ios/
+example/android/app/build/outputs/apk
