@@ -31,6 +31,7 @@ class example extends Component {
         <Text style={styles.welcome}>
           Welcome to react-native-datepicker example!
         </Text>
+        <DatePicker placeholder="Please insert a date" />
         <DatePicker
           style={{width: 200}}
           date={this.state.date}
