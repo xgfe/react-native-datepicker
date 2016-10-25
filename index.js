@@ -256,6 +256,9 @@ class DatePicker extends Component {
               >
                 <Animated.View
                   style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
+                  onStartShouldSetResponder={e => true}
+                  onMoveShouldSetResponder={e => true}
+                  onResponderTerminationRequest={e => !this.props.modalRejectTerminationRequest}
                 >
                   <DatePickerIOS
                     date={this.state.date}
@@ -309,7 +312,8 @@ DatePicker.defaultProps = {
   // whether or not show the icon
   showIcon: true,
   disabled: false,
-  placeholder: ''
+  placeholder: '',
+  modalRejectTerminationRequest: false
 };
 
 DatePicker.propTypes = {
@@ -326,7 +330,8 @@ DatePicker.propTypes = {
   showIcon: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   onDateChange: React.PropTypes.func,
-  placeholder: React.PropTypes.string
+  placeholder: React.PropTypes.string,
+  modalRejectTerminationRequest: React.PropTypes.bool
 };
 
 export default DatePicker;
