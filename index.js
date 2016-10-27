@@ -263,6 +263,8 @@ class DatePicker extends Component {
                     minimumDate={this.props.minDate && this.getDate(this.props.minDate)}
                     maximumDate={this.props.maxDate && this.getDate(this.props.maxDate)}
                     onDateChange={(date) => this.setState({date: date})}
+                    minuteInterval={this.props.minuteInterval}
+                    timeZoneOffsetInMinutes={this.props.timeZoneOffsetInMinutes}
                     style={[Style.datePicker, customStyles.datePicker]}
                   />
                   <TouchableHighlight

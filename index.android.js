@@ -47,6 +47,7 @@ class datepicker extends Component {
           format="HH:mm"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
+          minuteInterval={10}
           onDateChange={(time) => {this.setState({time: time});}}
         />
         <Text style={styles.instructions}>time: {this.state.time}</Text>
@@ -79,6 +80,7 @@ class datepicker extends Component {
               marginLeft: 36
             }
           }}
+          minuteInterval={10}
           onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
         />
         <Text style={styles.instructions}>datetime: {this.state.datetime1}</Text>
