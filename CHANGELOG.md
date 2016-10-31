@@ -1,3 +1,14 @@
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/xgfe/react-native-datepicker/compare/v1.3.2...v1.4.0) (2016-10-31)
+
+
+### Features
+
+* **datepicker:** default prevent manual panResonder when mdal shown ([6d1c1d0](https://github.com/xgfe/react-native-datepicker/commit/6d1c1d0))
+* **Datepicker:** support minuteInterval property in ios [#46](https://github.com/xgfe/react-native-datepicker/issues/46) ([3ae69a4](https://github.com/xgfe/react-native-datepicker/commit/3ae69a4))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/xgfe/react-native-datepicker/compare/v1.3.1...v1.3.2) (2016-08-02)
 
