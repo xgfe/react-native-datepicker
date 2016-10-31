@@ -3,7 +3,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  PanResponder
 } from 'react-native';
 import DatePicker from './index.js';
 
@@ -20,9 +21,22 @@ class datepicker extends Component {
     };
   }
 
+  componentWillMount() {
+    this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (e) => {console.log('onStartShouldSetPanResponder'); return true;},
+      onMoveShouldSetPanResponder: (e) => {console.log('onMoveShouldSetPanResponder'); return true;},
+      onPanResponderGrant: (e) => console.log('onPanResponderGrant'),
+      onPanResponderMove: (e) => console.log('onPanResponderMove'),
+      onPanResponderRelease: (e) => console.log('onPanResponderRelease'),
+      onPanResponderTerminate: (e) => console.log('onPanResponderTerminate')
+    });
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container}
+            {...this._panResponder.panHandlers}
+      >
         <Text style={styles.welcome}>
           Welcome to react-native-datepicker example!
         </Text>

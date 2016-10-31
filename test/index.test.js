@@ -301,6 +301,19 @@ describe('DatePicker:', () => {
     expect(datePicker.onPressDate).to.throw(Error);
   });
 
+  it('panResponder', () => {
+    Platform.OS = 'ios';
+    const wrapper = shallow(<DatePicker date="2016-05-06" minDate="2016-04-01" maxDate="2016-06-01"/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onPressDate();
+
+    expect(datePicker.onStartShouldSetResponder()).to.equal(true);
+    expect(datePicker.onMoveShouldSetResponder()).to.equal(true);
+
+    expect(datePicker.props.modalOnResponderTerminationRequest()).to.equal(false);
+  });
+
   it('getTitleElement - with placeholder', () => {
     const placeholder = 'Please pick a date';
     const wrapper = mount(<DatePicker placeholder={placeholder} />);
