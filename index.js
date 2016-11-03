@@ -254,9 +254,6 @@ class DatePicker extends Component {
           >
             <View
               style={{flex: 1}}
-              onStartShouldSetResponder={this.onStartShouldSetResponder}
-              onMoveShouldSetResponder={this.onMoveShouldSetResponder}
-              onResponderTerminationRequest={this.props.modalOnResponderTerminationRequest}
             >
               <TouchableHighlight
                 style={Style.datePickerMask}
