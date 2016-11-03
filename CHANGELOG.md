@@ -1,3 +1,13 @@
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/xgfe/react-native-datepicker/compare/v1.4.0...v1.4.1) (2016-11-03)
+
+
+### Bug Fixes
+
+* **datepicker:** fix btn not work in 7p bug [#50](https://github.com/xgfe/react-native-datepicker/issues/50) ([8285d2d](https://github.com/xgfe/react-native-datepicker/commit/8285d2d)), closes [#50](https://github.com/xgfe/react-native-datepicker/issues/50)
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/xgfe/react-native-datepicker/compare/v1.3.2...v1.4.0) (2016-10-31)
 
