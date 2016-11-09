@@ -243,10 +243,7 @@ class DatePicker extends Component {
           <View style={dateInputStyle}>
             {this.getTitleElement()}
           </View>
-          {this.props.showIcon && <Image
-            style={[Style.dateIcon, customStyles.dateIcon]}
-            source={this.props.iconSource}
-          />}
+          {this.props.showIcon && this.props.icon}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
             visible={this.state.modalVisible}
@@ -317,7 +314,7 @@ DatePicker.defaultProps = {
   duration: 300,
   confirmBtnText: '确定',
   cancelBtnText: '取消',
-  iconSource: require('./date_icon.png'),
+  icon: (<Image style={Style.dateIcon} source={require('./date_icon.png')} />),
   customStyles: {},
 
   // whether or not show the icon
@@ -336,7 +333,7 @@ DatePicker.propTypes = {
   duration: React.PropTypes.number,
   confirmBtnText: React.PropTypes.string,
   cancelBtnText: React.PropTypes.string,
-  iconSource: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.object]),
+  icon: React.PropTypes.element,
   customStyles: React.PropTypes.object,
   showIcon: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
