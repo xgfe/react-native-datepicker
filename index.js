@@ -341,7 +341,7 @@ DatePicker.defaultProps = {
   showIcon: true,
   disabled: false,
   placeholder: '',
-  modalOnResponderTerminationRequest: e => true
+  modalOnResponderTerminationRequest: e => true,
   onDateChange: () => {}
 };
 
