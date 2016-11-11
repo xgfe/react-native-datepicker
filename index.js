@@ -41,6 +41,8 @@ class DatePicker extends Component {
   }
 
   setModalVisible = (visible) => {
+    const {height, duration} = this.props;
+
     this.setState({modalVisible: visible});
 
     // slide animation
@@ -48,8 +50,8 @@ class DatePicker extends Component {
       Animated.timing(
         this.state.animatedHeight,
         {
-          toValue: this.props.height,
-          duration: this.props.duration
+          toValue: height,
+          duration: duration
         }
       ).start();
     } else {
@@ -77,22 +79,24 @@ class DatePicker extends Component {
   };
 
   getDate(date = this.props.date) {
+    const {minDate, maxDate} = this.props;
     // date默认值
     if (!date) {
-      let now = new Date();
-      if (this.props.minDate) {
-        let minDate = this.getDate(this.props.minDate);
+      const now = new Date();
 
-        if (now < minDate) {
-          return minDate;
+      if (minDate) {
+        const cleanMinDate = this.getDate(minDate);
+
+        if (now < cleanMinDate) {
+          return cleanMinDate;
         }
       }
 
-      if (this.props.maxDate) {
-        let maxDate = this.getDate(this.props.maxDate);
+      if (maxDate) {
+        const cleanMaxDate = this.getDate(maxDate);
 
-        if (now > maxDate) {
-          return maxDate;
+        if (now > cleanMaxDate) {
+          return cleanMaxDate;
         }
       }
 
@@ -115,17 +119,16 @@ class DatePicker extends Component {
   }
 
   datePicked = () => {
-    if (typeof this.props.onDateChange === 'function') {
-      this.props.onDateChange(this.getDateStr(this.state.date), this.state.date);
-    }
+    const {date} = this.state;
+    this.props.onDateChange(this.getDateStr(date));
   };
 
   getTitleElement() {
-    const {date, placeholder, styles} = this.props;
+    const {date, placeholder, styles, customStyles} = this.props;
     if (!date && placeholder) {
-      return (<Text style={[styles.placeholderText, this.props.customStyles.placeholderText]}>{placeholder}</Text>);
+      return (<Text style={[styles.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
     }
-    return (<Text style={[styles.dateText, this.props.customStyles.dateText]}>{this.getDateStr()}</Text>);
+    return (<Text style={[styles.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
   }
 
   onDatePicked = ({action, year, month, day}) => {
@@ -168,7 +171,10 @@ class DatePicker extends Component {
   };
 
   onPressDate = () => {
-    if (this.state.disabled) {
+    const {mode, minDate, maxDate} = this.props;
+    const {disabled, date} = this.state;
+
+    if (disabled) {
       return true;
     }
 
@@ -182,29 +188,29 @@ class DatePicker extends Component {
     } else {
 
       // 选日期
-      if (this.props.mode === 'date') {
+      if (mode === 'date') {
         DatePickerAndroid.open({
-          date: this.state.date,
-          minDate: this.props.minDate && this.getDate(this.props.minDate),
-          maxDate: this.props.maxDate && this.getDate(this.props.maxDate)
+          date,
+          minDate: minDate && this.getDate(minDate),
+          maxDate: maxDate && this.getDate(maxDate)
         }).then(this.onDatePicked);
-      } else if (this.props.mode === 'time') {
+      } else if (mode === 'time') {
         // 选时间
 
-        const timeMoment = Moment(this.state.date);
+        const timeMoment = Moment(date);
 
         TimePickerAndroid.open({
           hour: timeMoment.hour(),
           minute: timeMoment.minutes(),
           is24Hour: !this.format.match(/h|a/)
         }).then(this.onTimePicked);
-      } else if (this.props.mode === 'datetime') {
+      } else if (mode === 'datetime') {
         // 选日期和时间
 
         DatePickerAndroid.open({
-          date: this.state.date,
-          minDate: this.props.minDate && this.getDate(this.props.minDate),
-          maxDate: this.props.maxDate && this.getDate(this.props.maxDate)
+          date,
+          minDate: minDate && this.getDate(minDate),
+          maxDate: maxDate && this.getDate(maxDate)
         }).then(this.onDatetimePicked);
       } else {
         throw new Error('The specified mode is not supported');
@@ -337,6 +343,7 @@ DatePicker.defaultProps = {
   disabled: false,
   placeholder: '',
   modalOnResponderTerminationRequest: e => true
+  onDateChange: () => {}
 };
 
 DatePicker.propTypes = {
