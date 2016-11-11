@@ -119,8 +119,7 @@ class DatePicker extends Component {
   }
 
   datePicked = () => {
-    const {date} = this.state;
-    this.props.onDateChange(this.getDateStr(date));
+    this.props.onDateChange(this.getDateStr(this.state.date));
   };
 
   getTitleElement() {
