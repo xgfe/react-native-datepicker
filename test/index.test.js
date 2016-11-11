@@ -8,15 +8,9 @@ import Moment from 'moment';
 import {expect} from 'chai';
 import sinon from 'sinon';
 
-/*---------------- mock DOM ----------------*/
-import {jsdom} from 'jsdom';
-
 // hack require for require image
 var m = require('module');
 var originalLoader = m._load;
-
-var exposedProperties = ['window', 'navigator', 'document'];
-var DatePicker = require('../index').default;
 
 m._load = function (request, parent, isMain) {
   var file = m._resolveFilename(request, parent);
@@ -25,6 +19,10 @@ m._load = function (request, parent, isMain) {
   }
   return originalLoader(request, parent, isMain);
 };
+
+/*---------------- mock DOM ----------------*/
+import {jsdom} from 'jsdom';
+var exposedProperties = ['window', 'navigator', 'document'];
 
 global.document = jsdom('');
 global.window = document.defaultView;
@@ -42,6 +40,8 @@ global.navigator = {
 global.ErrorUtils = {
   setGlobalHandler: () => {}
 };
+
+var DatePicker = require('../index').default;
 
 describe('DatePicker:', () => {
 
@@ -293,6 +293,9 @@ describe('DatePicker:', () => {
 
     wrapper.setProps({mode: 'time'});
     expect(datePicker.onPressDate).to.not.throw(Error);
+
+    wrapper.setProps({mode: 'tttt'});
+    expect(datePicker.onPressDate).to.throw(Error);
   });
 
   it('panResponder', () => {
