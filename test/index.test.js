@@ -1,12 +1,11 @@
 import React from 'react';
-import {
-  Animated,
-  Platform
-} from 'react-native';
+import {Animated, Platform} from 'react-native';
 import {shallow, mount} from 'enzyme';
 import Moment from 'moment';
 import {expect} from 'chai';
 import sinon from 'sinon';
+/*---------------- mock DOM ----------------*/
+import {jsdom} from 'jsdom';
 
 // hack require for require image
 var m = require('module');
@@ -20,8 +19,7 @@ m._load = function (request, parent, isMain) {
   return originalLoader(request, parent, isMain);
 };
 
-/*---------------- mock DOM ----------------*/
-import {jsdom} from 'jsdom';
+var DatePicker = require('../index').default;
 var exposedProperties = ['window', 'navigator', 'document'];
 
 global.document = jsdom('');
@@ -40,8 +38,6 @@ global.navigator = {
 global.ErrorUtils = {
   setGlobalHandler: () => {}
 };
-
-var DatePicker = require('../index').default;
 
 describe('DatePicker:', () => {
 
