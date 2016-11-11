@@ -61,11 +61,11 @@ class DatePicker extends Component {
     }
   };
 
-  onStartShouldSetResponder(e) {
+  onStartShouldSetResponder() {
     return true;
   }
 
-  onMoveShouldSetResponder(e) {
+  onMoveShouldSetResponder() {
     return true;
   }
 
@@ -110,16 +110,17 @@ class DatePicker extends Component {
     return Moment(date, this.format).toDate();
   }
 
-  getDateStr(date = this.props.date) {
+  getDateStr(date = this.props.date, format = this.format) {
     if (date instanceof Date) {
-      return Moment(date).format(this.format);
+      return Moment(date).format(format);
     } else {
-      return Moment(this.getDate(date)).format(this.format);
+      return Moment(this.getDate(date)).format(format);
     }
   }
 
   datePicked = () => {
-    this.props.onDateChange(this.getDateStr(this.state.date));
+    const {date} = this.state;
+    this.props.onDateChange(this.getDateStr(this.state.date), date);
   };
 
   getTitleElement() {
@@ -218,7 +219,7 @@ class DatePicker extends Component {
   };
 
   setDateState = (newDate) => {
-    this.setState({date: newDate})
+    this.setState({date: newDate});
   };
 
   get format() {
@@ -227,15 +228,15 @@ class DatePicker extends Component {
 
   render() {
     const {
-      customStyles, 
-      styles, 
-      style, 
-      showIcon, 
-      iconSource, 
-      mode, 
-      minDate, 
-      maxDate, 
-      minuteInterval, 
+      customStyles,
+      styles,
+      style,
+      showIcon,
+      iconSource,
+      mode,
+      minDate,
+      maxDate,
+      minuteInterval,
       timeZoneOffsetInMinutes,
       confirmBtnText,
       cancelBtnText
@@ -266,7 +267,9 @@ class DatePicker extends Component {
           {Platform.OS === 'ios' && <Modal
             transparent={true}
             visible={modalVisible}
-            onRequestClose={() => {this.setModalVisible(false);}}
+            onRequestClose={() => {
+              this.setModalVisible(false);
+            }}
           >
             <View
               style={{flex: 1}}
