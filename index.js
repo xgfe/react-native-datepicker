@@ -11,8 +11,10 @@ import {
   Platform,
   Animated
 } from 'react-native';
-import Style from './style';
+
 import Moment from 'moment';
+
+let Style = require('./style');
 
 const FORMATS = {
   'date': 'YYYY-MM-DD',
@@ -50,6 +52,10 @@ class DatePicker extends Component {
       'Warning: Failed propType'
       // Other warnings you don't want like 'jsSchedulingOverhead',
     ];
+    if(this.props.style) {
+      Style = this.props.style;
+    }
+
   }
 
   setModalVisible(visible) {
@@ -235,7 +241,7 @@ class DatePicker extends Component {
 
     return (
       <TouchableHighlight
-        style={[Style.dateTouch, this.props.style]}
+        style={Style.dateTouch}
         underlayColor={'transparent'}
         onPress={this.onPressDate}
       >
