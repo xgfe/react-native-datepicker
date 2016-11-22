@@ -75,6 +75,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
 | customStyles | - | `number` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
 | showIcon | true | `boolean` | Controller whether or not show the icon |
+| disabled | false | `boolean` | Controller whether or not disable the picker |
 | placeholder | '' | `string` | The placeholder show when this.props.date is falsy |
 | onDateChange | - | `function` | This is called when the user confirm the picked date or time in the UI. The first and only argument is a date or time string representing the new date and time formatted by [moment.js](http://momentjs.com/) with the given format property. |
 | modalOnResponderTerminationRequest | - | `function` | Set the callback for React Native's [Gesture Responder System](https://facebook.github.io/react-native/docs/gesture-responder-system.html#responder-lifecycle)'s call to `onResponderTerminationRequest`. By default this will reject a termination request, but can be overidden in case the View under the Modal is implementing custom gesture responders, and you wish for those to be overidden in certain cases.  |
