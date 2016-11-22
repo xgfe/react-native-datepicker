@@ -1,15 +1,11 @@
-import React, {Component} from 'react';
-import {
-  Animated,
-  Platform,
-  Image,
-  Text,
-  View
-} from 'react-native';
+import React from 'react';
+import {Animated, Platform} from 'react-native';
 import {shallow, mount} from 'enzyme';
 import Moment from 'moment';
 import {expect} from 'chai';
 import sinon from 'sinon';
+/*---------------- mock DOM ----------------*/
+import {jsdom} from 'jsdom';
 
 // hack require for require image
 var m = require('module');
@@ -23,8 +19,7 @@ m._load = function (request, parent, isMain) {
   return originalLoader(request, parent, isMain);
 };
 
-/*---------------- mock DOM ----------------*/
-import {jsdom} from 'jsdom';
+var DatePicker = require('../index').default;
 var exposedProperties = ['window', 'navigator', 'document'];
 
 global.document = jsdom('');
@@ -43,8 +38,6 @@ global.navigator = {
 global.ErrorUtils = {
   setGlobalHandler: () => {}
 };
-
-var DatePicker = require('../index').default;
 
 describe('DatePicker:', () => {
 
@@ -109,7 +102,7 @@ describe('DatePicker:', () => {
   it('default selected Date', () => {
     var dateStr = null;
     const wrapper = shallow(<DatePicker date="" onDateChange={(date) => {
-      dateStr = date
+      dateStr = date;
     }}/>);
     const datePicker = wrapper.instance();
 
@@ -121,10 +114,10 @@ describe('DatePicker:', () => {
   it('default selected Date with minDate and maxDate', () => {
     var dateStr = null;
     var dateStrMax = null;
-    var dateStrNormal = null
+    var dateStrNormal = null;
 
     const wrapper = shallow(<DatePicker date="" minDate="3000-09-09" onDateChange={(date) => {
-      dateStr = date
+      dateStr = date;
     }}/>);
     const datePicker = wrapper.instance();
 
@@ -134,7 +127,7 @@ describe('DatePicker:', () => {
 
 
     const wrapperMax = shallow(<DatePicker date="" maxDate="2016-07-07" onDateChange={(date) => {
-      dateStrMax = date
+      dateStrMax = date;
     }}/>);
     const datePickerMax = wrapperMax.instance();
 
@@ -142,10 +135,11 @@ describe('DatePicker:', () => {
 
     expect(dateStrMax).to.equal('2016-07-07');
 
-
-    const wrapperNormal = shallow(<DatePicker date="" minDate="2016-07-07" maxDate="3000-09-09" onDateChange={(date) => {
-      dateStrNormal = date
-    }}/>);
+    const wrapperNormal = shallow(
+      <DatePicker date="" minDate="2016-07-07" maxDate="3000-09-09" onDateChange={(date) => {
+        dateStrNormal = date;
+      }}/>
+    );
     const datePickerNormal = wrapperNormal.instance();
 
     datePickerNormal.onPressConfirm();
@@ -212,8 +206,7 @@ describe('DatePicker:', () => {
     expect(datePicker.getDateStr(new Date('2016-06-02'))).to.equal('2016-06-02');
     expect(datePicker.getDateStr('2016-06-03')).to.equal('2016-06-03');
 
-    datePicker.format = 'YYYY/MM/DD';
-    expect(datePicker.getDateStr(new Date('2016-06-02'))).to.equal('2016/06/02');
+    expect(datePicker.getDateStr(new Date('2016-06-02'), 'YYYY/MM/DD')).to.equal('2016/06/02');
   });
 
   it('datePicked', () => {
@@ -311,7 +304,7 @@ describe('DatePicker:', () => {
     expect(datePicker.onStartShouldSetResponder()).to.equal(true);
     expect(datePicker.onMoveShouldSetResponder()).to.equal(true);
 
-    expect(datePicker.props.modalOnResponderTerminationRequest()).to.equal(false);
+    expect(datePicker.props.modalOnResponderTerminationRequest()).to.equal(true);
   });
 
   it('getTitleElement - with placeholder', () => {
