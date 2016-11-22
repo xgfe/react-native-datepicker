@@ -296,9 +296,6 @@ describe('DatePicker:', () => {
 
     wrapper.setProps({mode: 'time'});
     expect(datePicker.onPressDate).to.not.throw(Error);
-
-    wrapper.setProps({mode: 'tttt'});
-    expect(datePicker.onPressDate).to.throw(Error);
   });
 
   it('panResponder', () => {
