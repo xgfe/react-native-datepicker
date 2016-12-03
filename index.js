@@ -54,7 +54,7 @@ class DatePicker extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.disabled !== nextProps.disabled) {
-      this.setState({ disabled: nextProps.editable });
+      this.setState({ disabled: nextProps.disabled });
     }
   }
 
