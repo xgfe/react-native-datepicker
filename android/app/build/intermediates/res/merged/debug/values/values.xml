@@ -31,7 +31,7 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.33.0/res/values/values.xml -->
+    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.39.0/res/values/values.xml -->
     <eat-comment/>
     <color name="catalyst_redbox_background">#eecc0000</color>
     <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
@@ -223,7 +223,7 @@
     <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">datepicker</string>
-    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.33.0/res/values/values.xml -->
+    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.39.0/res/values/values.xml -->
     <eat-comment/>
     <string name="catalyst_copy_button" project="catalyst" translatable="false">Copy</string>
     <string name="catalyst_debugjs" project="catalyst" translatable="false">Debug JS Remotely</string>
@@ -255,7 +255,7 @@
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
     <style name="Animation.AppCompat.DropDownUp" parent="Base.Animation.AppCompat.DropDownUp"/>
-    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.33.0/res/values/values.xml -->
+    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.39.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Animation.Catalyst.RedBox" parent="@android:style/Animation">
     <item name="android:windowEnterAnimation">@anim/catalyst_push_up_in</item>
@@ -1181,7 +1181,7 @@
         <item name="android:minWidth">56dp</item>
         <item name="android:scaleType">center</item>
     </style>
-    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.33.0/res/values/values.xml -->
+    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.39.0/res/values/values.xml -->
     <eat-comment/>
     <style name="DialogAnimationFade">
     <item name="android:windowEnterAnimation">@anim/fade_in</item>
@@ -1400,7 +1400,7 @@
     </style>
     <style name="TextAppearance.Widget.AppCompat.Toolbar.Title" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
     </style>
-    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.33.0/res/values/values.xml -->
+    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.39.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Theme"/>
     <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
@@ -1427,7 +1427,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.33.0/res/values/values.xml -->
+    <!-- From: file:/Users/yuebin/workspace/react-native/react-native-datepicker/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.39.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Theme.Catalyst"/>
     <style name="Theme.Catalyst.RedBox" parent="@style/Theme.AppCompat.DialogWhenLarge">
@@ -1441,6 +1441,7 @@
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowIsFloating">false</item>
     <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowTranslucentStatus">true</item>
   </style>
     <style name="Theme.FullScreenDialogAnimatedFade" parent="Theme.FullScreenDialog">
     <item name="android:windowAnimationStyle">@style/DialogAnimationFade</item>
