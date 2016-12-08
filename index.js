@@ -29,7 +29,6 @@ class DatePicker extends Component {
     this.state = {
       date: this.getDate(),
       modalVisible: false,
-      disabled: this.props.disabled,
       animatedHeight: new Animated.Value(0)
     };
 
@@ -180,7 +179,7 @@ class DatePicker extends Component {
   }
 
   onPressDate() {
-    if (this.state.disabled) {
+    if (this.props.disabled) {
       return true;
     }
 
@@ -229,8 +228,8 @@ class DatePicker extends Component {
     this.format = this.props.format || FORMATS[this.props.mode];
     const dateInputStyle = [
       Style.dateInput, customStyles.dateInput,
-      this.state.disabled && Style.disabled,
-      this.state.disabled && customStyles.disabled
+      this.props.disabled && Style.disabled,
+      this.props.disabled && customStyles.disabled
     ];
 
     return (

@@ -62,9 +62,9 @@ describe('DatePicker:', () => {
     expect(wrapper.prop('iconSource')).to.deep.equal(require('../date_icon.png'));
     expect(wrapper.prop('customStyles')).to.deep.equal({});
     expect(wrapper.prop('showIcon')).to.equal(true);
+    expect(wrapper.prop('disabled')).to.equal(false);
 
     expect(wrapper.state('date')).to.be.a('date');
-    expect(wrapper.state('disabled')).to.equal(false);
     expect(wrapper.state('modalVisible')).to.equal(false);
     expect(wrapper.state('animatedHeight')).to.deep.equal(new Animated.Value(0));
 
@@ -92,9 +92,9 @@ describe('DatePicker:', () => {
     expect(wrapper1.prop('iconSource')).to.deep.equal({});
     expect(wrapper1.prop('customStyles')).to.deep.equal({testStyle: 123});
     expect(wrapper1.prop('showIcon')).to.equal(false);
+    expect(wrapper1.prop('disabled')).to.equal(true);
 
     expect(wrapper1.state('date')).to.deep.equal(Moment('2016-05-11', 'YYYY-MM-DD').toDate());
-    expect(wrapper1.state('disabled')).to.equal(true);
 
     // find not work with mount, and defaultProps not work with shallow...
     const wrapper2 = shallow(<DatePicker date={new Date('2016/09/09')}/>);
@@ -278,12 +278,12 @@ describe('DatePicker:', () => {
     const datePicker = wrapper.instance();
     datePicker.setModalVisible = setModalVisible;
 
-    wrapper.setState({disabled: true});
+    wrapper.setProps({disabled: true});
     datePicker.onPressDate();
 
     expect(setModalVisible.callCount).to.equal(0);
 
-    wrapper.setState({disabled: false});
+    wrapper.setProps({disabled: false});
     datePicker.onPressDate();
     expect(wrapper.state('date')).to.deep.equal(datePicker.getDate());
     expect(setModalVisible.callCount).to.equal(1);
@@ -311,7 +311,7 @@ describe('DatePicker:', () => {
     expect(datePicker.onStartShouldSetResponder()).to.equal(true);
     expect(datePicker.onMoveShouldSetResponder()).to.equal(true);
 
-    expect(datePicker.props.modalOnResponderTerminationRequest()).to.equal(false);
+    expect(datePicker.props.modalOnResponderTerminationRequest()).to.equal(true);
   });
 
   it('getTitleElement - with placeholder', () => {
