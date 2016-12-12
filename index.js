@@ -52,21 +52,32 @@ class DatePicker extends Component {
   }
 
   setModalVisible(visible) {
-    this.setState({modalVisible: visible});
 
     // slide animation
     if (visible) {
+      this.setState({modalVisible: visible});
+
+      setTimeout(() => {
+        Animated.timing(
+          this.state.animatedHeight,
+          {
+            toValue: this.props.height,
+            duration: this.props.duration
+          }
+        ).start();
+      }, this.props.duration);
+    } else {
       Animated.timing(
         this.state.animatedHeight,
         {
-          toValue: this.props.height,
+          toValue: 0,
           duration: this.props.duration
         }
       ).start();
-    } else {
-      this.setState({
-        animatedHeight: new Animated.Value(0)
-      });
+
+      setTimeout(() => {
+        this.setState({modalVisible: visible});
+      }, this.props.duration);
     }
   }
 
@@ -248,6 +259,7 @@ class DatePicker extends Component {
           />}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
+            animationType={'fade'}
             visible={this.state.modalVisible}
             onRequestClose={() => {this.setModalVisible(false);}}
           >
