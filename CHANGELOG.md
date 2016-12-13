@@ -1,3 +1,19 @@
+<a name="1.4.3"></a>
+## [1.4.3](https://github.com/xgfe/react-native-datepicker/compare/v1.4.1...v1.4.3) (2016-12-13)
+
+
+### Bug Fixes
+
+* **datepicker:** fix `disabled` props change not update bug [#66](https://github.com/xgfe/react-native-datepicker/issues/66) ([7579dc9](https://github.com/xgfe/react-native-datepicker/commit/7579dc9)), closes [#66](https://github.com/xgfe/react-native-datepicker/issues/66)
+* **datepicker:** fix is24Hour flag can't be specified bug ([c320e56](https://github.com/xgfe/react-native-datepicker/commit/c320e56)), closes [#69](https://github.com/xgfe/react-native-datepicker/issues/69)
+
+
+### Reverts
+
+* **datepicker:** revert responder prevert func temporary [#47](https://github.com/xgfe/react-native-datepicker/issues/47) [#50](https://github.com/xgfe/react-native-datepicker/issues/50) ([5b9f60c](https://github.com/xgfe/react-native-datepicker/commit/5b9f60c))
+
+
+
 <a name="1.4.1"></a>
 ## [1.4.1](https://github.com/xgfe/react-native-datepicker/compare/v1.4.0...v1.4.1) (2016-11-03)
 
