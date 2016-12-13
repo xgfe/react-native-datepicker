@@ -159,12 +159,13 @@ class DatePicker extends Component {
 
   onDatetimePicked({action, year, month, day}) {
     if (action !== DatePickerAndroid.dismissedAction) {
+      const {is24Hour = !this.format.match(/h|a/)} = this.props;
       let timeMoment = Moment(this.state.date);
 
       TimePickerAndroid.open({
         hour: timeMoment.hour(),
         minute: timeMoment.minutes(),
-        is24Hour: !this.format.match(/h|a/)
+        is24Hour: is24Hour
       }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
     }
   }
@@ -191,6 +192,7 @@ class DatePicker extends Component {
     if (Platform.OS === 'ios') {
       this.setModalVisible(true);
     } else {
+      const {is24Hour = !this.format.match(/h|a/)} = this.props;
 
       // 选日期
       if (this.props.mode === 'date') {
@@ -207,7 +209,7 @@ class DatePicker extends Component {
         TimePickerAndroid.open({
           hour: timeMoment.hour(),
           minute: timeMoment.minutes(),
-          is24Hour: !this.format.match(/h|a/)
+          is24Hour: is24Hour
         }).then(this.onTimePicked);
       } else if (this.props.mode === 'datetime') {
         // 选日期和时间
@@ -341,7 +343,8 @@ DatePicker.propTypes = {
   disabled: React.PropTypes.bool,
   onDateChange: React.PropTypes.func,
   placeholder: React.PropTypes.string,
-  modalOnResponderTerminationRequest: React.PropTypes.func
+  modalOnResponderTerminationRequest: React.PropTypes.func,
+  is24Hour: React.PropTypes.bool
 };
 
 export default DatePicker;
