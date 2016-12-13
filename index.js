@@ -24,8 +24,6 @@ class DatePicker extends Component {
   constructor(props) {
     super(props);
 
-    this.format = this.props.format || FORMATS[this.props.mode];
-
     this.state = {
       date: this.getDate(),
       modalVisible: false,
@@ -52,6 +50,8 @@ class DatePicker extends Component {
   }
 
   setModalVisible(visible) {
+    const {height, duration} = this.props;
+
     this.setState({modalVisible: visible});
 
     // slide animation
@@ -59,8 +59,8 @@ class DatePicker extends Component {
       Animated.timing(
         this.state.animatedHeight,
         {
-          toValue: this.props.height,
-          duration: this.props.duration
+          toValue: height,
+          duration: duration
         }
       ).start();
     } else {
@@ -88,22 +88,24 @@ class DatePicker extends Component {
   }
 
   getDate(date = this.props.date) {
+    const {mode, minDate, maxDate, format = FORMATS[mode]} = this.props;
+
     // date默认值
     if (!date) {
       let now = new Date();
-      if (this.props.minDate) {
-        let minDate = this.getDate(this.props.minDate);
+      if (minDate) {
+        let _minDate = this.getDate(minDate);
 
-        if (now < minDate) {
-          return minDate;
+        if (now < _minDate) {
+          return _minDate;
         }
       }
 
-      if (this.props.maxDate) {
-        let maxDate = this.getDate(this.props.maxDate);
+      if (maxDate) {
+        let _maxDate = this.getDate(maxDate);
 
-        if (now > maxDate) {
-          return maxDate;
+        if (now > _maxDate) {
+          return _maxDate;
         }
       }
 
@@ -114,14 +116,16 @@ class DatePicker extends Component {
       return date;
     }
 
-    return Moment(date, this.format).toDate();
+    return Moment(date, format).toDate();
   }
 
   getDateStr(date = this.props.date) {
+    const {mode, format = FORMATS[mode]} = this.props;
+
     if (date instanceof Date) {
-      return Moment(date).format(this.format);
+      return Moment(date).format(format);
     } else {
-      return Moment(this.getDate(date)).format(this.format);
+      return Moment(this.getDate(date)).format(format);
     }
   }
 
@@ -132,11 +136,12 @@ class DatePicker extends Component {
   }
 
   getTitleElement() {
-    const {date, placeholder} = this.props;
+    const {date, placeholder, customStyles} = this.props;
+
     if (!date && placeholder) {
-      return (<Text style={[Style.placeholderText, this.props.customStyles.placeholderText]}>{placeholder}</Text>);
+      return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
     }
-    return (<Text style={[Style.dateText, this.props.customStyles.dateText]}>{this.getDateStr()}</Text>);
+    return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
   }
 
   onDatePicked({action, year, month, day}) {
@@ -158,8 +163,9 @@ class DatePicker extends Component {
   }
 
   onDatetimePicked({action, year, month, day}) {
+    const {mode, format = FORMATS[mode], is24Hour = !format.match(/h|a/)} = this.props;
+
     if (action !== DatePickerAndroid.dismissedAction) {
-      const {is24Hour = !this.format.match(/h|a/)} = this.props;
       let timeMoment = Moment(this.state.date);
 
       TimePickerAndroid.open({
@@ -192,16 +198,17 @@ class DatePicker extends Component {
     if (Platform.OS === 'ios') {
       this.setModalVisible(true);
     } else {
-      const {is24Hour = !this.format.match(/h|a/)} = this.props;
+
+      const {mode, format = FORMATS[mode], minDate, maxDate, is24Hour = !format.match(/h|a/)} = this.props;
 
       // 选日期
-      if (this.props.mode === 'date') {
+      if (mode === 'date') {
         DatePickerAndroid.open({
           date: this.state.date,
-          minDate: this.props.minDate && this.getDate(this.props.minDate),
-          maxDate: this.props.maxDate && this.getDate(this.props.maxDate)
+          minDate: minDate && this.getDate(minDate),
+          maxDate: maxDate && this.getDate(maxDate)
         }).then(this.onDatePicked);
-      } else if (this.props.mode === 'time') {
+      } else if (mode === 'time') {
         // 选时间
 
         let timeMoment = Moment(this.state.date);
@@ -211,32 +218,43 @@ class DatePicker extends Component {
           minute: timeMoment.minutes(),
           is24Hour: is24Hour
         }).then(this.onTimePicked);
-      } else if (this.props.mode === 'datetime') {
+      } else if (mode === 'datetime') {
         // 选日期和时间
 
         DatePickerAndroid.open({
           date: this.state.date,
-          minDate: this.props.minDate && this.getDate(this.props.minDate),
-          maxDate: this.props.maxDate && this.getDate(this.props.maxDate)
+          minDate: minDate && this.getDate(minDate),
+          maxDate: maxDate && this.getDate(maxDate)
         }).then(this.onDatetimePicked);
-      } else {
-        throw new Error('The specified mode is not supported');
       }
     }
   }
 
   render() {
-    let customStyles = this.props.customStyles;
-    this.format = this.props.format || FORMATS[this.props.mode];
+    const {
+      mode,
+      style,
+      customStyles,
+      disabled,
+      showIcon,
+      iconSource,
+      minDate,
+      maxDate,
+      minuteInterval,
+      timeZoneOffsetInMinutes,
+      cancelBtnText,
+      confirmBtnText
+    } = this.props;
+
     const dateInputStyle = [
       Style.dateInput, customStyles.dateInput,
-      this.props.disabled && Style.disabled,
-      this.props.disabled && customStyles.disabled
+      disabled && Style.disabled,
+      disabled && customStyles.disabled
     ];
 
     return (
       <TouchableHighlight
-        style={[Style.dateTouch, this.props.style]}
+        style={[Style.dateTouch, style]}
         underlayColor={'transparent'}
         onPress={this.onPressDate}
       >
@@ -244,9 +262,9 @@ class DatePicker extends Component {
           <View style={dateInputStyle}>
             {this.getTitleElement()}
           </View>
-          {this.props.showIcon && <Image
+          {showIcon && <Image
             style={[Style.dateIcon, customStyles.dateIcon]}
-            source={this.props.iconSource}
+            source={iconSource}
           />}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
@@ -271,12 +289,12 @@ class DatePicker extends Component {
                   >
                     <DatePickerIOS
                       date={this.state.date}
-                      mode={this.props.mode}
-                      minimumDate={this.props.minDate && this.getDate(this.props.minDate)}
-                      maximumDate={this.props.maxDate && this.getDate(this.props.maxDate)}
+                      mode={mode}
+                      minimumDate={minDate && this.getDate(minDate)}
+                      maximumDate={maxDate && this.getDate(maxDate)}
                       onDateChange={(date) => this.setState({date: date})}
-                      minuteInterval={this.props.minuteInterval}
-                      timeZoneOffsetInMinutes={this.props.timeZoneOffsetInMinutes}
+                      minuteInterval={minuteInterval}
+                      timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
                       style={[Style.datePicker, customStyles.datePicker]}
                     />
                     <TouchableHighlight
@@ -287,7 +305,7 @@ class DatePicker extends Component {
                       <Text
                         style={[Style.btnTextText, Style.btnTextCancel, customStyles.btnTextCancel]}
                       >
-                        {this.props.cancelBtnText}
+                        {cancelBtnText}
                       </Text>
                     </TouchableHighlight>
                     <TouchableHighlight
@@ -295,7 +313,7 @@ class DatePicker extends Component {
                       onPress={this.onPressConfirm}
                       style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
                     >
-                      <Text style={[Style.btnTextText, customStyles.btnTextConfirm]}>{this.props.confirmBtnText}</Text>
+                      <Text style={[Style.btnTextText, customStyles.btnTextConfirm]}>{confirmBtnText}</Text>
                     </TouchableHighlight>
                   </Animated.View>
                 </TouchableHighlight>
@@ -331,6 +349,7 @@ DatePicker.defaultProps = {
 DatePicker.propTypes = {
   mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
   date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
+  format: React.PropTypes.string,
   minDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   maxDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   height: React.PropTypes.number,

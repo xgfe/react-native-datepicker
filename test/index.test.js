@@ -54,7 +54,6 @@ describe('DatePicker:', () => {
     const datePicker = wrapper.instance();
 
     expect(wrapper.prop('mode')).to.equal('date');
-    expect(datePicker.format).to.equal('YYYY-MM-DD');
     expect(wrapper.prop('duration')).to.equal(300);
     expect(wrapper.prop('height')).to.above(200);
     expect(wrapper.prop('confirmBtnText')).to.equal('确定');
@@ -85,7 +84,7 @@ describe('DatePicker:', () => {
     const datePicker1 = wrapper1.instance();
 
     expect(wrapper1.prop('mode')).to.equal('datetime');
-    expect(datePicker1.format).to.equal('YYYY/MM/DD');
+    expect(wrapper1.prop('format')).to.equal('YYYY/MM/DD');
     expect(wrapper1.prop('duration')).to.equal(400);
     expect(wrapper1.prop('confirmBtnText')).to.equal('Confirm');
     expect(wrapper1.prop('cancelBtnText')).to.equal('Cancel');
@@ -212,7 +211,7 @@ describe('DatePicker:', () => {
     expect(datePicker.getDateStr(new Date('2016-06-02'))).to.equal('2016-06-02');
     expect(datePicker.getDateStr('2016-06-03')).to.equal('2016-06-03');
 
-    datePicker.format = 'YYYY/MM/DD';
+    wrapper.setProps({format: 'YYYY/MM/DD'});
     expect(datePicker.getDateStr(new Date('2016-06-02'))).to.equal('2016/06/02');
   });
 
