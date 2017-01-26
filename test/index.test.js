@@ -156,15 +156,19 @@ describe('DatePicker:', () => {
     const wrapper = shallow(<DatePicker />);
     const datePicker = wrapper.instance();
 
-    datePicker.setModalVisible(true);
+    new Promise(function(resolve, reject) {
+      datePicker.setModalVisible(true);
+    }).then((result) => {
+      expect(wrapper.state('modalVisible')).to.equal(true);
+      expect(wrapper.state('animatedHeight')._animation._toValue).to.above(200);
+    })
 
-    expect(wrapper.state('modalVisible')).to.equal(true);
-    expect(wrapper.state('animatedHeight')._animation._toValue).to.above(200);
-
-    datePicker.setModalVisible(false);
-
-    expect(wrapper.state('modalVisible')).to.equal(false);
-    expect(wrapper.state('animatedHeight')).to.deep.equal(new Animated.Value(0));
+    new Promise(function(resolve, reject) {
+      datePicker.setModalVisible(false);
+    }).then((result) => {
+      expect(wrapper.state('modalVisible')).to.equal(false);
+      expect(wrapper.state('animatedHeight')).to.deep.equal(new Animated.Value(0));
+    });
   });
 
   it('onPressCancel', () => {
