@@ -52,10 +52,9 @@ class DatePicker extends Component {
   setModalVisible(visible) {
     const {height, duration} = this.props;
 
-    this.setState({modalVisible: visible});
-
     // slide animation
     if (visible) {
+      this.setState({modalVisible: visible});
       Animated.timing(
         this.state.animatedHeight,
         {
@@ -64,8 +63,14 @@ class DatePicker extends Component {
         }
       ).start();
     } else {
-      this.setState({
-        animatedHeight: new Animated.Value(0)
+      Animated.timing(
+        this.state.animatedHeight,
+        {
+          toValue: 0,
+          duration: duration
+        }
+      ).start(() => {
+        this.setState({modalVisible: visible});
       });
     }
   }
