@@ -153,7 +153,7 @@ class DatePicker extends Component {
       this.props.onDateChange(this.getDateStr(this.state.date), this.state.date);
     }
   }
-  
+
   getTitleElement() {
     const { date, placeholder, customStyles, calendarDate } = this.props;
 
@@ -164,7 +164,7 @@ class DatePicker extends Component {
     }
     return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
   }
-  
+
   onDatePicked({action, year, month, day}) {
     if (action !== DatePickerAndroid.dismissedAction) {
       this.setState({
