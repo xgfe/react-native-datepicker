@@ -80,11 +80,19 @@ class DatePicker extends Component {
 
   onPressCancel() {
     this.setModalVisible(false);
+
+    if (typeof this.props.onCloseModal === 'function') {
+      this.props.onCloseModal();
+    }
   }
 
   onPressConfirm() {
     this.datePicked();
     this.setModalVisible(false);
+
+    if (typeof this.props.onCloseModal === 'function') {
+      this.props.onCloseModal();
+    }
   }
 
   getDate(date = this.props.date) {
@@ -228,6 +236,10 @@ class DatePicker extends Component {
         }).then(this.onDatetimePicked);
       }
     }
+
+    if (typeof this.props.onOpenModal === 'function') {
+      this.props.onOpenModal();
+    }
   }
 
   render() {
@@ -361,6 +373,8 @@ DatePicker.propTypes = {
   showIcon: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   onDateChange: React.PropTypes.func,
+  onOpenModal: React.PropTypes.func,
+  onCloseModal: React.PropTypes.func,
   placeholder: React.PropTypes.string,
   modalOnResponderTerminationRequest: React.PropTypes.func,
   is24Hour: React.PropTypes.bool
