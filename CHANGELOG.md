@@ -1,3 +1,18 @@
+<a name="1.4.4"></a>
+## [1.4.4](https://github.com/xgfe/react-native-datepicker/compare/v1.4.3...v1.4.4) (2017-02-06)
+
+
+### Features
+
+* **datepicker:** Added two new properties: onOpenModal and onCloseModal ([#77](https://github.com/xgfe/react-native-datepicker/pull/77), [846ae35](https://github.com/xgfe/react-native-datepicker/commit/846ae35))
+* **Datepicker:** Add animation on datepicker dismiss ([#76](https://github.com/xgfe/react-native-datepicker/pull/76), [fdfcc21](https://github.com/xgfe/react-native-datepicker/commit/fdfcc21))
+
+### Bug Fixes
+
+* **datepicker:** fix datepicker can't  open in landscape mode bug ([#28](https://github.com/xgfe/react-native-datepicker/issues/28), [3a9df99](https://github.com/xgfe/react-native-datepicker/commit/3a9df99))
+
+
+
 <a name="1.4.3"></a>
 ## [1.4.3](https://github.com/xgfe/react-native-datepicker/compare/v1.4.1...v1.4.3) (2016-12-13)
 
