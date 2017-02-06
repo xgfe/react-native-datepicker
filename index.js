@@ -20,6 +20,8 @@ const FORMATS = {
   'time': 'HH:mm'
 };
 
+const SUPPORTED_ORIENTATIONS = ["portrait", "portrait-upside-down", "landscape", "landscape-left", "landscape-right"];
+
 class DatePicker extends Component {
   constructor(props) {
     super(props);
@@ -285,7 +287,9 @@ class DatePicker extends Component {
           />}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
+            animationType="none"
             visible={this.state.modalVisible}
+            supportedOrientations={SUPPORTED_ORIENTATIONS}
             onRequestClose={() => {this.setModalVisible(false);}}
           >
             <View
