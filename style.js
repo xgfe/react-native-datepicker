@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 
 let style = StyleSheet.create({
   dateTouch: {
+    flexDirection: "row",
   },
   dateTouchBody: {
     flexDirection: 'row',
