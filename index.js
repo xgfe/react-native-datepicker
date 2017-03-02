@@ -51,6 +51,12 @@ class DatePicker extends Component {
     ];
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.disabled !== nextProps.disabled) {
+      this.setState({ disabled: nextProps.disabled });
+    }
+  }
+
   setModalVisible(visible) {
     const {height, duration} = this.props;
 
