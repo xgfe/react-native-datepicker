@@ -33,6 +33,7 @@ export default class MyDatePicker extends Component {
         date={this.state.date}
         mode="date"
         placeholder="select date"
+        displayFormat="dddd, MMMM Do"
         format="YYYY-MM-DD"
         minDate="2016-05-01"
         maxDate="2016-06-01"
@@ -66,7 +67,8 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | style | - | `object` | Specify the style of the DatePicker, eg. width, height...  |
 | date | - | `string | date` | Specify the display date of DatePicker. `string` type value must match the specified format  |
 | mode | 'date' | `enum` | The `enum` of `date`, `datetime` and `time` |
-| format | 'YYYY-MM-DD' | `string` | Specify the display format of the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
+| format | 'YYYY-MM-DD' | `string` | Specify the internal format used for the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
+| displayFormat | `format` | `string` | Specify the display/rendered format of the date, which using [moment.js](http://momentjs.com/). The default value will fall back to `format`, or change according to the mode. |
 | confirmBtnText | '确定' | `string` | Specify the text of confirm btn in ios. |
 | cancelBtnText | '取消' | `string` | Specify the text of cancel btn in ios. |
 | iconSource | - | `{uri: string} | number` | Specify the icon. Same as the `source` of Image, always using `require()` |
