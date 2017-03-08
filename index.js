@@ -133,14 +133,15 @@ class DatePicker extends Component {
 
     return Moment(date, format).toDate();
   }
-
-  getDateStr(date = this.props.date) {
-    const {mode, format = FORMATS[mode]} = this.props;
-
+  
+  getDateStr(date = this.props.date, display = false) {
+    const { mode, displayFormat, format = FORMATS[mode] } = this.props;
+    const strFormat = display && displayFormat ? displayFormat : format;
+    
     if (date instanceof Date) {
-      return Moment(date).format(format);
+      return Moment(date).format(strFormat);
     } else {
-      return Moment(this.getDate(date)).format(format);
+      return Moment(this.getDate(date)).format(strFormat);
     }
   }
 
@@ -156,7 +157,7 @@ class DatePicker extends Component {
     if (!date && placeholder) {
       return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
     }
-    return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
+    return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr(date, true)}</Text>);
   }
 
   onDatePicked({action, year, month, day}) {
@@ -371,6 +372,7 @@ DatePicker.propTypes = {
   mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
   date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   format: React.PropTypes.string,
+  displayFormat: React.PropTypes.string,
   minDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   maxDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   height: React.PropTypes.number,
