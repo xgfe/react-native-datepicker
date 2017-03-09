@@ -135,12 +135,12 @@ class DatePicker extends Component {
   }
 
   getDateStr(date = this.props.date) {
-    const {mode, format = FORMATS[mode]} = this.props;
+    const {mode, locale, format = FORMATS[mode]} = this.props;
 
     if (date instanceof Date) {
-      return Moment(date).format(format);
+      return Moment(date).locale(locale).format(format);
     } else {
-      return Moment(this.getDate(date)).format(format);
+      return Moment(this.getDate(date)).locale(locale).format(format);
     }
   }
 
@@ -350,6 +350,7 @@ class DatePicker extends Component {
 DatePicker.defaultProps = {
   mode: 'date',
   date: '',
+  locale: 'en',
   // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
   height: 259,
 
@@ -371,6 +372,7 @@ DatePicker.propTypes = {
   mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
   date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   format: React.PropTypes.string,
+  locale: React.PropTypes.string,
   minDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   maxDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   height: React.PropTypes.number,
