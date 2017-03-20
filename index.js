@@ -51,6 +51,12 @@ class DatePicker extends Component {
     ];
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.date !== this.props.date) {
+      this.setState({date: this.getDate(nextProps.date)});
+    }
+  }
+
   setModalVisible(visible) {
     const {height, duration} = this.props;
 
