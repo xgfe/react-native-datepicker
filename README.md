@@ -7,6 +7,12 @@ react native datePicker component for both Android and IOS, using DatePickerAndr
 npm install react-native-datepicker --save
 ```
 
+Or using [react-native-ui-xg](https://github.com/xgfe/react-native-ui-xg), our react-naitve ui kit.
+
+```bash
+npm install react-native-ui-xg --save
+```
+
 ## Example
 Check [index.android.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.android.js) in the Example.
 

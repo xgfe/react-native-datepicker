@@ -1,3 +1,13 @@
+<a name="1.4.5"></a>
+## [1.4.5](https://github.com/xgfe/react-native-datepicker/compare/v1.4.4...v1.4.5) (2017-03-21)
+
+
+### Bug Fixes
+
+* **datepicker:** fix `date` prop change not invoke state change bug ([#93](https://github.com/xgfe/react-native-datepicker/issues/93), [3c8099b](https://github.com/xgfe/react-native-datepicker/commit/3c8099b))
+
+
+
 <a name="1.4.4"></a>
 ## [1.4.4](https://github.com/xgfe/react-native-datepicker/compare/v1.4.3...v1.4.4) (2017-02-06)
 
