@@ -38,6 +38,7 @@ export default class MyDatePicker extends Component {
         style={{width: 200}}
         date={this.state.date}
         mode="date"
+        androidMode="spinner"
         placeholder="select date"
         format="YYYY-MM-DD"
         minDate="2016-05-01"
@@ -72,6 +73,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | style | - | `object` | Specify the style of the DatePicker, eg. width, height...  |
 | date | - | `string | date` | Specify the display date of DatePicker. `string` type value must match the specified format  |
 | mode | 'date' | `enum` | The `enum` of `date`, `datetime` and `time` |
+| androidMode | 'default' | `enum` | The `enum` of `calendar`, `spinner` and `default` |
 | format | 'YYYY-MM-DD' | `string` | Specify the display format of the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
 | confirmBtnText | '确定' | `string` | Specify the text of confirm btn in ios. |
 | cancelBtnText | '取消' | `string` | Specify the text of cancel btn in ios. |

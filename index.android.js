@@ -44,6 +44,7 @@ class datepicker extends Component {
           style={{width: 200}}
           date={this.state.date}
           mode="date"
+          androidMode="spinner"
           placeholder="placeholder"
           format="YYYY-MM-DD"
           minDate="2016-05-01"
@@ -69,6 +70,7 @@ class datepicker extends Component {
           style={{width: 200}}
           date={this.state.datetime}
           mode="datetime"
+          androidMode="spinner"
           format="YYYY-MM-DD HH:mm"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
@@ -80,6 +82,7 @@ class datepicker extends Component {
           style={{width: 200}}
           date={this.state.datetime1}
           mode="datetime"
+          androidMode="spinner"
           format="YYYY-MM-DD HH:mm"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"

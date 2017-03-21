@@ -226,6 +226,7 @@ class DatePicker extends Component {
       if (mode === 'date') {
         DatePickerAndroid.open({
           date: this.state.date,
+          mode: this.props.androidMode,
           minDate: minDate && this.getDate(minDate),
           maxDate: maxDate && this.getDate(maxDate)
         }).then(this.onDatePicked);
@@ -244,6 +245,7 @@ class DatePicker extends Component {
 
         DatePickerAndroid.open({
           date: this.state.date,
+          mode: this.props.androidMode,
           minDate: minDate && this.getDate(minDate),
           maxDate: maxDate && this.getDate(maxDate)
         }).then(this.onDatetimePicked);
@@ -355,6 +357,7 @@ class DatePicker extends Component {
 
 DatePicker.defaultProps = {
   mode: 'date',
+  androidMode: 'default',
   date: '',
   // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
   height: 259,
@@ -375,6 +378,7 @@ DatePicker.defaultProps = {
 
 DatePicker.propTypes = {
   mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
+  androidMode: React.PropTypes.oneOf(['calendar', 'spinner', 'default']),
   date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   format: React.PropTypes.string,
   minDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
