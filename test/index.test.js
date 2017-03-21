@@ -173,19 +173,22 @@ describe('DatePicker:', () => {
 
   it('onPressCancel', () => {
     const setModalVisible = sinon.spy();
-    const wrapper = shallow(<DatePicker />);
+    const onCloseModal = sinon.spy();
+    const wrapper = shallow(<DatePicker onCloseModal={onCloseModal}/>);
     const datePicker = wrapper.instance();
     datePicker.setModalVisible = setModalVisible;
 
     datePicker.onPressCancel();
 
     expect(setModalVisible.calledWith(false)).to.equal(true);
+    expect(onCloseModal.callCount).to.equal(1);
   });
 
   it('onPressConfirm', () => {
     const setModalVisible = sinon.spy();
     const datePicked = sinon.spy();
-    const wrapper = shallow(<DatePicker />);
+    const onCloseModal = sinon.spy();
+    const wrapper = shallow(<DatePicker onCloseModal={onCloseModal}/>);
     const datePicker = wrapper.instance();
     datePicker.setModalVisible = setModalVisible;
     datePicker.datePicked = datePicked;
@@ -194,6 +197,7 @@ describe('DatePicker:', () => {
 
     expect(setModalVisible.calledWith(false)).to.equal(true);
     expect(datePicked.callCount).to.equal(1);
+    expect(onCloseModal.callCount).to.equal(1);
   });
 
   it('getDate', () => {
@@ -277,7 +281,10 @@ describe('DatePicker:', () => {
   it('onPressDate', () => {
     Platform.OS = 'ios';
     const setModalVisible = sinon.spy();
-    const wrapper = shallow(<DatePicker date="2016-05-06" minDate="2016-04-01" maxDate="2016-06-01"/>);
+    const onOpenModal = sinon.spy();
+    const wrapper = shallow(
+      <DatePicker date="2016-05-06" minDate="2016-04-01" maxDate="2016-06-01" onOpenModal={onOpenModal}/>
+    );
     const datePicker = wrapper.instance();
     datePicker.setModalVisible = setModalVisible;
 
@@ -290,6 +297,7 @@ describe('DatePicker:', () => {
     datePicker.onPressDate();
     expect(wrapper.state('date')).to.deep.equal(datePicker.getDate());
     expect(setModalVisible.callCount).to.equal(1);
+    expect(onOpenModal.callCount).to.equal(1);
 
     Platform.OS = 'android';
     expect(datePicker.onPressDate).to.not.throw(Error);
@@ -330,6 +338,16 @@ describe('DatePicker:', () => {
     const datePicker = wrapper.instance();
 
     expect(datePicker.getTitleElement().props.children).to.equal(datePicker.getDateStr());
+  });
+
+  it('`date` prop changes', () => {
+    const wrapper = mount(<DatePicker date="2016-06-04" />);
+
+    expect(wrapper.state('date')).to.deep.equal(new Date(2016, 5, 4));
+
+    wrapper.setProps({date: '2016-06-05'});
+
+    expect(wrapper.state('date')).to.deep.equal(new Date(2016, 5, 5));
   });
 });
 

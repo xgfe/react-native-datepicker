@@ -20,7 +20,7 @@ const FORMATS = {
   'time': 'HH:mm'
 };
 
-const SUPPORTED_ORIENTATIONS = ["portrait", "portrait-upside-down", "landscape", "landscape-left", "landscape-right"];
+const SUPPORTED_ORIENTATIONS = ['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right'];
 
 class DatePicker extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class DatePicker extends Component {
     // slide animation
     if (visible) {
       this.setState({modalVisible: visible});
-      Animated.timing(
+      return Animated.timing(
         this.state.animatedHeight,
         {
           toValue: height,
@@ -71,7 +71,7 @@ class DatePicker extends Component {
         }
       ).start();
     } else {
-      Animated.timing(
+      return Animated.timing(
         this.state.animatedHeight,
         {
           toValue: 0,
