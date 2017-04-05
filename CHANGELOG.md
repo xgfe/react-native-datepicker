@@ -1,3 +1,13 @@
+<a name="1.4.6"></a>
+## [1.4.6](https://github.com/xgfe/react-native-datepicker/compare/v1.4.5...v1.4.6) (2017-04-05)
+
+
+### Features
+
+* **datepicker:** add `androidMode` property for DatePickerAndroid & TimePickerAndroid ([be30731](https://github.com/xgfe/react-native-datepicker/commit/be30731))
+
+
+
 <a name="1.4.5"></a>
 ## [1.4.5](https://github.com/xgfe/react-native-datepicker/compare/v1.4.4...v1.4.5) (2017-03-21)
 
