@@ -184,7 +184,7 @@ class DatePicker extends Component {
   }
 
   onDatetimePicked({action, year, month, day}) {
-    const {mode, format = FORMATS[mode], is24Hour = !format.match(/h|a/)} = this.props;
+    const {mode, androidMode, format = FORMATS[mode], is24Hour = !format.match(/h|a/)} = this.props;
 
     if (action !== DatePickerAndroid.dismissedAction) {
       let timeMoment = Moment(this.state.date);
@@ -192,7 +192,8 @@ class DatePicker extends Component {
       TimePickerAndroid.open({
         hour: timeMoment.hour(),
         minute: timeMoment.minutes(),
-        is24Hour: is24Hour
+        is24Hour: is24Hour,
+        androidMode
       }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
     }
   }
@@ -220,14 +221,15 @@ class DatePicker extends Component {
       this.setModalVisible(true);
     } else {
 
-      const {mode, format = FORMATS[mode], minDate, maxDate, is24Hour = !format.match(/h|a/)} = this.props;
+      const {mode, androidMode, format = FORMATS[mode], minDate, maxDate, is24Hour = !format.match(/h|a/)} = this.props;
 
       // 选日期
       if (mode === 'date') {
         DatePickerAndroid.open({
           date: this.state.date,
           minDate: minDate && this.getDate(minDate),
-          maxDate: maxDate && this.getDate(maxDate)
+          maxDate: maxDate && this.getDate(maxDate),
+          androidMode
         }).then(this.onDatePicked);
       } else if (mode === 'time') {
         // 选时间
@@ -245,7 +247,8 @@ class DatePicker extends Component {
         DatePickerAndroid.open({
           date: this.state.date,
           minDate: minDate && this.getDate(minDate),
-          maxDate: maxDate && this.getDate(maxDate)
+          maxDate: maxDate && this.getDate(maxDate),
+          androidMode
         }).then(this.onDatetimePicked);
       }
     }
@@ -355,6 +358,7 @@ class DatePicker extends Component {
 
 DatePicker.defaultProps = {
   mode: 'date',
+  androidMode: 'default',
   date: '',
   // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
   height: 259,
@@ -375,6 +379,7 @@ DatePicker.defaultProps = {
 
 DatePicker.propTypes = {
   mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
+  androidMode: React.PropTypes.oneOf(['calendar', 'spinner', 'default']),
   date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
   format: React.PropTypes.string,
   minDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),

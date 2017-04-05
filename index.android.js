@@ -34,9 +34,7 @@ class datepicker extends Component {
 
   render() {
     return (
-      <View style={styles.container}
-            {...this._panResponder.panHandlers}
-      >
+      <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to react-native-datepicker example!
         </Text>
