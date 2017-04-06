@@ -193,7 +193,7 @@ class DatePicker extends Component {
         hour: timeMoment.hour(),
         minute: timeMoment.minutes(),
         is24Hour: is24Hour,
-        androidMode
+        mode: androidMode
       }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
     }
   }
@@ -229,7 +229,7 @@ class DatePicker extends Component {
           date: this.state.date,
           minDate: minDate && this.getDate(minDate),
           maxDate: maxDate && this.getDate(maxDate),
-          androidMode
+          mode: androidMode
         }).then(this.onDatePicked);
       } else if (mode === 'time') {
         // 选时间
@@ -248,7 +248,7 @@ class DatePicker extends Component {
           date: this.state.date,
           minDate: minDate && this.getDate(minDate),
           maxDate: maxDate && this.getDate(maxDate),
-          androidMode
+          mode: androidMode
         }).then(this.onDatetimePicked);
       }
     }
