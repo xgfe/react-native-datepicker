@@ -1,3 +1,12 @@
+<a name="1.4.7"></a>
+## [1.4.7](https://github.com/xgfe/react-native-datepicker/compare/v1.4.6...v1.4.7) (2017-04-13)
+
+
+### Bug Fixes
+
+* **datepicker:** fix `androidMode` prop pass bug ([#111](https://github.com/xgfe/react-native-datepicker/issues/111), [095f756](https://github.com/xgfe/react-native-datepicker/commit/095f756))
+
+
 <a name="1.4.6"></a>
 ## [1.4.6](https://github.com/xgfe/react-native-datepicker/compare/v1.4.5...v1.4.6) (2017-04-05)
 
