@@ -36,6 +36,7 @@ class DatePicker extends Component {
     this.onPressDate = this.onPressDate.bind(this);
     this.onPressCancel = this.onPressCancel.bind(this);
     this.onPressConfirm = this.onPressConfirm.bind(this);
+    this.onPressMask = this.onPressMask.bind(this);
     this.onDatePicked = this.onDatePicked.bind(this);
     this.onTimePicked = this.onTimePicked.bind(this);
     this.onDatetimePicked = this.onDatetimePicked.bind(this);
@@ -89,6 +90,14 @@ class DatePicker extends Component {
 
   onMoveShouldSetResponder(e) {
     return true;
+  }
+
+  onPressMask() {
+    if (typeof this.props.onPressMask === 'function') {
+      this.props.onPressMask();
+    } else {
+      this.onPressCancel();
+    }
   }
 
   onPressCancel() {
@@ -308,7 +317,7 @@ class DatePicker extends Component {
                 style={Style.datePickerMask}
                 activeOpacity={1}
                 underlayColor={'#00000077'}
-                onPress={this.onPressCancel}
+                onPress={this.onPressMask}
               >
                 <TouchableHighlight
                   underlayColor={'#fff'}
@@ -395,6 +404,7 @@ DatePicker.propTypes = {
   onDateChange: React.PropTypes.func,
   onOpenModal: React.PropTypes.func,
   onCloseModal: React.PropTypes.func,
+  onPressMask: React.PropTypes.func,
   placeholder: React.PropTypes.string,
   modalOnResponderTerminationRequest: React.PropTypes.func,
   is24Hour: React.PropTypes.bool
