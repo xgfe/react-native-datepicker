@@ -171,6 +171,8 @@ class DatePicker extends Component {
         date: new Date(year, month, day)
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -180,6 +182,8 @@ class DatePicker extends Component {
         date: Moment().hour(hour).minute(minute).toDate()
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -195,6 +199,8 @@ class DatePicker extends Component {
         is24Hour: is24Hour,
         mode: androidMode
       }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -204,6 +210,8 @@ class DatePicker extends Component {
         date: new Date(year, month, day, hour, minute)
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
