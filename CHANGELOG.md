@@ -1,3 +1,17 @@
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/xgfe/react-native-datepicker/compare/v1.4.7...v1.5.0) (2017-05-15)
+
+
+### Features
+
+* **datepicker:** Add onPressMask prop for ios ([#120](https://github.com/xgfe/react-native-datepicker/issues/120), [09ecdf8](https://github.com/xgfe/react-native-datepicker/commit/09ecdf8))
+* **datepicker:** Ability to pass icon component with `iconComponent` property ([#124](https://github.com/xgfe/react-native-datepicker/issues/124), [35150ed](https://github.com/xgfe/react-native-datepicker/commit/35150ed))
+
+### Bug Fixes
+
+* **datepicker:** Fix onCloseModal for android ([#122](https://github.com/xgfe/react-native-datepicker/issues/122), [ba55c06](https://github.com/xgfe/react-native-datepicker/commit/ba55c06))
+
+
 <a name="1.4.7"></a>
 ## [1.4.7](https://github.com/xgfe/react-native-datepicker/compare/v1.4.6...v1.4.7) (2017-04-13)
 
