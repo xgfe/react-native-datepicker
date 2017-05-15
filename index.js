@@ -38,6 +38,7 @@ class DatePicker extends Component {
     this.onPressCancel = this.onPressCancel.bind(this);
     this.onPressConfirm = this.onPressConfirm.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
+    this.onPressMask = this.onPressMask.bind(this);
     this.onDatePicked = this.onDatePicked.bind(this);
     this.onTimePicked = this.onTimePicked.bind(this);
     this.onDatetimePicked = this.onDatetimePicked.bind(this);
@@ -91,6 +92,14 @@ class DatePicker extends Component {
 
   onMoveShouldSetResponder(e) {
     return true;
+  }
+
+  onPressMask() {
+    if (typeof this.props.onPressMask === 'function') {
+      this.props.onPressMask();
+    } else {
+      this.onPressCancel();
+    }
   }
 
   onPressCancel() {
@@ -186,6 +195,8 @@ class DatePicker extends Component {
         date: new Date(year, month, day)
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -195,6 +206,8 @@ class DatePicker extends Component {
         date: Moment().hour(hour).minute(minute).toDate()
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -210,6 +223,8 @@ class DatePicker extends Component {
         is24Hour: is24Hour,
         mode: androidMode
       }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -219,6 +234,8 @@ class DatePicker extends Component {
         date: new Date(year, month, day, hour, minute)
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -272,6 +289,29 @@ class DatePicker extends Component {
       this.props.onOpenModal();
     }
   }
+  
+  _renderIcon() {
+    const {
+      showIcon,
+      iconSource,
+      iconComponent,
+      customStyles
+    } = this.props;
+
+    if (showIcon) {
+      if (!!iconComponent) {
+        return iconComponent;
+      }
+      return (
+        <Image
+          style={[Style.dateIcon, customStyles.dateIcon]}
+          source={iconSource}
+        />
+      );
+    }
+
+    return null;
+  }
 
   render() {
     const {
@@ -305,10 +345,7 @@ class DatePicker extends Component {
           <View style={dateInputStyle}>
             {this.getTitleElement()}
           </View>
-          {showIcon && <Image
-            style={[Style.dateIcon, customStyles.dateIcon]}
-            source={iconSource}
-          />}
+          {this._renderIcon()}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
             animationType="none"
@@ -323,7 +360,7 @@ class DatePicker extends Component {
                 style={Style.datePickerMask}
                 activeOpacity={1}
                 underlayColor={'#00000077'}
-                onPress={this.onPressCancel}
+                onPress={this.onPressMask}
               >
                 <TouchableHighlight
                   underlayColor={'#fff'}
@@ -406,12 +443,14 @@ DatePicker.propTypes = {
   confirmBtnText: React.PropTypes.string,
   cancelBtnText: React.PropTypes.string,
   iconSource: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.object]),
+  iconComponent: React.PropTypes.element,
   customStyles: React.PropTypes.object,
   showIcon: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   onDateChange: React.PropTypes.func,
   onOpenModal: React.PropTypes.func,
   onCloseModal: React.PropTypes.func,
+  onPressMask: React.PropTypes.func,
   placeholder: React.PropTypes.string,
   modalOnResponderTerminationRequest: React.PropTypes.func,
   is24Hour: React.PropTypes.bool
