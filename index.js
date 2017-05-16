@@ -186,7 +186,7 @@ class DatePicker extends Component {
         allowPointerEvents: true
       })
       clearTimeout(timeoutId)
-    }, 500)
+    }, 200);
   }
 
   onDatePicked({action, year, month, day}) {
@@ -289,7 +289,7 @@ class DatePicker extends Component {
       this.props.onOpenModal();
     }
   }
-  
+
   _renderIcon() {
     const {
       showIcon,
@@ -319,8 +319,6 @@ class DatePicker extends Component {
       style,
       customStyles,
       disabled,
-      showIcon,
-      iconSource,
       minDate,
       maxDate,
       minuteInterval,
