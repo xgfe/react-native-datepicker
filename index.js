@@ -29,13 +29,15 @@ class DatePicker extends Component {
     this.state = {
       date: this.getDate(),
       modalVisible: false,
-      animatedHeight: new Animated.Value(0)
+      animatedHeight: new Animated.Value(0),
+      allowPointerEvents: true
     };
 
     this.datePicked = this.datePicked.bind(this);
     this.onPressDate = this.onPressDate.bind(this);
     this.onPressCancel = this.onPressCancel.bind(this);
     this.onPressConfirm = this.onPressConfirm.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
     this.onPressMask = this.onPressMask.bind(this);
     this.onDatePicked = this.onDatePicked.bind(this);
     this.onTimePicked = this.onTimePicked.bind(this);
@@ -172,6 +174,19 @@ class DatePicker extends Component {
       return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
     }
     return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
+  }
+
+  onDateChange(date) {
+    this.setState({
+      allowPointerEvents: false,
+      date: date
+    })
+    const timeoutId = setTimeout(() => {
+      this.setState({
+        allowPointerEvents: true
+      })
+      clearTimeout(timeoutId)
+    }, 500)
   }
 
   onDatePicked({action, year, month, day}) {
@@ -354,16 +369,18 @@ class DatePicker extends Component {
                   <Animated.View
                     style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
                   >
-                    <DatePickerIOS
-                      date={this.state.date}
-                      mode={mode}
-                      minimumDate={minDate && this.getDate(minDate)}
-                      maximumDate={maxDate && this.getDate(maxDate)}
-                      onDateChange={(date) => this.setState({date: date})}
-                      minuteInterval={minuteInterval}
-                      timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
-                      style={[Style.datePicker, customStyles.datePicker]}
-                    />
+                    <View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
+                      <DatePickerIOS
+                        date={this.state.date}
+                        mode={mode}
+                        minimumDate={minDate && this.getDate(minDate)}
+                        maximumDate={maxDate && this.getDate(maxDate)}
+                        onDateChange={this.onDateChange}
+                        minuteInterval={minuteInterval}
+                        timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
+                        style={[Style.datePicker, customStyles.datePicker]}
+                      />
+                    </View>
                     <TouchableHighlight
                       underlayColor={'transparent'}
                       onPress={this.onPressCancel}
