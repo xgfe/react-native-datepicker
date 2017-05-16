@@ -1,3 +1,16 @@
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/xgfe/react-native-datepicker/compare/v1.5.0...v1.5.1) (2017-05-16)
+
+
+### Features
+
+* **datepicker:** change datepicker switch gap timeout to 200ms ([5b6e78f](https://github.com/xgfe/react-native-datepicker/commit/5b6e78f))
+
+### Bug Fixes
+
+* **datepicker:** Fix onDateChange for ios ([#123](https://github.com/xgfe/react-native-datepicker/issues/123), [e4e2193](https://github.com/xgfe/react-native-datepicker/commit/e4e2193))
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/xgfe/react-native-datepicker/compare/v1.4.7...v1.5.0) (2017-05-15)
 
