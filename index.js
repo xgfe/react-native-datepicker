@@ -340,9 +340,14 @@ class DatePicker extends Component {
         onPress={this.onPressDate}
       >
         <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
-          <View style={dateInputStyle}>
-            {this.getTitleElement()}
-          </View>
+          {
+            !this.props.hideText ?
+              <View style={dateInputStyle}>
+                {this.getTitleElement()}
+              </View>
+            :
+              <View/>
+          }
           {this._renderIcon()}
           {Platform.OS === 'ios' && <Modal
             transparent={true}

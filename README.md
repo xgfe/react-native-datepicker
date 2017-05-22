@@ -70,18 +70,19 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | Prop  | Default  | Type | Description |
 | :------------ |:---------------:| :---------------:| :-----|
 | style | - | `object` | Specify the style of the DatePicker, eg. width, height...  |
-| date | - | `string | date` | Specify the display date of DatePicker. `string` type value must match the specified format  |
+| date | - | <code>string &#124; date</code> | Specify the display date of DatePicker. `string` type value must match the specified format  |
 | mode | 'date' | `enum` | The `enum` of `date`, `datetime` and `time` |
 | androidMode | 'default' | `enum` | The `enum` of `default`, `calendar` and `spinner` (only Android) |
 | format | 'YYYY-MM-DD' | `string` | Specify the display format of the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
 | confirmBtnText | '确定' | `string` | Specify the text of confirm btn in ios. |
 | cancelBtnText | '取消' | `string` | Specify the text of cancel btn in ios. |
-| iconSource | - | `{uri: string} | number` | Specify the icon. Same as the `source` of Image, always using `require()` |
-| minDate | - | `string | date` | Restricts the range of possible date values. |
-| maxDate | - | `string | date` | Restricts the range of possible date values. |
+| iconSource | - | <code>{uri: string} &#124; number</code> | Specify the icon. Same as the `source` of Image, always using `require()` |
+| minDate | - | <code>string &#124; date</code> | Restricts the range of possible date values. |
+| maxDate | - | <code>string &#124; date</code> | Restricts the range of possible date values. |
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
 | customStyles | - | `number` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
 | showIcon | true | `boolean` | Controller whether or not show the icon |
+| hideText | false | `boolean` | Controller whether or not show the `dateText` |
 | iconComponent | - | `element` | Set the custom icon |
 | disabled | false | `boolean` | Controller whether or not disable the picker |
 | is24Hour | - | `boolean` | Set the TimePicker is24Hour flag. The default value depend on `format`. Only work in Android |
