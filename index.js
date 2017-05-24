@@ -9,7 +9,8 @@ import {
   TimePickerAndroid,
   DatePickerIOS,
   Platform,
-  Animated
+  Animated,
+  Keyboard,
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
@@ -243,6 +244,8 @@ class DatePicker extends Component {
     if (this.props.disabled) {
       return true;
     }
+
+    Keyboard.dismiss();
 
     // reset state
     this.setState({
