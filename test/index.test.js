@@ -221,6 +221,9 @@ describe('DatePicker:', () => {
 
     wrapper.setProps({format: 'YYYY/MM/DD'});
     expect(datePicker.getDateStr(new Date('2016-06-02'))).to.equal('2016/06/02');
+
+    wrapper.setProps({format: "ddd, DD MMM YYYY", locale: "pt-br"});
+    expect(datePicker.getDateStr()).to.equal('Qua, 20 Jan 2016');
   });
 
   it('datePicked', () => {
