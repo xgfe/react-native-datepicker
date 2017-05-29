@@ -50,7 +50,7 @@ let style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  btnTextText: {
+  btnTextConfirm: {
     fontSize: 16,
     color: '#46cf98'
   },
