@@ -1,3 +1,13 @@
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/xgfe/react-native-datepicker/compare/v1.5.1...v1.6.0) (2017-06-12)
+
+### Features
+
+* **datepicker:** adding testIds to elements ([#138](https://github.com/xgfe/react-native-datepicker/issues/138)
+* **datepicker:** add `hideText` property to hide the Date Text ([#127](https://github.com/xgfe/react-native-datepicker/issues/127)
+* **datepicker:** add `TouchableComponent` property to support custom touchable components ([#128](https://github.com/xgfe/react-native-datepicker/issues/128)
+
+
 <a name="1.5.1"></a>
 ## [1.5.1](https://github.com/xgfe/react-native-datepicker/compare/v1.5.0...v1.5.1) (2017-05-16)
 
