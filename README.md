@@ -82,6 +82,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
 | customStyles | - | `number` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
 | showIcon | true | `boolean` | Controller whether or not show the icon |
+| hideText | false | `boolean` | Controller whether or not show the `dateText` |
 | iconComponent | - | `element` | Set the custom icon |
 | disabled | false | `boolean` | Controller whether or not disable the picker |
 | is24Hour | - | `boolean` | Set the TimePicker is24Hour flag. The default value depend on `format`. Only work in Android |
