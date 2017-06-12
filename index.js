@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -10,7 +11,7 @@ import {
   DatePickerIOS,
   Platform,
   Animated,
-  Keyboard,
+  Keyboard
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
@@ -34,6 +35,8 @@ class DatePicker extends Component {
       allowPointerEvents: true
     };
 
+    this.getDate = this.getDate.bind(this);
+    this.getDateStr = this.getDateStr.bind(this);
     this.datePicked = this.datePicked.bind(this);
     this.onPressDate = this.onPressDate.bind(this);
     this.onPressCancel = this.onPressCancel.bind(this);
@@ -443,29 +446,31 @@ DatePicker.defaultProps = {
   modalOnResponderTerminationRequest: e => true
 };
 
+const {bool, element, func, instanceOf, number, object, oneOf, oneOfType, string} = PropTypes;
+
 DatePicker.propTypes = {
-  mode: React.PropTypes.oneOf(['date', 'datetime', 'time']),
-  androidMode: React.PropTypes.oneOf(['calendar', 'spinner', 'default']),
-  date: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
-  format: React.PropTypes.string,
-  minDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
-  maxDate: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.instanceOf(Date)]),
-  height: React.PropTypes.number,
-  duration: React.PropTypes.number,
-  confirmBtnText: React.PropTypes.string,
-  cancelBtnText: React.PropTypes.string,
-  iconSource: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.object]),
-  iconComponent: React.PropTypes.element,
-  customStyles: React.PropTypes.object,
-  showIcon: React.PropTypes.bool,
-  disabled: React.PropTypes.bool,
-  onDateChange: React.PropTypes.func,
-  onOpenModal: React.PropTypes.func,
-  onCloseModal: React.PropTypes.func,
-  onPressMask: React.PropTypes.func,
-  placeholder: React.PropTypes.string,
-  modalOnResponderTerminationRequest: React.PropTypes.func,
-  is24Hour: React.PropTypes.bool
+  mode: oneOf(['date', 'datetime', 'time']),
+  androidMode: oneOf(['calendar', 'spinner', 'default']),
+  date: oneOfType([string, instanceOf(Date)]),
+  format: string,
+  minDate: oneOfType([string, instanceOf(Date)]),
+  maxDate: oneOfType([string, instanceOf(Date)]),
+  height: number,
+  duration: number,
+  confirmBtnText: string,
+  cancelBtnText: string,
+  iconSource: oneOfType([number, object]),
+  iconComponent: element,
+  customStyles: object,
+  showIcon: bool,
+  disabled: bool,
+  onDateChange: func,
+  onOpenModal: func,
+  onCloseModal: func,
+  onPressMask: func,
+  placeholder: string,
+  modalOnResponderTerminationRequest: func,
+  is24Hour: bool
 };
 
 export default DatePicker;
