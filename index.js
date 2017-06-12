@@ -331,6 +331,7 @@ class DatePicker extends Component {
       timeZoneOffsetInMinutes,
       cancelBtnText,
       confirmBtnText,
+      TouchableComponent,
       testID,
       cancelBtnTestID,
       confirmBtnTestID
@@ -341,8 +342,6 @@ class DatePicker extends Component {
       disabled && Style.disabled,
       disabled && customStyles.disabled
     ];
-
-    const TouchableComponent = this.props.TouchableComponent ? this.props.TouchableComponent : TouchableHighlight;
 
     return (
       <TouchableComponent
@@ -444,35 +443,35 @@ DatePicker.defaultProps = {
   // whether or not show the icon
   showIcon: true,
   disabled: false,
+  hideText: false,
   placeholder: '',
+  TouchableComponent: TouchableHighlight,
   modalOnResponderTerminationRequest: e => true
 };
 
-const {bool, element, func, instanceOf, number, object, oneOf, oneOfType, string} = PropTypes;
-
 DatePicker.propTypes = {
-  mode: oneOf(['date', 'datetime', 'time']),
-  androidMode: oneOf(['calendar', 'spinner', 'default']),
-  date: oneOfType([string, instanceOf(Date)]),
-  format: string,
-  minDate: oneOfType([string, instanceOf(Date)]),
-  maxDate: oneOfType([string, instanceOf(Date)]),
-  height: number,
-  duration: number,
-  confirmBtnText: string,
-  cancelBtnText: string,
-  iconSource: oneOfType([number, object]),
-  iconComponent: element,
-  customStyles: object,
-  showIcon: bool,
-  disabled: bool,
-  onDateChange: func,
-  onOpenModal: func,
-  onCloseModal: func,
-  onPressMask: func,
-  placeholder: string,
-  modalOnResponderTerminationRequest: func,
-  is24Hour: bool
+  mode: PropTypes.oneOf(['date', 'datetime', 'time']),
+  androidMode: PropTypes.oneOf(['calendar', 'spinner', 'default']),
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  format: PropTypes.string,
+  minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  height: PropTypes.number,
+  duration: PropTypes.number,
+  confirmBtnText: PropTypes.string,
+  cancelBtnText: PropTypes.string,
+  iconSource: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  iconComponent: PropTypes.element,
+  customStyles: PropTypes.object,
+  showIcon: PropTypes.bool,
+  disabled: PropTypes.bool,
+  onDateChange: PropTypes.func,
+  onOpenModal: PropTypes.func,
+  onCloseModal: PropTypes.func,
+  onPressMask: PropTypes.func,
+  placeholder: PropTypes.string,
+  modalOnResponderTerminationRequest: PropTypes.func,
+  is24Hour: PropTypes.bool
 };
 
 export default DatePicker;
