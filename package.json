@@ -1,7 +1,7 @@
 {
   "name": "react-native-datepicker",
   "version": "1.6.0",
-  "description": "react native datePicker component for both Android and IOS, useing DatePikcerAndroid, TimePickerAndroid and DatePickerIOS",
+  "description": "React Native DatePicker component for both Android and IOS, useing DatePickerAndroid, TimePickerAndroid and DatePickerIOS",
   "main": "index.js",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
