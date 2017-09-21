@@ -11,7 +11,8 @@ import {
   DatePickerIOS,
   Platform,
   Animated,
-  Keyboard
+  Keyboard,
+  I18nManager
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
@@ -52,10 +53,10 @@ class DatePicker extends Component {
 
   componentWillMount() {
     // ignore the warning of Failed propType for date of DatePickerIOS, will remove after being fixed by official
-    if (!console.ignoredYellowBox) {
-      console.ignoredYellowBox = [];
-    }
-    console.ignoredYellowBox.push('Warning: Failed propType');
+    console.ignoredYellowBox = [
+      'Warning: Failed propType'
+      // Other warnings you don't want like 'jsSchedulingOverhead',
+    ];
   }
 
   componentWillReceiveProps(nextProps) {
@@ -177,7 +178,7 @@ class DatePicker extends Component {
     if (!date && placeholder) {
       return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
     }
-    return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
+    return (<Text style={[Style.dateText, customStyles.dateText,{textAlign: 'left'}]}>{this.getDateStr()}</Text>);
   }
 
   onDateChange(date) {
@@ -331,6 +332,7 @@ class DatePicker extends Component {
       timeZoneOffsetInMinutes,
       cancelBtnText,
       confirmBtnText,
+      header,
       TouchableComponent,
       testID,
       cancelBtnTestID,
@@ -350,6 +352,10 @@ class DatePicker extends Component {
         onPress={this.onPressDate}
         testID={testID}
       >
+        <View>
+        <Text style={{color: 'rgba(96, 125, 139, 0.7)',fontSize: 12,fontWeight: '300',textAlign: 'left'}}>
+            {this.props.header}
+        </Text>
         <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
           {
             !this.props.hideText ?
@@ -421,6 +427,7 @@ class DatePicker extends Component {
             </View>
           </Modal>}
         </View>
+        </View>
       </TouchableComponent>
     );
   }
@@ -437,6 +444,7 @@ DatePicker.defaultProps = {
   duration: 300,
   confirmBtnText: '确定',
   cancelBtnText: '取消',
+  header:'',
   iconSource: require('./date_icon.png'),
   customStyles: {},
 
@@ -460,6 +468,7 @@ DatePicker.propTypes = {
   duration: PropTypes.number,
   confirmBtnText: PropTypes.string,
   cancelBtnText: PropTypes.string,
+  header: PropTypes.string,
   iconSource: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   iconComponent: PropTypes.element,
   customStyles: PropTypes.object,
