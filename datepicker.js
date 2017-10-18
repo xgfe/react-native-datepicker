@@ -184,12 +184,12 @@ class DatePicker extends Component {
     this.setState({
       allowPointerEvents: false,
       date: date
-    })
+    });
     const timeoutId = setTimeout(() => {
       this.setState({
         allowPointerEvents: true
-      })
-      clearTimeout(timeoutId)
+      });
+      clearTimeout(timeoutId);
     }, 200);
   }
 
@@ -305,7 +305,7 @@ class DatePicker extends Component {
     } = this.props;
 
     if (showIcon) {
-      if (!!iconComponent) {
+      if (iconComponent) {
         return iconComponent;
       }
       return (
@@ -452,7 +452,7 @@ DatePicker.defaultProps = {
 DatePicker.propTypes = {
   mode: PropTypes.oneOf(['date', 'datetime', 'time']),
   androidMode: PropTypes.oneOf(['calendar', 'spinner', 'default']),
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date), PropTypes.object]),
   format: PropTypes.string,
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
