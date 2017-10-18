@@ -1,8 +1,7 @@
 example
 .*
 coverage
-index.android.js
-index.ios.js
+index.js
 android/
 ios/
 google_calendar.png
