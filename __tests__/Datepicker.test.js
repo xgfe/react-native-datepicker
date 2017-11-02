@@ -243,6 +243,45 @@ describe('DatePicker', () => {
     expect(onDateChange).toHaveBeenCalledTimes(1);
   });
 
+  it('onTimePicked15MinuteInterval', () => {
+    const onDateChange = jest.fn();
+    const wrapper = shallow(<DatePicker onDateChange={onDateChange} minuteInterval={15}/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onTimePicked({action: DatePickerAndroid.dismissedAction, hour: 12, minute: 10});
+    datePicker.onTimePicked({action: '', hour: 12, minute: 10});
+
+    expect(wrapper.state('date').getHours()).toEqual(12);
+    expect(wrapper.state('date').getMinutes()).toEqual(15);
+    expect(onDateChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('onTimePicked30MinuteInterval', () => {
+    const onDateChange = jest.fn();
+    const wrapper = shallow(<DatePicker onDateChange={onDateChange} minuteInterval={30}/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onTimePicked({action: DatePickerAndroid.dismissedAction, hour: 12, minute: 10});
+    datePicker.onTimePicked({action: '', hour: 12, minute: 10});
+
+    expect(wrapper.state('date').getHours()).toEqual(12);
+    expect(wrapper.state('date').getMinutes()).toEqual(0);
+    expect(onDateChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('onTimePicked2MinuteInterval', () => {
+    const onDateChange = jest.fn();
+    const wrapper = shallow(<DatePicker onDateChange={onDateChange} minuteInterval={2}/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onTimePicked({action: DatePickerAndroid.dismissedAction, hour: 12, minute: 9});
+    datePicker.onTimePicked({action: '', hour: 12, minute: 9});
+
+    expect(wrapper.state('date').getHours()).toEqual(12);
+    expect(wrapper.state('date').getMinutes()).toEqual(10);
+    expect(onDateChange).toHaveBeenCalledTimes(1);
+  });
+
   it('onDatetimeTimePicked', () => {
     const onDateChange = jest.fn();
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);

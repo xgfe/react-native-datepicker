@@ -157,7 +157,6 @@ class DatePicker extends Component {
 
   getDateStr(date = this.props.date) {
     const {mode, format = FORMATS[mode]} = this.props;
-
     if (date instanceof Date) {
       return Moment(date).format(format);
     } else {
@@ -206,6 +205,25 @@ class DatePicker extends Component {
 
   onTimePicked({action, hour, minute}) {
     if (action !== DatePickerAndroid.dismissedAction) {
+      const minuteInterval = this.props.minuteInterval;
+      if (minuteInterval !== undefined) {
+        const intCount = 60/minuteInterval;
+        const minIntFloor = Math.floor(minute/minuteInterval);
+        const minIntCeil = minIntFloor + 1;
+        const minFloorDiff = minute - (minIntFloor * minuteInterval);
+        const minCeilDiff = (minIntCeil * minuteInterval) - minute;
+        if (minCeilDiff <= minFloorDiff) {
+          // special case: if minIntCeil === intCount, need to advance the hour, too.
+          if (minIntCeil === intCount) {
+            hour = hour + 1;
+            minute = 0;
+          } else {
+            minute = (minIntCeil*minuteInterval);
+          }
+        } else {
+          minute = (minIntFloor * minuteInterval);
+        }
+      }
       this.setState({
         date: Moment().hour(hour).minute(minute).toDate()
       });
@@ -450,10 +468,11 @@ DatePicker.defaultProps = {
 };
 
 DatePicker.propTypes = {
-  mode: PropTypes.oneOf(['date', 'datetime', 'time']),
+  mode: PropTypes.oneOf(['date', 'datetime', 'time']), 
   androidMode: PropTypes.oneOf(['calendar', 'spinner', 'default']),
   date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date), PropTypes.object]),
-  format: PropTypes.string,
+  format: PropTypes.string, 
+  minuteInterval: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30]), 
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   height: PropTypes.number,
