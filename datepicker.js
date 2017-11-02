@@ -207,8 +207,8 @@ class DatePicker extends Component {
     if (action !== DatePickerAndroid.dismissedAction) {
       const minuteInterval = this.props.minuteInterval;
       if (minuteInterval !== undefined) {
-        const intCount = 60/minuteInterval;
-        const minIntFloor = Math.floor(minute/minuteInterval);
+        const intCount = 60 / minuteInterval;
+        const minIntFloor = Math.floor(minute / minuteInterval);
         const minIntCeil = minIntFloor + 1;
         const minFloorDiff = minute - (minIntFloor * minuteInterval);
         const minCeilDiff = (minIntCeil * minuteInterval) - minute;
@@ -218,7 +218,7 @@ class DatePicker extends Component {
             hour = hour + 1;
             minute = 0;
           } else {
-            minute = (minIntCeil*minuteInterval);
+            minute = (minIntCeil * minuteInterval);
           }
         } else {
           minute = (minIntFloor * minuteInterval);
