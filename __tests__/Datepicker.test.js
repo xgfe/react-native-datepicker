@@ -282,6 +282,19 @@ describe('DatePicker', () => {
     expect(onDateChange).toHaveBeenCalledTimes(1);
   });
 
+  it('onTimePicked15MinuteIntervalAcrossHour', () => {
+    const onDateChange = jest.fn();
+    const wrapper = shallow(<DatePicker onDateChange={onDateChange} minuteInterval={15}/>);
+    const datePicker = wrapper.instance();
+
+    datePicker.onTimePicked({action: DatePickerAndroid.dismissedAction, hour: 12, minute: 9});
+    datePicker.onTimePicked({action: '', hour: 12, minute: 58});
+
+    expect(wrapper.state('date').getHours()).toEqual(13);
+    expect(wrapper.state('date').getMinutes()).toEqual(0);
+    expect(onDateChange).toHaveBeenCalledTimes(1);
+  });
+
   it('onDatetimeTimePicked', () => {
     const onDateChange = jest.fn();
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);
