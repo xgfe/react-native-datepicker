@@ -223,6 +223,8 @@ class DatePicker extends Component {
         } else {
           minute = (minIntFloor * minuteInterval);
         }
+        this.setHour(hour);
+        this.setMinute(minute);
       }
       this.setState({
         date: Moment().hour(hour).minute(minute).toDate()
