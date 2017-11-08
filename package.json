@@ -39,7 +39,7 @@
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^7.0.1",
     "inquirer": "^3.0.5",
-    "jest": "21.2.1",
+    "jest": "^21.2.1",
     "jsdom": "^11.3.0",
     "jsdom-global": "^3.0.2",
     "pre-commit": "^1.1.3",
