@@ -158,11 +158,15 @@ class DatePicker extends Component {
   getDateStr(date = this.props.date) {
     const {mode, format = FORMATS[mode]} = this.props;
 
-    if (date instanceof Date) {
-      return Moment(date).format(format);
-    } else {
-      return Moment(this.getDate(date)).format(format);
+    const dateInstance = date instanceof Date
+      ? date
+      : this.getDate(date);
+
+    if (typeof this.props.getDateStr === 'function') {
+      return this.props.getDateStr(dateInstance);
     }
+
+    return Moment(dateInstance).format(format);
   }
 
   datePicked() {
@@ -471,7 +475,8 @@ DatePicker.propTypes = {
   onPressMask: PropTypes.func,
   placeholder: PropTypes.string,
   modalOnResponderTerminationRequest: PropTypes.func,
-  is24Hour: PropTypes.bool
+  is24Hour: PropTypes.bool,
+  getDateStr: PropTypes.func
 };
 
 export default DatePicker;
