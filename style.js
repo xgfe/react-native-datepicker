@@ -1,4 +1,9 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, PixelRatio, Dimensions} from 'react-native';
+
+const { width, height } = Dimensions.get("window");
+
+const screenWidth = width < height ? width : height;
+const screenHeight = width < height ? height : width;
 
 let style = StyleSheet.create({
   dateTouch: {
@@ -62,6 +67,16 @@ let style = StyleSheet.create({
   },
   btnConfirm: {
     right: 0
+  },
+ titleText:{
+ position: 'absolute',
+  height: 42,
+  justifyContent: 'center',
+  alignItems: 'center',
+  width:screenWidth,    
+  },
+  textTitle:{
+textAlign:"center",
   },
   datePicker: {
     marginTop: 42,
