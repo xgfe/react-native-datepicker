@@ -158,11 +158,15 @@ class DatePicker extends Component {
   getDateStr(date = this.props.date) {
     const {mode, format = FORMATS[mode]} = this.props;
 
-    if (date instanceof Date) {
-      return Moment(date).format(format);
-    } else {
-      return Moment(this.getDate(date)).format(format);
+    const dateInstance = date instanceof Date
+      ? date
+      : this.getDate(date);
+
+    if (typeof this.props.getDateStr === 'function') {
+      return this.props.getDateStr(dateInstance);
     }
+
+    return Moment(dateInstance).format(format);
   }
 
   datePicked() {
@@ -277,7 +281,8 @@ class DatePicker extends Component {
         TimePickerAndroid.open({
           hour: timeMoment.hour(),
           minute: timeMoment.minutes(),
-          is24Hour: is24Hour
+          is24Hour: is24Hour,
+          mode: androidMode
         }).then(this.onTimePicked);
       } else if (mode === 'datetime') {
         // 选日期和时间
@@ -335,7 +340,8 @@ class DatePicker extends Component {
       testID,
       cancelBtnTestID,
       confirmBtnTestID,
-      allowFontScaling
+      allowFontScaling,
+      locale
     } = this.props;
 
     const dateInputStyle = [
@@ -392,8 +398,9 @@ class DatePicker extends Component {
                         maximumDate={maxDate && this.getDate(maxDate)}
                         onDateChange={this.onDateChange}
                         minuteInterval={minuteInterval}
-                        timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
+                        timeZoneOffsetInMinutes={timeZoneOffsetInMinutes ? timeZoneOffsetInMinutes : null}
                         style={[Style.datePicker, customStyles.datePicker]}
+                        locale={locale}
                       />
                     </View>
                     <TouchableComponent
@@ -475,7 +482,9 @@ DatePicker.propTypes = {
   onPressMask: PropTypes.func,
   placeholder: PropTypes.string,
   modalOnResponderTerminationRequest: PropTypes.func,
-  is24Hour: PropTypes.bool
+  is24Hour: PropTypes.bool,
+  getDateStr: PropTypes.func,
+  locale: PropTypes.string,
 };
 
 export default DatePicker;
