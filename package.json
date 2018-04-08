@@ -1,6 +1,6 @@
 {
   "name": "react-native-datepicker",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "React Native DatePicker component for both Android and iOS, useing DatePickerAndroid, TimePickerAndroid and DatePickerIOS",
   "main": "datepicker.js",
   "scripts": {
