@@ -1,3 +1,20 @@
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/xgfe/react-native-datepicker/compare/v1.6.0...v1.7.0) (2018-04-08)
+
+
+### Bug Fixes
+
+* **datepicker:** fix warns when pass moment instance to date prop ([7450bba](https://github.com/xgfe/react-native-datepicker/commit/7450bba)), closes [#166](https://github.com/xgfe/react-native-datepicker/issues/166)
+
+
+### Features
+
+* **datepicker:** add `getDateStr` prop to customize display outside moment format ([905dfbd](https://github.com/xgfe/react-native-datepicker/commit/905dfbd))
+* **datepicker:** pass `locale` to native control if given ([60e3887](https://github.com/xgfe/react-native-datepicker/commit/60e3887))
+* **datepicker:** merge some PR for bugs ([5377499](https://github.com/xgfe/react-native-datepicker/commit/5377499))
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/xgfe/react-native-datepicker/compare/v1.5.1...v1.6.0) (2017-06-12)
 

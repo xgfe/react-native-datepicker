@@ -179,9 +179,17 @@ class DatePicker extends Component {
     const {date, placeholder, customStyles, allowFontScaling} = this.props;
 
     if (!date && placeholder) {
-      return (<Text allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
+      return (
+        <Text allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>
+          {placeholder}
+        </Text>
+      );
     }
-    return (<Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
+    return (
+      <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]}>
+        {this.getDateStr()}
+      </Text>
+    );
   }
 
   onDateChange(date) {
@@ -422,7 +430,11 @@ class DatePicker extends Component {
                       style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
                       testID={confirmBtnTestID}
                     >
-                      <Text allowFontScaling={allowFontScaling} style={[Style.btnTextText, customStyles.btnTextConfirm]}>{confirmBtnText}</Text>
+                      <Text allowFontScaling={allowFontScaling}
+                            style={[Style.btnTextText, customStyles.btnTextConfirm]}
+                      >
+                        {confirmBtnText}
+                      </Text>
                     </TouchableComponent>
                   </Animated.View>
                 </TouchableComponent>
@@ -484,7 +496,7 @@ DatePicker.propTypes = {
   modalOnResponderTerminationRequest: PropTypes.func,
   is24Hour: PropTypes.bool,
   getDateStr: PropTypes.func,
-  locale: PropTypes.string,
+  locale: PropTypes.string
 };
 
 export default DatePicker;
