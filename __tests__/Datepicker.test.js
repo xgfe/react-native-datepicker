@@ -2,7 +2,7 @@ import React from 'react';
 import {Platform, Animated, DatePickerAndroid, Modal, View} from 'react-native';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Moment from 'moment';
+import Moment from 'moment/min/moment-with-locales';
 import DatePicker from '../datepicker.js';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -353,5 +353,12 @@ describe('Coverage', () => {
     const wrapper = shallow(<DatePicker />);
 
     wrapper.find('DatePickerIOS').simulate('dateChange');
+  });
+
+  it('Sets locale', () => {
+    jest.spyOn(Moment, 'locale');
+    shallow(<DatePicker locale="es" />);
+
+    expect(Moment.locale).toHaveBeenCalledWith('es');
   });
 });

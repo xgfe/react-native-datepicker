@@ -14,7 +14,7 @@ import {
   Keyboard
 } from 'react-native';
 import Style from './style';
-import Moment from 'moment';
+import Moment from 'moment/min/moment-with-locales';
 
 const FORMATS = {
   'date': 'YYYY-MM-DD',
@@ -56,6 +56,12 @@ class DatePicker extends Component {
       console.ignoredYellowBox = [];
     }
     console.ignoredYellowBox.push('Warning: Failed propType');
+  }
+
+  componentDidMount() {
+    if (this.props.locale) {
+      Moment.locale(this.props.locale);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
