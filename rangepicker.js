@@ -15,16 +15,16 @@ export default class RangePicker extends Component{
   constructor(props){
     super(props);
     
-    const minYear = parseInt(props.minDate);
-    const maxYear = parseInt(props.maxDate);
-    const interval = (maxYear - minYear) + 1;
+    const min = parseInt(props.min);
+    const max = parseInt(props.max);
+    const interval = (max - min) + 1;
 
     this.state = {
       animatedHeight: new Animated.Value(0),
       selected : '',
       modalVisible: false,
       allowPointerEvents: true,
-      year : Array.from(new Array(interval),(val,index)=>index+minYear),
+      rangeArray : Array.from(new Array(interval),(val,index)=>index+min),
     }
     
   }
@@ -157,7 +157,7 @@ export default class RangePicker extends Component{
               style={[Style.datePicker, customStyles.datePicker]}
               selectedValue = { this.state.selected }
               onValueChange = { (itemValue, itemIndex) => {this.setState({selected: itemValue});} }>
-              {this.state.year.map((value,index)=>{
+              {this.state.rangeArray.map((value,index)=>{
                 return(<Picker.Item key={index} label={String(value)} value={value}/>)})}
             </Picker>
           </View>
