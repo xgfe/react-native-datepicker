@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Style from './style';
 
-export default class YearPicker extends Component{
+export default class RangePicker extends Component{
   constructor(props){
     super(props);
     
@@ -181,7 +181,7 @@ export default class YearPicker extends Component{
             testID={confirmBtnTestID}
           >
             <Text allowFontScaling={allowFontScaling}
-                  style={[Style.btnTextText, customStyles.btnTextConfirm]}
+              style={[Style.btnTextText, customStyles.btnTextConfirm]}
             >
               {confirmBtnText}
             </Text>
@@ -199,7 +199,7 @@ export default class YearPicker extends Component{
 }
 
 
-YearPicker.defaultProps = {
+RangePicker.defaultProps = {
   selected: '',
   // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
   height: 259,
