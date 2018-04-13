@@ -25,6 +25,7 @@ export default class RangePicker extends Component{
       modalVisible: false,
       allowPointerEvents: true,
       rangeArray : props.rangeArray ? props.rangeArray : Array.from(new Array(interval),(val,index)=>index+min),
+      showContent: false,
     }
     
   }
@@ -74,6 +75,7 @@ export default class RangePicker extends Component{
   }
   onPressConfirm = () => {
     this.onPicked();
+    this.setState({showContent:true});
     this.setModalVisible(false);
     
     if (typeof this.props.onCloseModal === 'function') {
@@ -83,8 +85,8 @@ export default class RangePicker extends Component{
   
   getTitleElement() {
     const { placeholder, customStyles, allowFontScaling} = this.props;
-    const selected = this.state.selected;
-    if (!selected && placeholder) {
+    const showContent = this.state.showContent;
+    if (!showContent && placeholder) {
       return (
         <Text allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>
           {placeholder}
@@ -93,7 +95,7 @@ export default class RangePicker extends Component{
     }
     return (
       <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.contentText]}>
-        {selected}
+        {this.state.selected}
       </Text>
     );
   }
