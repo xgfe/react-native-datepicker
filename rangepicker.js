@@ -92,7 +92,7 @@ export default class RangePicker extends Component{
       );
     }
     return (
-      <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]}>
+      <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.contentText]}>
         {selected}
       </Text>
     );
