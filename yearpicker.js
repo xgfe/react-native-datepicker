@@ -156,7 +156,7 @@ export default class YearPicker extends Component{
             <Picker
               style={[Style.datePicker, customStyles.datePicker]}
               selectedValue = { this.state.selected }
-              onValueChange = { (itemValue, itemIndex) => {this.setState({selected: itemValue}); console.log(itemValue)} }>
+              onValueChange = { (itemValue, itemIndex) => {this.setState({selected: itemValue});} }>
               {this.state.year.map((value,index)=>{
                 return(<Picker.Item key={index} label={String(value)} value={value}/>)})}
             </Picker>
