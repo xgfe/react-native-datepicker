@@ -62,6 +62,82 @@ export default class MyDatePicker extends Component {
   }
 }
 ```
+```javascript
+
+import React, { Component } from 'react'
+import { RangePicker } from 'react-native-datepicker'
+
+export default class MyRangePicker extends Component {
+  constructor(props){
+    super(props)
+    this.state = {value: ''}
+  }
+  //showing 1 to 10 for selection
+  render(){
+    return (
+      <RangePicker 
+        min={'1'}
+        max={'10'}
+        placeholder={'placeholder'}
+        style={{width: 200}}
+        
+        confirmBtnText={"確定" } 
+        cancelBtnText={"取消"}
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onValueChange={(value)=>this.setState({value})}  
+      />
+    )
+  }
+}
+```
+```javascript
+
+import React, { Component } from 'react'
+import { RangePicker } from 'react-native-datepicker'
+
+export default class MyRangePicker extends Component {
+  constructor(props){
+    super(props)
+    this.state = {value: ''}
+  }
+  //for spec range array [100,300, 400, 600]
+  render(){
+    return (
+      <RangePicker 
+        placeholder={'placeholder'}
+        style={{width: 200}}
+        rangeArray={[100,300,400,600]}
+        confirmBtnText={"確定" } 
+        cancelBtnText={"取消"}
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onValueChange={(value)=>this.setState({value})}  
+      />
+    )
+  }
+}
+```
 
 You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.android.js) in the Example for detail.
 
