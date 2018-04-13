@@ -24,7 +24,7 @@ export default class RangePicker extends Component{
       selected : '',
       modalVisible: false,
       allowPointerEvents: true,
-      rangeArray : Array.from(new Array(interval),(val,index)=>index+min),
+      rangeArray : props.rangeArray ? props.rangeArray : Array.from(new Array(interval),(val,index)=>index+min),
     }
     
   }
