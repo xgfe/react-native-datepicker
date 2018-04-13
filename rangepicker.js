@@ -112,8 +112,8 @@ export default class RangePicker extends Component{
       allowFontScaling,
     } = this.props;
     
-    const dateInputStyle = [
-      Style.dateInput, customStyles.dateInput,
+    const contentInputStyle = [
+      Style.dateInput, customStyles.contentInput,
       disabled && Style.disabled,
       disabled && customStyles.disabled
     ];
@@ -128,7 +128,7 @@ export default class RangePicker extends Component{
         <View style={[ Style.dateTouchBody, customStyles.dateTouchBody ]}>
           {
             !this.props.hideText ?
-              <View style={dateInputStyle}>
+              <View style={contentInputStyle}>
                 {this.getTitleElement()}
               </View>
             :
