@@ -24,7 +24,7 @@ Check [index.android.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 ```javascript
 
 import React, { Component } from 'react'
-import DatePicker from 'react-native-datepicker'
+import { DatePicker } from 'react-native-datepicker'
 
 export default class MyDatePicker extends Component {
   constructor(props){
