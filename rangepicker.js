@@ -21,7 +21,7 @@ export default class RangePicker extends Component{
 
     this.state = {
       animatedHeight: new Animated.Value(0),
-      selected : '',
+      selected : props.rangeArray ? props.rangeArray[0] : props.min,
       modalVisible: false,
       allowPointerEvents: true,
       rangeArray : props.rangeArray ? props.rangeArray : Array.from(new Array(interval),(val,index)=>index+min),
