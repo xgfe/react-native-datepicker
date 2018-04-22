@@ -14,7 +14,7 @@ import {
   Keyboard
 } from 'react-native';
 import Style from './style';
-import Moment from 'moment';
+import Moment from 'moment/min/moment-with-locales';
 
 const FORMATS = {
   'date': 'YYYY-MM-DD',
@@ -48,6 +48,12 @@ class DatePicker extends Component {
     this.onDatetimePicked = this.onDatetimePicked.bind(this);
     this.onDatetimeTimePicked = this.onDatetimeTimePicked.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.locale) {
+      Moment.locale(this.props.locale);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
