@@ -1,3 +1,13 @@
+<a name="1.7.2"></a>
+## [1.7.2](https://github.com/xgfe/react-native-datepicker/compare/v1.7.0...v1.7.2) (2018-04-22)
+
+
+### Bug Fixes
+
+* **datepicker:** fix androidMode enum not support 'clock' bug ([dc29a09](https://github.com/xgfe/react-native-datepicker/commit/dc29a09))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/xgfe/react-native-datepicker/compare/v1.6.0...v1.7.0) (2018-04-08)
 
