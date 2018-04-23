@@ -352,7 +352,7 @@ class DatePicker extends Component {
 
     return (
       <TouchableComponent
-        style={[Style.dateTouch, style]}
+        style={style}
         underlayColor={'transparent'}
         onPress={this.onPressDate}
         testID={testID}
