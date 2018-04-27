@@ -2,7 +2,7 @@ import React from 'react';
 import {Platform, Animated, DatePickerAndroid, Modal, View} from 'react-native';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Moment from 'moment';
+import DayJS from 'dayjs';
 import DatePicker from '../datepicker.js';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -57,7 +57,7 @@ describe('DatePicker', () => {
     expect(datePicker1.props.showIcon).toEqual(false);
     expect(datePicker1.props.disabled).toEqual(true);
 
-    expect(wrapper1.state('date')).toMatchObject(Moment('2016-05-11', 'YYYY-MM-DD').toDate());
+    expect(wrapper1.state('date')).toMatchObject(DayJS('2016-05-11').toDate());
     expect(datePicker1._renderIcon()).toEqual(null);
 
     // find not work with mount, and defaultProps not work with shallow...
@@ -69,7 +69,7 @@ describe('DatePicker', () => {
 
     const wrapper3 = shallow(<DatePicker showIcon={false} date={{test: 123}} />);
     expect(wrapper3.find('Image').length).toEqual(0);
-    expect(wrapper3.instance().getDateStr()).toEqual('Invalid date');
+    expect(wrapper3.instance().getDateStr()).toEqual('NaN-NaN-NaN');
     expect(datePicker1._renderIcon()).toEqual(null);
 
   });
@@ -83,7 +83,7 @@ describe('DatePicker', () => {
 
     datePicker.onPressConfirm();
 
-    expect(dateStr).toEqual(Moment().format('YYYY-MM-DD'));
+    expect(dateStr).toEqual(DayJS().format('YYYY-MM-DD'));
   });
 
   it('default selected Date with minDate and maxDate', () => {
@@ -118,7 +118,7 @@ describe('DatePicker', () => {
 
     datePickerNormal.onPressConfirm();
 
-    expect(dateStrNormal).toEqual(Moment().format('YYYY-MM-DD'));
+    expect(dateStrNormal).toEqual(DayJS().format('YYYY-MM-DD'));
   });
 
   it('setModalVisible', () => {
@@ -187,8 +187,8 @@ describe('DatePicker', () => {
     const wrapper = shallow(<DatePicker date="2016-06-04"/>);
     const datePicker = wrapper.instance();
 
-    expect(datePicker.getDate()).toMatchObject(Moment('2016-06-04', 'YYYY-MM-DD').toDate());
-    expect(datePicker.getDate('2016-06-06')).toMatchObject(Moment('2016-06-06', 'YYYY-MM-DD').toDate());
+    expect(datePicker.getDate()).toMatchObject(DayJS('2016-06-04').toDate());
+    expect(datePicker.getDate('2016-06-06')).toMatchObject(DayJS('2016-06-06').toDate());
 
     const date = new Date();
     expect(datePicker.getDate(date)).toEqual(date);
@@ -237,7 +237,7 @@ describe('DatePicker', () => {
 
     datePicker.onTimePicked({action: DatePickerAndroid.dismissedAction, hour: 12, minute: 10});
     datePicker.onTimePicked({action: '', hour: 12, minute: 10});
-
+    console.log(wrapper.state('date').toString());
     expect(wrapper.state('date').getHours()).toEqual(12);
     expect(wrapper.state('date').getMinutes()).toEqual(10);
     expect(onDateChange).toHaveBeenCalledTimes(1);
