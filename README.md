@@ -88,6 +88,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | is24Hour | - | `boolean` | Set the TimePicker is24Hour flag. The default value depend on `format`. Only work in Android |
 | allowFontScaling | true | `boolean` | Set to false to disable font scaling for every text component |
 | placeholder | '' | `string` | The placeholder show when this.props.date is falsy |
+| renderText | '' | `function` | Set the custom text |
 | onDateChange | - | `function` | This is called when the user confirm the picked date or time in the UI. The first and only argument is a date or time string representing the new date and time formatted by [moment.js](http://momentjs.com/) with the given format property. |
 | onOpenModal | - | `function` | This is called when the DatePicker Modal open. |
 | onCloseModal | - | `function` | This is called when the DatePicker Modal close |

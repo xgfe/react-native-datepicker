@@ -168,18 +168,18 @@ class DatePicker extends Component {
   }
 
   getTitleElement() {
-    const {date, placeholder, customStyles, allowFontScaling} = this.props;
+    const {date, placeholder, customStyles, allowFontScaling, renderText} = this.props;
 
     if (!date && placeholder) {
       return (
         <Text allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>
-          {placeholder}
+          {renderText ? renderText(placeholder) : placeholder}
         </Text>
       );
     }
     return (
       <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]}>
-        {this.getDateStr()}
+        {renderText ? renderText(date) : this.getDateStr() }
       </Text>
     );
   }
@@ -459,6 +459,7 @@ DatePicker.defaultProps = {
   allowFontScaling: true,
   hideText: false,
   placeholder: '',
+  renderText: null,
   TouchableComponent: TouchableHighlight,
   modalOnResponderTerminationRequest: e => true
 };
@@ -480,6 +481,7 @@ DatePicker.propTypes = {
   showIcon: PropTypes.bool,
   disabled: PropTypes.bool,
   allowFontScaling: PropTypes.bool,
+  renderText: PropTypes.func,
   onDateChange: PropTypes.func,
   onOpenModal: PropTypes.func,
   onCloseModal: PropTypes.func,
