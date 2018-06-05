@@ -116,10 +116,14 @@ class DatePicker extends Component {
   }
 
   getDate(date = this.props.date) {
-    const {mode, minDate, maxDate, format = FORMATS[mode]} = this.props;
+    const {mode, minDate, initialDate, maxDate, format = FORMATS[mode]} = this.props;
 
     // date默认值
     if (!date) {
+      if (initialDate) {
+        return this.getDate(initialDate);
+      }
+
       let now = new Date();
       if (minDate) {
         let _minDate = this.getDate(minDate);
@@ -467,6 +471,7 @@ DatePicker.propTypes = {
   mode: PropTypes.oneOf(['date', 'datetime', 'time']),
   androidMode: PropTypes.oneOf(['clock', 'calendar', 'spinner', 'default']),
   date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date), PropTypes.object]),
+  initialDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date), PropTypes.object]),
   format: PropTypes.string,
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
