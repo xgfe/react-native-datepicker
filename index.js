@@ -96,6 +96,19 @@ class datepicker extends Component {
           onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
         />
         <Text style={styles.instructions}>datetime: {this.state.datetime1}</Text>
+        <DatePicker
+          style={{width: 200}}
+          initialDate="1950-01-01"
+          date={this.state.date}
+          mode="date"
+          placeholder="placeholder"
+          format="YYYY-MM-DD"
+          maxDate="2016-06-01"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          iconSource={require('./google_calendar.png')}
+          onDateChange={(date) => {this.setState({date: date});}}
+        />
       </View>
     );
   }
