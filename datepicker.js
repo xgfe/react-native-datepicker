@@ -338,8 +338,11 @@ class DatePicker extends Component {
       confirmBtnText,
       TouchableComponent,
       testID,
+      accessibilityLabel,
       cancelBtnTestID,
       confirmBtnTestID,
+      cancelBtnAccessibilityLabel,
+      confirmBtnAccessibilityLabel,
       allowFontScaling,
       locale
     } = this.props;
@@ -356,6 +359,7 @@ class DatePicker extends Component {
         underlayColor={'transparent'}
         onPress={this.onPressDate}
         testID={testID}
+        accessibilityLabel={accessibilityLabel}
       >
         <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
           {
@@ -408,6 +412,7 @@ class DatePicker extends Component {
                       onPress={this.onPressCancel}
                       style={[Style.btnText, Style.btnCancel, customStyles.btnCancel]}
                       testID={cancelBtnTestID}
+                      accessibilityLabel={cancelBtnAccessibilityLabel}
                     >
                       <Text
                         allowFontScaling={allowFontScaling}
@@ -421,6 +426,7 @@ class DatePicker extends Component {
                       onPress={this.onPressConfirm}
                       style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
                       testID={confirmBtnTestID}
+                      accessibilityLabel={confirmBtnAccessibilityLabel}
                     >
                       <Text allowFontScaling={allowFontScaling}
                             style={[Style.btnTextText, customStyles.btnTextConfirm]}
