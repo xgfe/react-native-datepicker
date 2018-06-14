@@ -77,8 +77,8 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | confirmBtnText | '确定' | `string` | Specify the text of confirm btn in ios. |
 | cancelBtnText | '取消' | `string` | Specify the text of cancel btn in ios. |
 | iconSource | - | <code>{uri: string} &#124; number</code> | Specify the icon. Same as the `source` of Image, always using `require()` |
-| minDate | - | <code>string &#124; date</code> | Restricts the range of possible date values. |
-| maxDate | - | <code>string &#124; date</code> | Restricts the range of possible date values. |
+| minDate | - | <code>string &#124; date</code> | Restricts the range of possible date values. The date format should match what is specified in the `format` prop. |
+| maxDate | - | <code>string &#124; date</code> | Restricts the range of possible date values. The date format should match what is specified in the `format` prop. |
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
 | customStyles | - | `object` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
 | showIcon | true | `boolean` | Controller whether or not show the icon |
