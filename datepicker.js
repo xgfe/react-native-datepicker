@@ -179,7 +179,8 @@ class DatePicker extends Component {
     }
     return (
       <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]} >
-        {// If displayFormat, date and format props are sent, then return date in user-defined format}
+        {// If displayFormat, date and format props are sent, then return date in user-defined format
+        }
         {(this.props.displayFormat && this.props.date && this.props.format) ? Moment(this.props.date, this.props.format).format(this.props.displayFormat) : this.getDateStr()}
       </Text >
     )
