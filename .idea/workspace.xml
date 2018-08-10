@@ -29,14 +29,15 @@
         <counts>
           <entry key="gitignore" value="1" />
           <entry key="js" value="4" />
-          <entry key="json" value="2" />
-          <entry key="md" value="2" />
+          <entry key="json" value="4" />
+          <entry key="md" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="2" />
+          <entry key="JSON" value="4" />
           <entry key="JavaScript" value="4" />
+          <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
@@ -44,14 +45,15 @@
         <counts>
           <entry key="gitignore" value="11" />
           <entry key="js" value="6" />
-          <entry key="json" value="107" />
-          <entry key="md" value="67" />
+          <entry key="json" value="121" />
+          <entry key="md" value="85" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="107" />
+          <entry key="JSON" value="121" />
           <entry key="JavaScript" value="6" />
+          <entry key="Markdown" value="18" />
           <entry key="PLAIN_TEXT" value="78" />
         </counts>
       </usages-collector>
@@ -60,10 +62,16 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="133">
+                <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+                <folding>
+                  <element signature="e#0#40#0" expanded="true" />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -78,8 +86,8 @@
       <list>
         <option value="$PROJECT_DIR$/datepicker.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -168,18 +176,18 @@
       <updated>1533890498417</updated>
       <workItem from="1533890499746" duration="1899000" />
       <workItem from="1533894200539" duration="385000" />
-      <workItem from="1533894638743" duration="466000" />
+      <workItem from="1533894638743" duration="1152000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2750000" />
+    <option name="totallyTimeSpent" value="3436000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24950495" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24950495" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -192,9 +200,9 @@
       <window_info anchor="bottom" id="Get Gist" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Regex Tester" order="10" weight="0.32938075" />
+      <window_info anchor="bottom" id="Regex Tester" order="10" weight="0.32806325" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.32806325" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32806325" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -228,6 +236,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -236,17 +251,13 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="115">
-            <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <first_editor relative-caret-position="133">
+            <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            <folding>
+              <element signature="e#0#40#0" expanded="true" />
+            </folding>
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
         </state>
       </provider>
     </entry>
