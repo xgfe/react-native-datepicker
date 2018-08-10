@@ -1,6 +1,6 @@
 {
-  "name": "react-native-datepicker",
-  "version": "1.7.2",
+  "name": "react-native-datepicker-upgraded",
+  "version": "1.8.0",
   "description": "React Native DatePicker component for both Android and iOS, useing DatePickerAndroid, TimePickerAndroid and DatePickerIOS",
   "main": "datepicker.js",
   "scripts": {
@@ -12,18 +12,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xgfe/react-native-datepicker.git"
+    "url": "git+https://github.com/sanzhardanybayev/react-native-datepicker"
   },
   "keywords": [
     "react-native",
     "DatePicker"
   ],
-  "author": "xgfe",
+  "author": "xgfe,Danybayev Sanzhar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xgfe/react-native-datepicker/issues"
+    "url": "https://github.com/sanzhardanybayev/react-native-datepicker/issues"
   },
-  "homepage": "https://github.com/xgfe/react-native-datepicker#readme",
+  "homepage": "https://github.com/sanzhardanybayev/react-native-datepicker#readme",
   "dependencies": {
     "moment": "^2.22.0"
   },
