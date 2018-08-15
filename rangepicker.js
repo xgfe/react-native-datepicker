@@ -4,9 +4,7 @@ import {
   Text,
   Modal,
   TouchableHighlight,
-  Platform,
   Animated,
-  Keyboard,
   Picker,
 } from 'react-native';
 import Style from './style';
@@ -26,6 +24,7 @@ export default class RangePicker extends Component{
       allowPointerEvents: true,
       rangeArray : props.rangeArray ? props.rangeArray : Array.from(new Array(interval),(val,index)=>index+min),
       showContent: false,
+      picking: '',
     }
     
   }
@@ -55,6 +54,7 @@ export default class RangePicker extends Component{
     }
   }
   onPicked = () => {
+    this.setState({ picking: this.state.selected });
     if(typeof this.props.onValueChange === 'function'){
       this.props.onValueChange(this.state.selected);
     }
@@ -74,28 +74,35 @@ export default class RangePicker extends Component{
     }
   }
   onPressConfirm = () => {
+    this.setModalVisible(false);
+    if (this.state.selected === 'default') {
+      this.setState({showContent: false});
+      return;
+    }
     this.onPicked();
     this.setState({showContent:true});
-    this.setModalVisible(false);
+    
     
     if (typeof this.props.onCloseModal === 'function') {
       this.props.onCloseModal();
     }
   }
-  
+  onValueChange = (itemValue, itemIndex) => {
+    this.setState({selected: itemValue});
+  }
   getTitleElement() {
     const { placeholder, customStyles, allowFontScaling} = this.props;
     const showContent = this.state.showContent;
     if (!showContent && placeholder) {
       return (
-        <Text allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>
+        <Text allowFontScaling={allowFontScaling} numberOfLines={1} style={[Style.placeholderText, customStyles.placeholderText]}>
           {placeholder}
         </Text>
       );
     }
     return (
-      <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.contentText]}>
-        {this.state.selected}
+      <Text allowFontScaling={allowFontScaling} numberOfLines={1} style={[Style.dateText, customStyles.contentText]}>
+        {this.state.picking}
       </Text>
     );
   }
@@ -158,7 +165,8 @@ export default class RangePicker extends Component{
             <Picker
               style={[Style.datePicker, customStyles.datePicker]}
               selectedValue = { this.state.selected }
-              onValueChange = { (itemValue, itemIndex) => {this.setState({selected: itemValue});} }>
+              onValueChange = { this.onValueChange }>
+              <Picker.Item key={'default0'} label={'Select a item ...'} value={'default'}/>
               {this.state.rangeArray.map((value,index)=>{
                 return(<Picker.Item key={index} label={String(value)} value={value}/>)})}
             </Picker>
