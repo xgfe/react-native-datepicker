@@ -19,7 +19,7 @@ export default class RangePicker extends Component{
 
     this.state = {
       animatedHeight: new Animated.Value(0),
-      selected : props.rangeArray ? props.rangeArray[0] : props.min,
+      selected : 'default',
       modalVisible: false,
       allowPointerEvents: true,
       rangeArray : props.rangeArray ? props.rangeArray : Array.from(new Array(interval),(val,index)=>index+min),
@@ -58,6 +58,7 @@ export default class RangePicker extends Component{
     if(typeof this.props.onValueChange === 'function'){
       this.props.onValueChange(this.state.selected);
     }
+    this.setState({selected:'default'});
   }
   onPressCancel = () => {
     this.setModalVisible(false);
@@ -75,20 +76,26 @@ export default class RangePicker extends Component{
   }
   onPressConfirm = () => {
     this.setModalVisible(false);
+    this.onPicked();
     if (this.state.selected === 'default') {
       this.setState({showContent: false});
       return;
     }
-    this.onPicked();
     this.setState({showContent:true});
-    
-    
     if (typeof this.props.onCloseModal === 'function') {
       this.props.onCloseModal();
     }
   }
+  resetOption = () => {
+    this.setState({picking: '', selected:'', showContent: false });
+  }
   onValueChange = (itemValue, itemIndex) => {
     this.setState({selected: itemValue});
+  }
+  componentDidUpdate() {
+    if (this.props.rangeArray !== this.state.rangeArray) {
+      this.setState({ rangeArray: this.props.rangeArray });
+    }
   }
   getTitleElement() {
     const { placeholder, customStyles, allowFontScaling} = this.props;
