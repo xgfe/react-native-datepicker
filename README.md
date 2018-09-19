@@ -54,7 +54,7 @@ export default class MyDatePicker extends Component {
           dateInput: {
             marginLeft: 36
           }
-          // ... You can check the source to find the other keys.
+          // ... See customStyles property below for other keys.
         }}
         onDateChange={(date) => {this.setState({date: date})}}
       />
@@ -80,7 +80,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | minDate | - | <code>string &#124; date</code> | Restricts the range of possible date values. |
 | maxDate | - | <code>string &#124; date</code> | Restricts the range of possible date values. |
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
-| customStyles | - | `object` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
+| customStyles | - | `object` | The hook of customize datepicker style, same as the native style. [See all style keys](/style.js)|
 | showIcon | true | `boolean` | Controller whether or not show the icon |
 | hideText | false | `boolean` | Controller whether or not show the `dateText` |
 | iconComponent | - | `element` | Set the custom icon |
