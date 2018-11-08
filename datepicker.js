@@ -378,9 +378,10 @@ class DatePicker extends Component {
               style={{flex: 1}}
             >
               <TouchableComponent
-                style={Style.datePickerMask}
+                style={[Style.datePickerMask,
+                  this.props.transparentMask ? {backgroundColor: '#00000000'} : {backgroundColor: '#00000077'}]}
                 activeOpacity={1}
-                underlayColor={'#00000077'}
+                underlayColor={this.props.transparentMask ? '#00000000' : '#00000077'}
                 onPress={this.onPressMask}
               >
                 <TouchableComponent
@@ -484,6 +485,7 @@ DatePicker.propTypes = {
   onOpenModal: PropTypes.func,
   onCloseModal: PropTypes.func,
   onPressMask: PropTypes.func,
+  transparentMask: PropTypes.bool,
   placeholder: PropTypes.string,
   modalOnResponderTerminationRequest: PropTypes.func,
   is24Hour: PropTypes.bool,

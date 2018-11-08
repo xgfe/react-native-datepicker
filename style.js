@@ -33,8 +33,7 @@ let style = StyleSheet.create({
   datePickerMask: {
     flex: 1,
     alignItems: 'flex-end',
-    flexDirection: 'row',
-    backgroundColor: '#00000077'
+    flexDirection: 'row'
   },
   datePickerCon: {
     backgroundColor: '#fff',
