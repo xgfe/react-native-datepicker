@@ -69,7 +69,7 @@ describe('DatePicker', () => {
 
     const wrapper3 = shallow(<DatePicker showIcon={false} date={{test: 123}} />);
     expect(wrapper3.find('Image').length).toEqual(0);
-    expect(wrapper3.instance().getDateStr()).toEqual('Invalid date');
+    expect(wrapper3.instance().getDateStr()).toEqual('NaN-NaN-NaN');
     expect(datePicker1._renderIcon()).toEqual(null);
 
   });

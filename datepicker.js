@@ -14,7 +14,7 @@ import {
   Keyboard
 } from 'react-native';
 import Style from './style';
-import Moment from 'moment';
+import Dayjs from 'dayjs';
 
 const FORMATS = {
   'date': 'YYYY-MM-DD',
@@ -144,7 +144,7 @@ class DatePicker extends Component {
       return date;
     }
 
-    return Moment(date, format).toDate();
+    return Dayjs(date).toDate();
   }
 
   getDateStr(date = this.props.date) {
@@ -158,7 +158,7 @@ class DatePicker extends Component {
       return this.props.getDateStr(dateInstance);
     }
 
-    return Moment(dateInstance).format(format);
+    return Dayjs(dateInstance).format(format);
   }
 
   datePicked() {
@@ -211,7 +211,7 @@ class DatePicker extends Component {
   onTimePicked({action, hour, minute}) {
     if (action !== DatePickerAndroid.dismissedAction) {
       this.setState({
-        date: Moment().hour(hour).minute(minute).toDate()
+        date: Dayjs().set('hour', hour).set('minute', minute).toDate()
       });
       this.datePicked();
     } else {
@@ -223,11 +223,11 @@ class DatePicker extends Component {
     const {mode, androidMode, format = FORMATS[mode], is24Hour = !format.match(/h|a/)} = this.props;
 
     if (action !== DatePickerAndroid.dismissedAction) {
-      let timeMoment = Moment(this.state.date);
+      const date = this.state.date;
 
       TimePickerAndroid.open({
-        hour: timeMoment.hour(),
-        minute: timeMoment.minutes(),
+        hour: date.getHours(),
+        minute: date.getMinutes(),
         is24Hour: is24Hour,
         mode: androidMode
       }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
@@ -276,11 +276,11 @@ class DatePicker extends Component {
       } else if (mode === 'time') {
         // 选时间
 
-        let timeMoment = Moment(this.state.date);
+        const date = this.state.date;
 
         TimePickerAndroid.open({
-          hour: timeMoment.hour(),
-          minute: timeMoment.minutes(),
+          hour: date.getHours(),
+          minute: date.getMinutes(),
           is24Hour: is24Hour,
           mode: androidMode
         }).then(this.onTimePicked);
