@@ -110,7 +110,9 @@ class DatePicker extends Component {
     this.datePicked();
     this.setModalVisible(false);
 
-    if (typeof this.props.onCloseModal === 'function') {
+    if (typeof this.props.onPressConfirm === 'function') {
+      this.props.onPressConfirm();
+    } else if (typeof this.props.onCloseModal === 'function') {
       this.props.onCloseModal();
     }
   }
@@ -484,6 +486,7 @@ DatePicker.propTypes = {
   onOpenModal: PropTypes.func,
   onCloseModal: PropTypes.func,
   onPressMask: PropTypes.func,
+  onPressConfirm: PropTypes.func,
   placeholder: PropTypes.string,
   modalOnResponderTerminationRequest: PropTypes.func,
   is24Hour: PropTypes.bool,
