@@ -137,7 +137,7 @@ class DatePicker extends Component {
         }
       }
 
-      return now;
+      return this.props.initialDate ? this.props.initialDate : now;
     }
 
     if (date instanceof Date) {
