@@ -108,7 +108,9 @@ class DatePicker extends Component {
 
   onPressConfirm() {
     this.datePicked();
-    this.setModalVisible(false);
+    if (!this.props.keepVisibleOnPressConfirm){
+      this.setModalVisible(false);
+    }
 
     if (typeof this.props.onCloseModal === 'function') {
       this.props.onCloseModal();
