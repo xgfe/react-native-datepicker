@@ -66,7 +66,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | :------------ |:---------------:| :---------------:| :-----|
 | style | - | `object` | Specify the style of the DatePicker, eg. width, height...  |
 | date | - | <code>string &#124; date &#124; Moment instance</code> | Specify the display date of DatePicker. `string` type value must match the specified format |
-| mode | 'date' | `enum` | The `enum` of `date`, `datetime` and `time` |
+| mode | 'date' | `enum` | The `enum` of `date`, `datetime`, `time` and `countdown` |
 | androidMode | 'default' | `enum` | The `enum` of `default`, `calendar` and `spinner` (only Android) |
 | format | 'YYYY-MM-DD' | `string` | Specify the display format of the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
 | confirmBtnText | '确定' | `string` | Specify the text of confirm btn in ios. |
