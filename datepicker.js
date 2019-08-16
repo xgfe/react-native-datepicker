@@ -31,7 +31,7 @@ class DatePicker extends Component {
     this.state = {
       date: this.getDate(),
       modalVisible: false,
-      animatedHeight: new Animated.Value(0),
+      animatedPosition: new Animated.Value(0),
       allowPointerEvents: true
     };
 
@@ -63,18 +63,20 @@ class DatePicker extends Component {
     if (visible) {
       this.setState({modalVisible: visible});
       return Animated.timing(
-        this.state.animatedHeight,
+        this.state.animatedPosition,
         {
-          toValue: height,
-          duration: duration
+          toValue: -height,
+          duration: duration,
+          useNativeDriver: true
         }
       ).start();
     } else {
       return Animated.timing(
-        this.state.animatedHeight,
+        this.state.animatedPosition,
         {
           toValue: 0,
-          duration: duration
+          duration: duration,
+          useNativeDriver: true
         }
       ).start(() => {
         this.setState({modalVisible: visible});
@@ -329,6 +331,7 @@ class DatePicker extends Component {
       mode,
       style,
       customStyles,
+      height,
       disabled,
       minDate,
       maxDate,
@@ -343,6 +346,11 @@ class DatePicker extends Component {
       allowFontScaling,
       locale
     } = this.props;
+
+    const position= {
+      bottom: -height,
+      transform: [{ translateY: this.state.animatedPosition }]
+    };
 
     const dateInputStyle = [
       Style.dateInput, customStyles.dateInput,
@@ -388,7 +396,7 @@ class DatePicker extends Component {
                   style={{flex: 1}}
                 >
                   <Animated.View
-                    style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
+                    style={[Style.datePickerCon, position, {height}, customStyles.datePickerCon]}
                   >
                     <View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
                       <DatePickerIOS
