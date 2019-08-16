@@ -37,8 +37,10 @@ let style = StyleSheet.create({
     backgroundColor: '#00000077'
   },
   datePickerCon: {
-    backgroundColor: '#fff',
-    height: 0,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    backgroundColor: '#fff'
     overflow: 'hidden'
   },
   btnText: {
