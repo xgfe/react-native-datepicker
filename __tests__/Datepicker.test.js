@@ -147,24 +147,48 @@ describe('DatePicker', () => {
     expect(onCloseModal).toHaveBeenCalledTimes(1);
   });
 
-  it('onPressMask', () => {
-    const onPressMask = jest.fn();
-    const wrapper = shallow(<DatePicker onPressMask={onPressMask}/>);
-    const datePicker = wrapper.instance();
+  describe('onPressMask', () => {
+    it('calls onPressMask if onPressMask is passed', () => {
+      const onPressMask = jest.fn();
+      const wrapper = shallow(<DatePicker onPressMask={onPressMask}/>);
+      const datePicker = wrapper.instance();
+  
+      datePicker.onPressMask();
+  
+      expect(onPressMask).toHaveBeenCalledTimes(1);
+    })
 
-    datePicker.onPressMask();
+    it('calls onPressCancel if onPressMask is not passed', () => {
+      const onPressCancel = jest.fn();
+      const wrapper = shallow(<DatePicker />);
+      const datePicker = wrapper.instance();
+      datePicker.onPressCancel = onPressCancel;
+  
+      datePicker.onPressMask();
+  
+      expect(onPressCancel).toHaveBeenCalledTimes(1);
+    })
 
-    expect(onPressMask).toHaveBeenCalledTimes(1);
+    it('calls onPressCancel when onPressMaskBehaviour is set to cancel and onPressMask is not passed', () => {
+      const onPressCancel = jest.fn();
+      const wrapper = shallow(<DatePicker onPressMaskBehaviour='cancel' />);
+      const datePicker = wrapper.instance();
+      datePicker.onPressCancel = onPressCancel;
 
-    // call onPressCancel when without onPressMask cb func
-    const onPressCancel = jest.fn();
-    const wrapper1 = shallow(<DatePicker />);
-    const datePicker1 = wrapper1.instance();
-    datePicker1.onPressCancel = onPressCancel;
+      datePicker.onPressMask();
 
-    datePicker1.onPressMask();
+      expect(onPressCancel).toHaveBeenCalledTimes(1);
+    })    
+    it('calls onPressConfirm when onPressMaskBehaviour is set to confirm and onPressMask is not passed', () => {
+      const onPressConfirm = jest.fn();
+      const wrapper = shallow(<DatePicker onPressMaskBehaviour='confirm' />);
+      const datePicker = wrapper.instance();
+      datePicker.onPressConfirm = onPressConfirm;
 
-    expect(onPressCancel).toHaveBeenCalledTimes(1);
+      datePicker.onPressMask();
+
+      expect(onPressConfirm).toHaveBeenCalledTimes(1);
+    })
   });
 
   it('onPressConfirm', () => {
