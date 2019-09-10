@@ -93,8 +93,10 @@ class DatePicker extends Component {
   onPressMask() {
     if (typeof this.props.onPressMask === 'function') {
       this.props.onPressMask();
+    } else if (this.props.onPressMaskBehaviour === 'confirm') {
+      this.onPressConfirm()
     } else {
-      this.onPressCancel();
+      this.onPressCancel()
     }
   }
 
@@ -483,6 +485,7 @@ DatePicker.propTypes = {
   onDateChange: PropTypes.func,
   onOpenModal: PropTypes.func,
   onCloseModal: PropTypes.func,
+  onPressMaskBehaviour: PropTypes.oneOf(['cancel', 'confirm']),
   onPressMask: PropTypes.func,
   placeholder: PropTypes.string,
   modalOnResponderTerminationRequest: PropTypes.func,
