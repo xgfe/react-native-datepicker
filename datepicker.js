@@ -168,17 +168,17 @@ class DatePicker extends Component {
   }
 
   getTitleElement() {
-    const {date, placeholder, customStyles, allowFontScaling} = this.props;
+    const {date, placeholder, customStyles, allowFontScaling, maxFontSizeMultiplier} = this.props;
 
     if (!date && placeholder) {
       return (
-        <Text allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>
+        <Text maxFontSizeMultiplier={maxFontSizeMultiplier} allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>
           {placeholder}
         </Text>
       );
     }
     return (
-      <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]}>
+      <Text maxFontSizeMultiplier={maxFontSizeMultiplier} allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]}>
         {this.getDateStr()}
       </Text>
     );
@@ -341,6 +341,7 @@ class DatePicker extends Component {
       cancelBtnTestID,
       confirmBtnTestID,
       allowFontScaling,
+      maxFontSizeMultiplier,
       locale
     } = this.props;
 
@@ -411,6 +412,7 @@ class DatePicker extends Component {
                     >
                       <Text
                         allowFontScaling={allowFontScaling}
+                        maxFontSizeMultiplier={maxFontSizeMultiplier}
                         style={[Style.btnTextText, Style.btnTextCancel, customStyles.btnTextCancel]}
                       >
                         {cancelBtnText}
@@ -422,7 +424,7 @@ class DatePicker extends Component {
                       style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
                       testID={confirmBtnTestID}
                     >
-                      <Text allowFontScaling={allowFontScaling}
+                      <Text allowFontScaling={allowFontScaling} maxFontSizeMultiplier={maxFontSizeMultiplier}
                             style={[Style.btnTextText, customStyles.btnTextConfirm]}
                       >
                         {confirmBtnText}
@@ -457,6 +459,7 @@ DatePicker.defaultProps = {
   showIcon: true,
   disabled: false,
   allowFontScaling: true,
+  maxFontSizeMultiplier: 1.25,
   hideText: false,
   placeholder: '',
   TouchableComponent: TouchableHighlight,
@@ -480,6 +483,7 @@ DatePicker.propTypes = {
   showIcon: PropTypes.bool,
   disabled: PropTypes.bool,
   allowFontScaling: PropTypes.bool,
+  maxFontSizeMultiplier: PropTypes.number,
   onDateChange: PropTypes.func,
   onOpenModal: PropTypes.func,
   onCloseModal: PropTypes.func,
