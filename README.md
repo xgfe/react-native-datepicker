@@ -11,6 +11,7 @@ Or using [react-native-ui-xg](https://github.com/xgfe/react-native-ui-xg), our r
 
 ```bash
 npm install react-native-ui-xg --save
+npm install @react-native-community/datetimepicker --save
 ```
 
 ## Example
