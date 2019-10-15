@@ -10,7 +10,7 @@ import {
   Animated,
   Keyboard,
 } from 'react-native';
-import Style from './datePickerStyles';
+import Style from './style';
 import Moment from 'moment';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 
