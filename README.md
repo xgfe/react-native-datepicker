@@ -14,6 +14,13 @@ Or using [react-native-ui-xg](https://github.com/xgfe/react-native-ui-xg), our r
 npm install react-native-ui-xg --save
 ```
 
+## iOS 13 Dark Mode
+
+Currently there is an issue with dark mode and date picker on iOS 13 and app built on Xcode 11 or higher. To workaround this issue at the moment you need to add you your iOS project plist file o opt-out from dark mode. Future versons of date picker or React Native should resolve it correctly.
+
+<key>UIUserInterfaceStyle</key>
+<string>Light</string>
+
 ## Example
 Check [index.android.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.android.js) in the Example.
 
