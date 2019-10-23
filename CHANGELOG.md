@@ -3,6 +3,8 @@
 Use @react-native-community/datetimepicker insead of deprecated ones.
 You need to install @react-native-community/datetimepicker (read install notes)
 
+Add info about iOS 13 Dark Mode issue
+
 <a name="1.7.2"></a>
 ## [1.7.2](https://github.com/xgfe/react-native-datepicker/compare/v1.7.0...v1.7.2) (2018-04-22)
 

@@ -66,7 +66,7 @@ export default class MyDatePicker extends Component {
           }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange={(date) => {this.setState({date: date})}} // Called when the user confirm the picked date or time in the UI 
       />
     )
   }
