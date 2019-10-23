@@ -5,8 +5,6 @@
   "main": "datepicker.js",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest --coverage",
-    "coverage": "cat ./coverage/lcov.info | coveralls",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "lint": "eslint ."
   },
