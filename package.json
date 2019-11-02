@@ -36,7 +36,7 @@
     "cz-conventional-changelog": "^1.2.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
-    "eslint": "^3.19.0",
+    "eslint": "^6.6.0",
     "eslint-plugin-react": "^7.0.1",
     "inquirer": "^3.0.5",
     "jest": "21.2.1",
