@@ -21,9 +21,9 @@
   "author": "xgfe",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xgfe/react-native-datepicker/issues"
+    "url": "https://github.com/vinipachecov/react-native-datepicker/issues"
   },
-  "homepage": "https://github.com/xgfe/react-native-datepicker#readme",
+  "homepage": "https://github.com/vinipachecov/react-native-datepicker#readme",
   "dependencies": {
     "moment": "^2.22.0"
   },
