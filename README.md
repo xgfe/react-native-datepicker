@@ -4,14 +4,9 @@ React Native DatePicker component for both Android and iOS, using DatePickerAndr
 ## Install
 
 ```bash
-npm install react-native-datepicker --save
+npm install react-native-datepicker-latest --save
 ```
 
-Or using [react-native-ui-xg](https://github.com/xgfe/react-native-ui-xg), our react-naitve ui kit.
-
-```bash
-npm install react-native-ui-xg --save
-```
 
 ## Example
 Check [index.android.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.android.js) in the Example.
@@ -71,7 +66,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | :------------ |:---------------:| :---------------:| :-----|
 | style | - | `object` | Specify the style of the DatePicker, eg. width, height...  |
 | date | - | <code>string &#124; date &#124; Moment instance</code> | Specify the display date of DatePicker. `string` type value must match the specified format |
-| mode | 'date' | `enum` | The `enum` of `date`, `datetime` and `time` |
+| mode | 'date' | `enum` | The `enum` of `date`, `datetime`, `time` and `countdown` |
 | androidMode | 'default' | `enum` | The `enum` of `default`, `calendar` and `spinner` (only Android) |
 | format | 'YYYY-MM-DD' | `string` | Specify the display format of the date, which using [moment.js](http://momentjs.com/). The default value change according to the mode. |
 | confirmBtnText | '确定' | `string` | Specify the text of confirm btn in ios. |
@@ -95,7 +90,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | modalOnResponderTerminationRequest | - | `function` | Set the callback for React Native's [Gesture Responder System](https://facebook.github.io/react-native/docs/gesture-responder-system.html#responder-lifecycle)'s call to `onResponderTerminationRequest`. By default this will reject a termination request, but can be overidden in case the View under the Modal is implementing custom gesture responders, and you wish for those to be overidden in certain cases.  |
 | TouchableComponent | `TouchableHighlight` | `Component` | Replace the `TouchableHighlight` with a custom `Component`. For example : `TouchableOpacity` |
 | getDateStr | - | Function | A function to override how to format the date into a `String` for display, receives a `Date` instance
-
+| displayFormat | 'YYYY-MM-DD' | `string` | Specify the display format of the date when you need to have different date variations, which using [moment.js](http://momentjs.com/).
 ### Property `customStyles` available keys
 
 * appearance: `dateInput`, `disabled`, `dateTouchBody`, `dateIcon`, `placeholderText`, `dateText`
