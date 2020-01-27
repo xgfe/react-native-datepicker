@@ -63,7 +63,7 @@ export default class MyDatePicker extends Component {
 }
 ```
 
-You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.android.js) in the Example for detail.
+You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.js) in the Example for detail.
 
 ## Properties
 
