@@ -161,9 +161,14 @@ class DatePicker extends Component {
     return Moment(dateInstance).format(format);
   }
 
-  datePicked() {
+  datePicked(action) {
     if (typeof this.props.onDateChange === 'function') {
       this.props.onDateChange(this.getDateStr(this.state.date), this.state.date);
+      if (action === DatePickerAndroid.dateSetAction) {
+        if (typeof this.props.onCloseModal === 'function') {
+          return this.props.onCloseModal();
+        }
+      }
     }
   }
 
@@ -202,7 +207,7 @@ class DatePicker extends Component {
       this.setState({
         date: new Date(year, month, day)
       });
-      this.datePicked();
+      this.datePicked(action);
     } else {
       this.onPressCancel();
     }
