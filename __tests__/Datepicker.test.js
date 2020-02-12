@@ -1,11 +1,11 @@
 import React from 'react';
-import {Platform, Animated, DatePickerAndroid, Modal, View} from 'react-native';
-import Enzyme, {shallow} from 'enzyme';
+import { Platform, Animated, DatePickerAndroid, Modal, View } from 'react-native';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Moment from 'moment';
 import DatePicker from '../datepicker.js';
 
-Enzyme.configure({adapter: new Adapter()});
+Enzyme.configure({ adapter: new Adapter() });
 
 import 'jsdom-global/register';
 console.error = function () {};
@@ -40,7 +40,7 @@ describe('DatePicker', () => {
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         iconSource={{}}
-        customStyles={{testStyle: 123}}
+        customStyles={{ testStyle: 123 }}
         disabled={true}
         showIcon={false}
       />
@@ -53,7 +53,7 @@ describe('DatePicker', () => {
     expect(datePicker1.props.confirmBtnText).toEqual('Confirm');
     expect(datePicker1.props.cancelBtnText).toEqual('Cancel');
     expect(datePicker1.props.iconSource).toMatchObject({});
-    expect(datePicker1.props.customStyles).toMatchObject({testStyle: 123});
+    expect(datePicker1.props.customStyles).toMatchObject({ testStyle: 123 });
     expect(datePicker1.props.showIcon).toEqual(false);
     expect(datePicker1.props.disabled).toEqual(true);
 
@@ -67,7 +67,7 @@ describe('DatePicker', () => {
     expect(wrapper2.instance().getDateStr()).toEqual('2016-09-09');
     expect(datePicker2._renderIcon()).toEqual(iconComponent);
 
-    const wrapper3 = shallow(<DatePicker showIcon={false} date={{test: 123}} />);
+    const wrapper3 = shallow(<DatePicker showIcon={false} date={{ test: 123 }} />);
     expect(wrapper3.find('Image').length).toEqual(0);
     expect(wrapper3.instance().getDateStr()).toEqual('Invalid date');
     expect(datePicker1._renderIcon()).toEqual(null);
@@ -202,7 +202,7 @@ describe('DatePicker', () => {
     expect(datePicker.getDateStr(new Date('2016-06-02'))).toEqual('2016-06-02');
     expect(datePicker.getDateStr('2016-06-03')).toEqual('2016-06-03');
 
-    wrapper.setProps({format: 'YYYY/MM/DD'});
+    wrapper.setProps({ format: 'YYYY/MM/DD' });
     expect(datePicker.getDateStr(new Date('2016-06-02'))).toEqual('2016/06/02');
   });
 
@@ -211,7 +211,7 @@ describe('DatePicker', () => {
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);
     const datePicker = wrapper.instance();
     const date = new Date('2016-06-06');
-    wrapper.setState({date});
+    wrapper.setState({ date });
 
     datePicker.datePicked();
 
@@ -223,8 +223,8 @@ describe('DatePicker', () => {
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);
     const datePicker = wrapper.instance();
 
-    datePicker.onDatePicked({action: DatePickerAndroid.dismissedAction, year: 2016, month: 5, day: 12});
-    datePicker.onDatePicked({action: '', year: 2016, month: 5, day: 12});
+    datePicker.onDatePicked({ action: DatePickerAndroid.dismissedAction, year: 2016, month: 5, day: 12 });
+    datePicker.onDatePicked({ action: '', year: 2016, month: 5, day: 12 });
 
     expect(wrapper.state('date')).toMatchObject(new Date(2016, 5, 12));
     expect(onDateChange).toHaveBeenCalledTimes(1);
@@ -235,8 +235,8 @@ describe('DatePicker', () => {
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);
     const datePicker = wrapper.instance();
 
-    datePicker.onTimePicked({action: DatePickerAndroid.dismissedAction, hour: 12, minute: 10});
-    datePicker.onTimePicked({action: '', hour: 12, minute: 10});
+    datePicker.onTimePicked({ action: DatePickerAndroid.dismissedAction, hour: 12, minute: 10 });
+    datePicker.onTimePicked({ action: '', hour: 12, minute: 10 });
 
     expect(wrapper.state('date').getHours()).toEqual(12);
     expect(wrapper.state('date').getMinutes()).toEqual(10);
@@ -248,10 +248,10 @@ describe('DatePicker', () => {
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);
     const datePicker = wrapper.instance();
 
-    datePicker.onDatetimePicked({action: DatePickerAndroid.dismissedAction, year: 2016, month: 12, day: 12});
-    datePicker.onDatetimePicked({action: '', year: 2016, month: 12, day: 12});
-    datePicker.onDatetimeTimePicked(2016, 6, 1, {action: DatePickerAndroid.dismissedAction, hour: 12, minute: 10});
-    datePicker.onDatetimeTimePicked(2016, 6, 1, {action: '', hour: 12, minute: 10});
+    datePicker.onDatetimePicked({ action: DatePickerAndroid.dismissedAction, year: 2016, month: 12, day: 12 });
+    datePicker.onDatetimePicked({ action: '', year: 2016, month: 12, day: 12 });
+    datePicker.onDatetimeTimePicked(2016, 6, 1, { action: DatePickerAndroid.dismissedAction, hour: 12, minute: 10 });
+    datePicker.onDatetimeTimePicked(2016, 6, 1, { action: '', hour: 12, minute: 10 });
 
     expect(wrapper.state('date').getFullYear()).toEqual(2016);
     expect(wrapper.state('date').getMonth()).toEqual(6);
@@ -271,12 +271,12 @@ describe('DatePicker', () => {
     const datePicker = wrapper.instance();
     datePicker.setModalVisible = setModalVisible;
 
-    wrapper.setProps({disabled: true});
+    wrapper.setProps({ disabled: true });
     datePicker.onPressDate();
 
     expect(setModalVisible).toHaveBeenCalledTimes(0);
 
-    wrapper.setProps({disabled: false});
+    wrapper.setProps({ disabled: false });
     datePicker.onPressDate();
     expect(wrapper.state('date')).toMatchObject(datePicker.getDate());
     expect(setModalVisible).toHaveBeenCalledTimes(1);
@@ -285,13 +285,13 @@ describe('DatePicker', () => {
     Platform.OS = 'android';
     expect(datePicker.onPressDate).not.toThrow(Error);
 
-    wrapper.setProps({mode: 'datetime'});
+    wrapper.setProps({ mode: 'datetime' });
     expect(datePicker.onPressDate).not.toThrow(Error);
 
-    wrapper.setProps({mode: 'time'});
+    wrapper.setProps({ mode: 'time' });
     expect(datePicker.onPressDate).not.toThrow(Error);
 
-    wrapper.setProps({mode: 'tttt'});
+    wrapper.setProps({ mode: 'tttt' });
     expect(datePicker.onPressDate).toThrow(Error);
   });
 
@@ -328,7 +328,7 @@ describe('DatePicker', () => {
 
     expect(wrapper.state('date')).toMatchObject(new Date(2016, 5, 4));
 
-    wrapper.setProps({date: '2016-06-05'});
+    wrapper.setProps({ date: '2016-06-05' });
 
     expect(wrapper.state('date')).toMatchObject(new Date(2016, 5, 5));
   });
