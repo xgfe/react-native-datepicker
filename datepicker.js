@@ -31,7 +31,7 @@ class DatePicker extends Component {
 		this.state = {
 			date: this.getDate(),
 			modalVisible: false,
-			animatedHeight: new Animated.Value(0),
+			animatedHeight: new Animated.Value(props.height),
 			allowPointerEvents: true
 		};
 
@@ -65,7 +65,7 @@ class DatePicker extends Component {
 			return Animated.timing(
 				this.state.animatedHeight,
 				{
-					toValue: height,
+					toValue: 0,
 					duration: duration
 				}
 			).start();
@@ -73,7 +73,7 @@ class DatePicker extends Component {
 			return Animated.timing(
 				this.state.animatedHeight,
 				{
-					toValue: 0,
+					toValue: height,
 					duration: duration
 				}
 			).start(() => {
@@ -342,7 +342,8 @@ class DatePicker extends Component {
 			cancelBtnTestID,
 			confirmBtnTestID,
 			allowFontScaling,
-			locale
+			locale,
+			height
 		} = this.props;
 
 		const dateInputStyle = [
@@ -391,7 +392,7 @@ class DatePicker extends Component {
 									<Animated.View
 										style={[
 											Style.datePickerCon,
-											{ height: this.state.animatedHeight }, customStyles.datePickerCon
+											{ height, transform: [{ translateY: this.state.animatedHeight }] }, customStyles.datePickerCon
 										]}
 									>
 										<View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
@@ -452,8 +453,8 @@ DatePicker.defaultProps = {
 
 	// slide animation duration time, default to 300ms, IOS only
 	duration: 300,
-	confirmBtnText: '确定',
-	cancelBtnText: '取消',
+	confirmBtnText: 'Submit',
+	cancelBtnText: 'Cancel',
 	iconSource: require('./date_icon.png'),
 	customStyles: {},
 

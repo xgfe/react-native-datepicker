@@ -52,7 +52,7 @@ let style = StyleSheet.create({
 	},
 	btnTextText: {
 		fontSize: 16,
-		color: '#46cf98'
+		color: '#007AFF' // ios default tint color
 	},
 	btnTextCancel: {
 		color: '#666'
