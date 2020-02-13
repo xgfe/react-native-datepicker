@@ -1,10 +1,6 @@
 {
   "parser": "babel-eslint",
 
-  "ecmaFeatures": {
-    "jsx": true
-  },
-
   "env": {
     "es6": true,
     "jasmine": true
@@ -189,7 +185,7 @@
     "semi": 1,                       // require or disallow use of semicolons instead of ASI
     "sort-vars": 0,                  // sort variables within the same declaration block (off by default)
     "keyword-spacing": 2,       // require a space after certain keywords (off by default)
-    "object-curly-spacing": 2,
+    "object-curly-spacing": ["error", "always"],
     "array-bracket-spacing": 2,
     "computed-property-spacing": 2,
     "space-in-parens": 2,            // require or disallow spaces inside parentheses (off by default)
@@ -203,7 +199,7 @@
     // The following rules are included for compatibility with JSHint and JSLint. While the names of the rules may not match up with the JSHint/JSLint counterpart, the functionality is the same.
 
     "max-depth": 0,                  // specify the maximum depth that blocks can be nested (off by default)
-    "max-len": [1, 120],                    // specify the maximum length of a line in your program (off by default)
+    "max-len": [1, 150],                    // specify the maximum length of a line in your program (off by default)
     "max-params": 0,                 // limits the number of parameters that can be used in the function declaration. (off by default)
     "max-statements": 0,             // specify the maximum number of statement allowed in a function (off by default)
     "no-bitwise": 1,                 // disallow use of bitwise operators (off by default)
@@ -222,7 +218,6 @@
     "react/self-closing-comp": 1,
     "react/wrap-multilines": 0,
     "react/jsx-no-undef": 2,
-
-    "indent": [2, 2, {"SwitchCase": 1}]
+		"indent": ["error", "tab"]
   }
 }
