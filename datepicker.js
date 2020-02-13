@@ -32,6 +32,7 @@ class DatePicker extends Component {
 			date: this.getDate(),
 			modalVisible: false,
 			animatedHeight: new Animated.Value(props.height),
+			opacity: new Animated.Value(0),
 			allowPointerEvents: true
 		};
 
@@ -62,21 +63,39 @@ class DatePicker extends Component {
 		// slide animation
 		if (visible) {
 			this.setState({ modalVisible: visible });
-			return Animated.timing(
-				this.state.animatedHeight,
-				{
-					toValue: 0,
-					duration: duration
-				}
-			).start();
+			Animated.parallel([
+				Animated.timing(
+					this.state.animatedHeight,
+					{
+						toValue: 0,
+						duration: duration
+					}
+				),
+				Animated.timing(
+					this.state.opacity,
+					{
+						toValue: 1,
+						duration: duration
+					}
+				)
+			]).start();
 		} else {
-			return Animated.timing(
-				this.state.animatedHeight,
-				{
-					toValue: height,
-					duration: duration
-				}
-			).start(() => {
+			Animated.parallel([
+				Animated.timing(
+					this.state.animatedHeight,
+					{
+						toValue: height,
+						duration: duration
+					}
+				),
+				Animated.timing(
+					this.state.opacity,
+					{
+						toValue: 0,
+						duration: duration
+					}
+				)
+			]).start(() => {
 				this.setState({ modalVisible: visible });
 			});
 		}
@@ -379,63 +398,65 @@ class DatePicker extends Component {
 						<View
 							style={{ flex: 1 }}
 						>
-							<TouchableComponent
-								style={Style.datePickerMask}
-								activeOpacity={1}
-								underlayColor={'#00000077'}
-								onPress={this.onPressMask}
-							>
+							<Animated.View style={{ flex: 1, opacity: this.state.opacity }}>
 								<TouchableComponent
-									underlayColor={'#fff'}
-									style={{ flex: 1 }}
+									style={Style.datePickerMask}
+									onPress={this.onPressMask}
+									activeOpacity={1}
+									underlayColor="#00000077"
 								>
-									<Animated.View
-										style={[
-											Style.datePickerCon,
-											{ height, transform: [{ translateY: this.state.animatedHeight }] }, customStyles.datePickerCon
-										]}
+									<TouchableComponent
+										underlayColor={'#fff'}
+										style={{ flex: 1 }}
 									>
-										<View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
-											<DatePickerIOS
-												date={this.state.date}
-												mode={mode}
-												minimumDate={minDate && this.getDate(minDate)}
-												maximumDate={maxDate && this.getDate(maxDate)}
-												onDateChange={this.onDateChange}
-												minuteInterval={minuteInterval}
-												timeZoneOffsetInMinutes={timeZoneOffsetInMinutes ? timeZoneOffsetInMinutes : null}
-												style={[Style.datePicker, customStyles.datePicker]}
-												locale={locale}
-											/>
-										</View>
-										<TouchableComponent
-											underlayColor={'transparent'}
-											onPress={this.onPressCancel}
-											style={[Style.btnText, Style.btnCancel, customStyles.btnCancel]}
-											testID={cancelBtnTestID}
+										<Animated.View
+											style={[
+												Style.datePickerCon,
+												{ height, transform: [{ translateY: this.state.animatedHeight }] }, customStyles.datePickerCon
+											]}
 										>
-											<Text
-												allowFontScaling={allowFontScaling}
-												style={[Style.btnTextText, Style.btnTextCancel, customStyles.btnTextCancel]}
+											<View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
+												<DatePickerIOS
+													date={this.state.date}
+													mode={mode}
+													minimumDate={minDate && this.getDate(minDate)}
+													maximumDate={maxDate && this.getDate(maxDate)}
+													onDateChange={this.onDateChange}
+													minuteInterval={minuteInterval}
+													timeZoneOffsetInMinutes={timeZoneOffsetInMinutes ? timeZoneOffsetInMinutes : null}
+													style={[Style.datePicker, customStyles.datePicker]}
+													locale={locale}
+												/>
+											</View>
+											<TouchableComponent
+												underlayColor={'transparent'}
+												onPress={this.onPressCancel}
+												style={[Style.btnText, Style.btnCancel, customStyles.btnCancel]}
+												testID={cancelBtnTestID}
 											>
-												{cancelBtnText}
-											</Text>
-										</TouchableComponent>
-										<TouchableComponent
-											underlayColor={'transparent'}
-											onPress={this.onPressConfirm}
-											style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
-											testID={confirmBtnTestID}
-										>
-											<Text allowFontScaling={allowFontScaling}
-												style={[Style.btnTextText, customStyles.btnTextConfirm]}
+												<Text
+													allowFontScaling={allowFontScaling}
+													style={[Style.btnTextText, Style.btnTextCancel, customStyles.btnTextCancel]}
+												>
+													{cancelBtnText}
+												</Text>
+											</TouchableComponent>
+											<TouchableComponent
+												underlayColor={'transparent'}
+												onPress={this.onPressConfirm}
+												style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
+												testID={confirmBtnTestID}
 											>
-												{confirmBtnText}
-											</Text>
-										</TouchableComponent>
-									</Animated.View>
+												<Text allowFontScaling={allowFontScaling}
+													style={[Style.btnTextText, customStyles.btnTextConfirm]}
+												>
+													{confirmBtnText}
+												</Text>
+											</TouchableComponent>
+										</Animated.View>
+									</TouchableComponent>
 								</TouchableComponent>
-							</TouchableComponent>
+							</Animated.View>
 						</View>
 					</Modal>}
 				</View>
