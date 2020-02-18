@@ -14,7 +14,7 @@ npm install react-native-ui-xg --save
 ```
 
 ## Example
-Check [index.android.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.android.js) in the Example.
+Check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.js) in the Example.
 
 ![android](http://xgfe.github.io/react-native-datepicker/img/react-native-datepicker-android.gif)
 ![ios](http://xgfe.github.io/react-native-datepicker/img/react-native-datepicker-ios.gif)
@@ -63,7 +63,7 @@ export default class MyDatePicker extends Component {
 }
 ```
 
-You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.android.js) in the Example for detail.
+You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.js) in the Example for detail.
 
 ## Properties
 
