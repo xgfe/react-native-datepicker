@@ -1,32 +1,45 @@
 {
-  "name": "react-native-datepicker",
-  "version": "1.7.2",
-  "description": "React Native DatePicker component for both Android and iOS, useing DatePickerAndroid, TimePickerAndroid and DatePickerIOS",
-  "main": "datepicker.js",
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest --coverage",
-    "coverage": "cat ./coverage/lcov.info | coveralls",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "lint": "eslint ."
+  "_from": "react-native-datepicker",
+  "_id": "react-native-datepicker@1.7.2",
+  "_inBundle": false,
+  "_integrity": "sha1-WNCCJZGgrJsyq6CCZQIioO4pZp0=",
+  "_location": "/react-native-datepicker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "react-native-yearpicker",
+    "name": "react-native-yearpicker",
+    "escapedName": "react-native-yearpicker",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xgfe/react-native-datepicker.git"
-  },
-  "keywords": [
-    "react-native",
-    "DatePicker"
+  "_requiredBy": [
+    "#USER",
+    "/"
   ],
-  "author": "xgfe",
-  "license": "MIT",
+  "_resolved": "https://registry.npmjs.org/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz",
+  "_shasum": "58d0822591a0ac9b32aba082650222a0ee29669d",
+  "_spec": "react-native-yearpicker",
+  "_where": "/Users/danielneu/work/teamraise",
+  "author": {
+    "name": "xgfe"
+  },
   "bugs": {
     "url": "https://github.com/xgfe/react-native-datepicker/issues"
   },
-  "homepage": "https://github.com/xgfe/react-native-datepicker#readme",
+  "bundleDependencies": false,
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "dependencies": {
     "moment": "^2.22.0"
   },
+  "deprecated": false,
+  "description": "React Native Picker Modal to add Picker for iOS with a modifiication of DatePicker component for both Android and iOS, using DatePickerAndroid, TimePickerAndroid and DatePickerIOS",
   "devDependencies": {
     "babel-core": "^6.5.2",
     "babel-eslint": "^7.2.3",
@@ -48,11 +61,7 @@
     "react-native": "0.49.3",
     "react-test-renderer": "16.0.0-beta.5"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
+  "homepage": "https://github.com/xgfe/react-native-yearpicker#readme",
   "jest": {
     "preset": "react-native",
     "testPathIgnorePatterns": [
@@ -60,7 +69,26 @@
       "tools/"
     ]
   },
+  "keywords": [
+    "react-native",
+    "DatePicker"
+  ],
+  "license": "MIT",
+  "main": "picker_modal.js",
+  "name": "react-native-yearpicker",
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xgfe/react-native-datepicker.git"
+  },
+  "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "lint": "eslint .",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest --coverage"
+  },
+  "version": "1.7.2"
 }
