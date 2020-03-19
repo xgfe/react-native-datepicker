@@ -74,7 +74,7 @@
     "DatePicker"
   ],
   "license": "MIT",
-  "main": "picker_modal.js",
+  "main": "year_picker.js",
   "name": "react-native-yearpicker",
   "pre-commit": [
     "lint"
