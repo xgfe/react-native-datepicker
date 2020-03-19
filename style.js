@@ -19,29 +19,25 @@ let style = StyleSheet.create({
   dateInput: {
     flex: 1,
     height: 40,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderWidth: 1,
+    borderColor: '#aaa',
     alignItems: 'center',
     justifyContent: 'center'
   },
   dateText: {
-    color: '#333', 
-    fontSize:36
+    color: '#333'
   },
   placeholderText: {
-    color: '#C7C7CD', // was: #c9c9c9
-    fontSize: 23, 
-
-    
+    color: '#c9c9c9'
   },
   datePickerMask: {
     flex: 1,
     alignItems: 'flex-end',
     flexDirection: 'row',
-    backgroundColor: 'transparent'// was '#00000077'
+    backgroundColor: '#00000077'
   },
   datePickerCon: {
-    backgroundColor: '#ddd',    // was: '#fff'
+    backgroundColor: '#fff',
     height: 0,
     overflow: 'hidden'
   },
@@ -56,7 +52,7 @@ let style = StyleSheet.create({
   },
   btnTextText: {
     fontSize: 16,
-    color: '#000000'// was: '#46cf98'
+    color: '#46cf98'
   },
   btnTextCancel: {
     color: '#666'
@@ -69,8 +65,8 @@ let style = StyleSheet.create({
   },
   datePicker: {
     marginTop: 42,
-    borderTopColor: '#ccc', // was: #ccc
-    borderTopWidth: 1, 
+    borderTopColor: '#ccc',
+    borderTopWidth: 1
   },
   disabled: {
     backgroundColor: '#eee'
