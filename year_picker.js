@@ -17,7 +17,7 @@ import {
 import Style from './style';
 import Moment from 'moment';
 
-import {years} from '../../../teamraise/app/lib/config'; 
+import {years} from '../../../app/lib/config'; 
 
 const FORMATS = {
   'date': 'YYYY-MM-DD',
@@ -488,7 +488,7 @@ class DatePicker extends Component {
                 <TouchableComponent
                   style={Style.datePickerMask}
                   activeOpacity={1}
-                  underlayColor={'#00000077'} // was: #00000077
+                  underlayColor={'#00000077'} 
                   onPress={this.onPressMask}
                 >
                   <TouchableComponent
