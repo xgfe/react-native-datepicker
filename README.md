@@ -1,10 +1,10 @@
-# react-native-datepicker [![Build Status](https://travis-ci.org/xgfe/react-native-datepicker.svg?branch=master)](https://travis-ci.org/xgfe/react-native-datepicker) [![Coverage Status](https://coveralls.io/repos/github/xgfe/react-native-datepicker/badge.svg?branch=master)](https://coveralls.io/github/xgfe/react-native-datepicker?branch=master) [![Monthly download](https://img.shields.io/npm/dm/react-native-datepicker.svg)](https://img.shields.io/npm/dm/react-native-datepicker.svg) [![Total downloads](https://img.shields.io/npm/dt/react-native-datepicker.svg)](https://img.shields.io/npm/dt/react-native-datepicker.svg)
-React Native DatePicker component for both Android and iOS, using DatePickerAndroid, TimePickerAndroid and DatePickerIOS
+# react-native-yearpicker [![Build Status](https://travis-ci.org/xgfe/react-native-datepicker.svg?branch=master)](https://travis-ci.org/xgfe/react-native-datepicker) [![Coverage Status](https://coveralls.io/repos/github/xgfe/react-native-datepicker/badge.svg?branch=master)](https://coveralls.io/github/xgfe/react-native-datepicker?branch=master) 
+React Native YearPicker component for both Android and iOS, using DatePickerAndroid, TimePickerAndroid and DatePickerIOS
 
 ## Install
 
 ```bash
-npm install react-native-datepicker --save
+npm install react-native-yearpicker --save
 ```
 
 Or using [react-native-ui-xg](https://github.com/xgfe/react-native-ui-xg), our react-naitve ui kit.
@@ -24,9 +24,9 @@ Check [index.android.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 ```javascript
 
 import React, { Component } from 'react'
-import DatePicker from 'react-native-datepicker'
+import YearPicker from 'react-native-yearpicker'
 
-export default class MyDatePicker extends Component {
+export default class MyYearPicker extends Component {
   constructor(props){
     super(props)
     this.state = {date:"2016-05-15"}
@@ -34,7 +34,7 @@ export default class MyDatePicker extends Component {
 
   render(){
     return (
-      <DatePicker
+      <YearPicker
         style={{width: 200}}
         date={this.state.date}
         mode="date"
