@@ -50,11 +50,30 @@ class DatePicker extends Component {
     this.setModalVisible = this.setModalVisible.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.date !== this.props.date) {
-      this.setState({date: this.getDate(nextProps.date)});
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.date !== this.props.date) {
+  //     this.setState({date: this.getDate(nextProps.date)});
+  //   }
+  // }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.date !== this.props.date) {
+      this.setState({date: this.getDate(this.props.date)});
     }
   }
+
+  // static getDerivedStateFromProps(props, state) {
+  //   // Any time the current user changes,
+  //   // Reset any parts of state that are tied to that user.
+  //   // In this simple example, that's just the email.
+  //   if (props.date !== state.date) {
+  //     var newd  = this.getDate(props.date);
+  //     return {
+  //       date: newd
+  //     };
+  //   }
+  //   return null;
+  // }
 
   setModalVisible(visible) {
     const {height, duration} = this.props;
