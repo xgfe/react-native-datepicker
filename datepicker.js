@@ -341,8 +341,11 @@ class DatePicker extends Component {
       cancelBtnTestID,
       confirmBtnTestID,
       allowFontScaling,
-      locale
+      locale,
+      textColor,
     } = this.props;
+
+    const DatePickerIOSComponent = this.props.iOSDatePickerComponent || DatePickerIOS;
 
     const dateInputStyle = [
       Style.dateInput, customStyles.dateInput,
@@ -391,12 +394,15 @@ class DatePicker extends Component {
                     style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
                   >
                     <View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
-                      <DatePickerIOS
+                      <DatePickerIOSComponent
                         date={this.state.date}
+                        value={this.state.date}
+                        textColor={textColor}
                         mode={mode}
                         minimumDate={minDate && this.getDate(minDate)}
                         maximumDate={maxDate && this.getDate(maxDate)}
                         onDateChange={this.onDateChange}
+                        onChange={(e, date) => this.onDateChange(date)}
                         minuteInterval={minuteInterval}
                         timeZoneOffsetInMinutes={timeZoneOffsetInMinutes ? timeZoneOffsetInMinutes : null}
                         style={[Style.datePicker, customStyles.datePicker]}
