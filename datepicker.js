@@ -50,11 +50,10 @@ class DatePicker extends Component {
     this.setModalVisible = this.setModalVisible.bind(this);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.date !== prevState.date) {
-      return ({date: nextProps.date});
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.date !== this.props.date) {
+      this.setState({date: this.getDate(nextProps.date)});
     }
-    return null;
   }
 
   setModalVisible(visible) {
