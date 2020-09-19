@@ -3,6 +3,7 @@
   "version": "1.7.2",
   "description": "React Native DatePicker component for both Android and iOS, useing DatePickerAndroid, TimePickerAndroid and DatePickerIOS",
   "main": "datepicker.js",
+  "types": "index.d.ts",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest --coverage",
