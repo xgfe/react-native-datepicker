@@ -65,6 +65,8 @@ export default class MyDatePicker extends Component {
 
 You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/master/index.android.js) in the Example for detail.
 
+> There has been changes to date component in iOS 14. To get the expected behaviour like iOS 13 and earlier, see [this](https://github.com/xgfe/react-native-datepicker/issues/425#issuecomment-691976594).
+
 ## Properties
 
 | Prop  | Default  | Type | Description |
