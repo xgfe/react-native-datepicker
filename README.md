@@ -5,12 +5,22 @@ React Native DatePicker component for both Android and iOS, using DatePickerAndr
 
 ```bash
 npm install react-native-datepicker --save
+npm install @react-native-community/datetimepicker --save
 ```
 
 Or using [react-native-ui-xg](https://github.com/xgfe/react-native-ui-xg), our react-naitve ui kit.
 
 ```bash
 npm install react-native-ui-xg --save
+```
+
+## iOS 13 Dark Mode
+
+Currently there is an issue with dark mode and date picker on iOS 13 and app built on Xcode 11 or higher. To workaround this issue at the moment you need to add you your iOS project plist file o opt-out from dark mode. Future versons of date picker or React Native should resolve it correctly.
+
+```xml
+<key>UIUserInterfaceStyle</key>
+<string>Light</string>
 ```
 
 ## Example
@@ -56,7 +66,7 @@ export default class MyDatePicker extends Component {
           }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange={(date) => {this.setState({date: date})}} // Called when the user confirm the picked date or time in the UI 
       />
     )
   }
