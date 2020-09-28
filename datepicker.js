@@ -358,7 +358,7 @@ class DatePicker extends Component {
       androidTimePickerVisible,
     } = this.state;
 
-    const { androidMode, format = FORMATS[mode], is24Hour = !format.match(/h|a/) } = this.props;
+    const { androidMode, iOSMode, format = FORMATS[mode], is24Hour = !format.match(/h|a/) } = this.props;
 
     const dateInputStyle = [
       Style.dateInput, customStyles.dateInput,
@@ -417,6 +417,7 @@ class DatePicker extends Component {
                         timeZoneOffsetInMinutes={timeZoneOffsetInMinutes ? timeZoneOffsetInMinutes : null}
                         style={[Style.datePicker, customStyles.datePicker]}
                         locale={locale}
+                        display={iOSMode}
                       />
                     </View>
                     <TouchableComponent
@@ -498,6 +499,7 @@ class DatePicker extends Component {
 DatePicker.defaultProps = {
   mode: 'date',
   androidMode: 'default',
+  iOSMode: 'default',
   date: '',
   // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
   height: 259,
@@ -522,6 +524,7 @@ DatePicker.defaultProps = {
 DatePicker.propTypes = {
   mode: PropTypes.oneOf(['date', 'datetime', 'time']),
   androidMode: PropTypes.oneOf(['clock', 'calendar', 'spinner', 'default']),
+  iOSMode: PropTypes.oneOf(['compact', 'inline', 'spinner', 'default']),
   date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date), PropTypes.object]),
   format: PropTypes.string,
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),

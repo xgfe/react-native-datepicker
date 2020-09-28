@@ -47,7 +47,7 @@
     "react-test-renderer": "16.9.0"
   },
   "peerDependencies": {
-    "@react-native-community/datetimepicker": "2.1.0"
+    "@react-native-community/datetimepicker": "2.6.0"
   },
   "config": {
     "commitizen": {
