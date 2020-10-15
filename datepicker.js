@@ -7,7 +7,6 @@ import {
   Modal,
   TouchableHighlight,
   DatePickerAndroid,
-  TimePickerAndroid,
   DatePickerIOS,
   Platform,
   Animated,
@@ -15,6 +14,7 @@ import {
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const FORMATS = {
   'date': 'YYYY-MM-DD',
@@ -32,7 +32,8 @@ class DatePicker extends Component {
       date: this.getDate(),
       modalVisible: false,
       animatedHeight: new Animated.Value(0),
-      allowPointerEvents: true
+      allowPointerEvents: true,
+      isPicker: false
     };
 
     this.getDate = this.getDate.bind(this);
@@ -46,7 +47,6 @@ class DatePicker extends Component {
     this.onDatePicked = this.onDatePicked.bind(this);
     this.onTimePicked = this.onTimePicked.bind(this);
     this.onDatetimePicked = this.onDatetimePicked.bind(this);
-    this.onDatetimeTimePicked = this.onDatetimeTimePicked.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
   }
 
@@ -220,30 +220,25 @@ class DatePicker extends Component {
   }
 
   onDatetimePicked({action, year, month, day}) {
-    const {mode, androidMode, format = FORMATS[mode], is24Hour = !format.match(/h|a/)} = this.props;
-
     if (action !== DatePickerAndroid.dismissedAction) {
-      let timeMoment = Moment(this.state.date);
-
-      TimePickerAndroid.open({
-        hour: timeMoment.hour(),
-        minute: timeMoment.minutes(),
-        is24Hour: is24Hour,
-        mode: androidMode
-      }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
+      this.setState({
+        isPicker: true,
+        date: new Date(year, month, day)
+      });
     } else {
       this.onPressCancel();
     }
   }
 
-  onDatetimeTimePicked(year, month, day, {action, hour, minute}) {
-    if (action !== DatePickerAndroid.dismissedAction) {
+  onDatetimeTimePicked = (event, time) => {
+    if (time === undefined) {
+      this.setState({ isPicker: false });
+    } else {
       this.setState({
-        date: new Date(year, month, day, hour, minute)
+        date: Moment(time),
+        isPicker: false
       });
       this.datePicked();
-    } else {
-      this.onPressCancel();
     }
   }
 
@@ -341,7 +336,8 @@ class DatePicker extends Component {
       cancelBtnTestID,
       confirmBtnTestID,
       allowFontScaling,
-      locale
+      locale,
+      androidMode
     } = this.props;
 
     const dateInputStyle = [
@@ -363,7 +359,7 @@ class DatePicker extends Component {
               <View style={dateInputStyle}>
                 {this.getTitleElement()}
               </View>
-            :
+              :
               <View/>
           }
           {this._renderIcon()}
@@ -423,7 +419,7 @@ class DatePicker extends Component {
                       testID={confirmBtnTestID}
                     >
                       <Text allowFontScaling={allowFontScaling}
-                            style={[Style.btnTextText, customStyles.btnTextConfirm]}
+                        style={[Style.btnTextText, customStyles.btnTextConfirm]}
                       >
                         {confirmBtnText}
                       </Text>
@@ -433,6 +429,7 @@ class DatePicker extends Component {
               </TouchableComponent>
             </View>
           </Modal>}
+          {(Platform.OS === 'android' && this.state.isPicker) ?<DateTimePicker minuteInterval={5} mode="time" value={this.state.date} onChange={this.onDatetimeTimePicked} display={androidMode} /> : null}
         </View>
       </TouchableComponent>
     );
