@@ -17,8 +17,15 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import Style from './style';
 import Moment from 'moment';
 
+/*
 const FORMATS = {
   'date': 'YYYY-MM-DD',
+  'datetime': 'YYYY-MM-DD HH:mm',
+  'time': 'HH:mm'
+};
+*/
+const FORMATS = {
+  'date': 'DD.MM.YYYY',
   'datetime': 'YYYY-MM-DD HH:mm',
   'time': 'HH:mm'
 };
@@ -42,21 +49,13 @@ class DatePicker extends Component {
     this.onPressDate = this.onPressDate.bind(this);
     this.onPressCancel = this.onPressCancel.bind(this);
     this.onPressConfirm = this.onPressConfirm.bind(this);
-    this.onDateChange = this.onDateChange.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.onPressMask = this.onPressMask.bind(this);
     this.onDatePicked = this.onDatePicked.bind(this);
     this.onTimePicked = this.onTimePicked.bind(this);
     this.onDatetimePicked = this.onDatetimePicked.bind(this);
     this.onDatetimeTimePicked = this.onDatetimeTimePicked.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
-  }
-
-  componentWillMount() {
-    // ignore the warning of Failed propType for date of DatePickerIOS, will remove after being fixed by official
-    if (!console.ignoredYellowBox) {
-      console.ignoredYellowBox = [];
-    }
-    console.ignoredYellowBox.push('Warning: Failed propType');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -75,7 +74,8 @@ class DatePicker extends Component {
         this.state.animatedHeight,
         {
           toValue: height,
-          duration: duration
+          duration: duration,
+          useNativeDriver: true
         }
       ).start();
     } else {
@@ -83,7 +83,8 @@ class DatePicker extends Component {
         this.state.animatedHeight,
         {
           toValue: 0,
-          duration: duration
+          duration: duration,
+          useNativeDriver: true
         }
       ).start(() => {
         this.setState({modalVisible: visible});
@@ -167,8 +168,8 @@ class DatePicker extends Component {
   }
 
   datePicked() {
-    if (typeof this.props.onDateChange === 'function') {
-      this.props.onDateChange(this.getDateStr(this.state.date), this.state.date);
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(this.getDateStr(this.state.date), this.state.date);
     }
   }
 
@@ -181,7 +182,7 @@ class DatePicker extends Component {
     return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
   }
 
-  onDateChange(date) {
+  onChange(event, date) {
     this.setState({
       allowPointerEvents: false,
       date: date
@@ -226,7 +227,7 @@ class DatePicker extends Component {
         hour: timeMoment.hour(),
         minute: timeMoment.minutes(),
         is24Hour: is24Hour,
-        mode: display
+        mode: mode
       }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
     } else {
       this.onPressCancel();
@@ -268,7 +269,7 @@ class DatePicker extends Component {
           date: this.state.date,
           minDate: minDate && this.getDate(minDate),
           maxDate: maxDate && this.getDate(maxDate),
-          mode: display
+          mode: mode
         }).then(this.onDatePicked);
       } else if (mode === 'time') {
         // 选时间
@@ -287,7 +288,7 @@ class DatePicker extends Component {
           date: this.state.date,
           minDate: minDate && this.getDate(minDate),
           maxDate: maxDate && this.getDate(maxDate),
-          mode: display
+          mode: mode
         }).then(this.onDatetimePicked);
       }
     }
@@ -324,6 +325,7 @@ class DatePicker extends Component {
     const {
       mode,
       style,
+      display,
       customStyles,
       disabled,
       minDate,
@@ -383,6 +385,7 @@ class DatePicker extends Component {
                 >
                   <Animated.View
                     style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
+                    useNativeDriver={true}
                   >
                     <View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
                       <DateTimePicker
@@ -390,7 +393,7 @@ class DatePicker extends Component {
                         mode={mode}
                         minimumDate={minDate && this.getDate(minDate)}
                         maximumDate={maxDate && this.getDate(maxDate)}
-                        onChange={this.onDateChange}
+                        onChange={this.onChange}
                         display={display}
                         minuteInterval={minuteInterval}
                         timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
@@ -467,7 +470,7 @@ DatePicker.propTypes = {
   customStyles: PropTypes.object,
   showIcon: PropTypes.bool,
   disabled: PropTypes.bool,
-  onDateChange: PropTypes.func,
+  onChange: PropTypes.func,
   onOpenModal: PropTypes.func,
   onCloseModal: PropTypes.func,
   onPressMask: PropTypes.func,
