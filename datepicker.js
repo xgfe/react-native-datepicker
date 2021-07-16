@@ -1,28 +1,32 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   View,
   Text,
   Image,
   Modal,
   TouchableHighlight,
-  DatePickerAndroid,
-  TimePickerAndroid,
-  DatePickerIOS,
   Platform,
   Animated,
-  Keyboard
-} from 'react-native';
-import Style from './style';
-import Moment from 'moment';
+  Keyboard,
+} from "react-native";
+import Style from "./style";
+import Moment from "moment";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const FORMATS = {
-  'date': 'YYYY-MM-DD',
-  'datetime': 'YYYY-MM-DD HH:mm',
-  'time': 'HH:mm'
+  date: "YYYY-MM-DD",
+  datetime: "YYYY-MM-DD HH:mm",
+  time: "HH:mm",
 };
 
-const SUPPORTED_ORIENTATIONS = ['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right'];
+const SUPPORTED_ORIENTATIONS = [
+  "portrait",
+  "portrait-upside-down",
+  "landscape",
+  "landscape-left",
+  "landscape-right",
+];
 
 class DatePicker extends Component {
   constructor(props) {
@@ -32,7 +36,8 @@ class DatePicker extends Component {
       date: this.getDate(),
       modalVisible: false,
       animatedHeight: new Animated.Value(0),
-      allowPointerEvents: true
+      allowPointerEvents: true,
+      isPicker: false,
     };
 
     this.getDate = this.getDate.bind(this);
@@ -45,39 +50,33 @@ class DatePicker extends Component {
     this.onPressMask = this.onPressMask.bind(this);
     this.onDatePicked = this.onDatePicked.bind(this);
     this.onTimePicked = this.onTimePicked.bind(this);
-    this.onDatetimePicked = this.onDatetimePicked.bind(this);
-    this.onDatetimeTimePicked = this.onDatetimeTimePicked.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.date !== this.props.date) {
-      this.setState({date: this.getDate(nextProps.date)});
+      this.setState({ date: this.getDate(nextProps.date) });
     }
   }
 
   setModalVisible(visible) {
-    const {height, duration} = this.props;
+    const { height, duration } = this.props;
 
     // slide animation
     if (visible) {
-      this.setState({modalVisible: visible});
-      return Animated.timing(
-        this.state.animatedHeight,
-        {
-          toValue: height,
-          duration: duration
-        }
-      ).start();
+      this.setState({
+        modalVisible: visible,
+      });
+      return Animated.timing(this.state.animatedHeight, {
+        toValue: height,
+        duration: duration,
+      }).start();
     } else {
-      return Animated.timing(
-        this.state.animatedHeight,
-        {
-          toValue: 0,
-          duration: duration
-        }
-      ).start(() => {
-        this.setState({modalVisible: visible});
+      return Animated.timing(this.state.animatedHeight, {
+        toValue: 0,
+        duration: duration,
+      }).start(() => {
+        this.setState({ modalVisible: visible });
       });
     }
   }
@@ -91,7 +90,7 @@ class DatePicker extends Component {
   }
 
   onPressMask() {
-    if (typeof this.props.onPressMask === 'function') {
+    if (typeof this.props.onPressMask === "function") {
       this.props.onPressMask();
     } else {
       this.onPressCancel();
@@ -101,7 +100,7 @@ class DatePicker extends Component {
   onPressCancel() {
     this.setModalVisible(false);
 
-    if (typeof this.props.onCloseModal === 'function') {
+    if (typeof this.props.onCloseModal === "function") {
       this.props.onCloseModal();
     }
   }
@@ -110,13 +109,13 @@ class DatePicker extends Component {
     this.datePicked();
     this.setModalVisible(false);
 
-    if (typeof this.props.onCloseModal === 'function') {
+    if (typeof this.props.onCloseModal === "function") {
       this.props.onCloseModal();
     }
   }
 
   getDate(date = this.props.date) {
-    const {mode, minDate, maxDate, format = FORMATS[mode]} = this.props;
+    const { mode, minDate, maxDate, format = FORMATS[mode] } = this.props;
 
     // date默认值
     if (!date) {
@@ -148,13 +147,11 @@ class DatePicker extends Component {
   }
 
   getDateStr(date = this.props.date) {
-    const {mode, format = FORMATS[mode]} = this.props;
+    const { mode, format = FORMATS[mode] } = this.props;
 
-    const dateInstance = date instanceof Date
-      ? date
-      : this.getDate(date);
+    const dateInstance = date instanceof Date ? date : this.getDate(date);
 
-    if (typeof this.props.getDateStr === 'function') {
+    if (typeof this.props.getDateStr === "function") {
       return this.props.getDateStr(dateInstance);
     }
 
@@ -162,88 +159,71 @@ class DatePicker extends Component {
   }
 
   datePicked() {
-    if (typeof this.props.onDateChange === 'function') {
-      this.props.onDateChange(this.getDateStr(this.state.date), this.state.date);
+    if (typeof this.props.onDateChange === "function") {
+      this.props.onDateChange(
+        this.getDateStr(this.state.date),
+        this.state.date
+      );
     }
   }
 
   getTitleElement() {
-    const {date, placeholder, customStyles, allowFontScaling} = this.props;
+    const { date, placeholder, customStyles, allowFontScaling } = this.props;
 
     if (!date && placeholder) {
       return (
-        <Text allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>
+        <Text
+          allowFontScaling={allowFontScaling}
+          style={[Style.placeholderText, customStyles.placeholderText]}
+        >
           {placeholder}
         </Text>
       );
     }
     return (
-      <Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]}>
+      <Text
+        allowFontScaling={allowFontScaling}
+        style={[Style.dateText, customStyles.dateText]}
+      >
         {this.getDateStr()}
       </Text>
     );
   }
 
-  onDateChange(date) {
+  onDateChange(event, date) {
     this.setState({
       allowPointerEvents: false,
-      date: date
+      date: date,
     });
     const timeoutId = setTimeout(() => {
       this.setState({
-        allowPointerEvents: true
+        allowPointerEvents: true,
       });
       clearTimeout(timeoutId);
     }, 200);
   }
 
-  onDatePicked({action, year, month, day}) {
-    if (action !== DatePickerAndroid.dismissedAction) {
+  onDatePicked(event, date) {
+    if (date === undefined) {
+      this.setState({ isPicker: false });
+    } else {
       this.setState({
-        date: new Date(year, month, day)
+        date: Moment(date),
+        isPicker: false,
       });
       this.datePicked();
-    } else {
-      this.onPressCancel();
     }
   }
 
-  onTimePicked({action, hour, minute}) {
-    if (action !== DatePickerAndroid.dismissedAction) {
+  onTimePicked(event, time) {
+    if (time === undefined) {
+      this.setState({ isPicker: false });
+    } else {
       this.setState({
-        date: Moment().hour(hour).minute(minute).toDate()
+        date: Moment(time),
+        isPicker: false,
       });
       this.datePicked();
-    } else {
-      this.onPressCancel();
-    }
-  }
-
-  onDatetimePicked({action, year, month, day}) {
-    const {mode, androidMode, format = FORMATS[mode], is24Hour = !format.match(/h|a/)} = this.props;
-
-    if (action !== DatePickerAndroid.dismissedAction) {
-      let timeMoment = Moment(this.state.date);
-
-      TimePickerAndroid.open({
-        hour: timeMoment.hour(),
-        minute: timeMoment.minutes(),
-        is24Hour: is24Hour,
-        mode: androidMode
-      }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
-    } else {
-      this.onPressCancel();
-    }
-  }
-
-  onDatetimeTimePicked(year, month, day, {action, hour, minute}) {
-    if (action !== DatePickerAndroid.dismissedAction) {
-      this.setState({
-        date: new Date(year, month, day, hour, minute)
-      });
-      this.datePicked();
-    } else {
-      this.onPressCancel();
     }
   }
 
@@ -256,58 +236,21 @@ class DatePicker extends Component {
 
     // reset state
     this.setState({
-      date: this.getDate()
+      date: this.getDate(),
+      isPicker: true,
     });
 
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       this.setModalVisible(true);
-    } else {
-
-      const {mode, androidMode, format = FORMATS[mode], minDate, maxDate, is24Hour = !format.match(/h|a/)} = this.props;
-
-      // 选日期
-      if (mode === 'date') {
-        DatePickerAndroid.open({
-          date: this.state.date,
-          minDate: minDate && this.getDate(minDate),
-          maxDate: maxDate && this.getDate(maxDate),
-          mode: androidMode
-        }).then(this.onDatePicked);
-      } else if (mode === 'time') {
-        // 选时间
-
-        let timeMoment = Moment(this.state.date);
-
-        TimePickerAndroid.open({
-          hour: timeMoment.hour(),
-          minute: timeMoment.minutes(),
-          is24Hour: is24Hour,
-          mode: androidMode
-        }).then(this.onTimePicked);
-      } else if (mode === 'datetime') {
-        // 选日期和时间
-
-        DatePickerAndroid.open({
-          date: this.state.date,
-          minDate: minDate && this.getDate(minDate),
-          maxDate: maxDate && this.getDate(maxDate),
-          mode: androidMode
-        }).then(this.onDatetimePicked);
-      }
     }
 
-    if (typeof this.props.onOpenModal === 'function') {
+    if (typeof this.props.onOpenModal === "function") {
       this.props.onOpenModal();
     }
   }
 
   _renderIcon() {
-    const {
-      showIcon,
-      iconSource,
-      iconComponent,
-      customStyles
-    } = this.props;
+    const { showIcon, iconSource, iconComponent, customStyles } = this.props;
 
     if (showIcon) {
       if (iconComponent) {
@@ -341,98 +284,142 @@ class DatePicker extends Component {
       cancelBtnTestID,
       confirmBtnTestID,
       allowFontScaling,
-      locale
+      locale,
     } = this.props;
 
     const dateInputStyle = [
-      Style.dateInput, customStyles.dateInput,
+      Style.dateInput,
+      customStyles.dateInput,
       disabled && Style.disabled,
-      disabled && customStyles.disabled
+      disabled && customStyles.disabled,
     ];
 
     return (
       <TouchableComponent
         style={[Style.dateTouch, style]}
-        underlayColor={'transparent'}
+        underlayColor={"transparent"}
         onPress={this.onPressDate}
         testID={testID}
       >
         <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
-          {
-            !this.props.hideText ?
-              <View style={dateInputStyle}>
-                {this.getTitleElement()}
-              </View>
-            :
-              <View/>
-          }
+          {!this.props.hideText ? (
+            <View style={dateInputStyle}>{this.getTitleElement()}</View>
+          ) : (
+            <View />
+          )}
           {this._renderIcon()}
-          {Platform.OS === 'ios' && <Modal
-            transparent={true}
-            animationType="none"
-            visible={this.state.modalVisible}
-            supportedOrientations={SUPPORTED_ORIENTATIONS}
-            onRequestClose={() => {this.setModalVisible(false);}}
-          >
-            <View
-              style={{flex: 1}}
+          {Platform.OS === "ios" && (
+            <Modal
+              transparent={true}
+              animationType="none"
+              visible={this.state.modalVisible}
+              supportedOrientations={SUPPORTED_ORIENTATIONS}
+              onRequestClose={() => {
+                this.setModalVisible(false);
+              }}
             >
-              <TouchableComponent
-                style={Style.datePickerMask}
-                activeOpacity={1}
-                underlayColor={'#00000077'}
-                onPress={this.onPressMask}
-              >
+              <View style={{ flex: 1 }}>
                 <TouchableComponent
-                  underlayColor={'#fff'}
-                  style={{flex: 1}}
+                  style={Style.datePickerMask}
+                  activeOpacity={1}
+                  underlayColor={"#00000077"}
+                  onPress={this.onPressMask}
                 >
-                  <Animated.View
-                    style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
+                  <TouchableComponent
+                    underlayColor={"#fff"}
+                    style={{ flex: 1 }}
                   >
-                    <View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
-                      <DatePickerIOS
-                        date={this.state.date}
-                        mode={mode}
-                        minimumDate={minDate && this.getDate(minDate)}
-                        maximumDate={maxDate && this.getDate(maxDate)}
-                        onDateChange={this.onDateChange}
-                        minuteInterval={minuteInterval}
-                        timeZoneOffsetInMinutes={timeZoneOffsetInMinutes ? timeZoneOffsetInMinutes : null}
-                        style={[Style.datePicker, customStyles.datePicker]}
-                        locale={locale}
-                      />
-                    </View>
-                    <TouchableComponent
-                      underlayColor={'transparent'}
-                      onPress={this.onPressCancel}
-                      style={[Style.btnText, Style.btnCancel, customStyles.btnCancel]}
-                      testID={cancelBtnTestID}
+                    <Animated.View
+                      style={[
+                        Style.datePickerCon,
+                        { height: this.state.animatedHeight },
+                        customStyles.datePickerCon,
+                      ]}
                     >
-                      <Text
-                        allowFontScaling={allowFontScaling}
-                        style={[Style.btnTextText, Style.btnTextCancel, customStyles.btnTextCancel]}
+                      <View
+                        pointerEvents={
+                          this.state.allowPointerEvents ? "auto" : "none"
+                        }
                       >
-                        {cancelBtnText}
-                      </Text>
-                    </TouchableComponent>
-                    <TouchableComponent
-                      underlayColor={'transparent'}
-                      onPress={this.onPressConfirm}
-                      style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
-                      testID={confirmBtnTestID}
-                    >
-                      <Text allowFontScaling={allowFontScaling}
-                            style={[Style.btnTextText, customStyles.btnTextConfirm]}
+                        <DateTimePicker
+                          value={this.state.date}
+                          mode={mode}
+                          minimumDate={minDate && this.getDate(minDate)}
+                          maximumDate={maxDate && this.getDate(maxDate)}
+                          onChange={this.onDateChange}
+                          minuteInterval={minuteInterval}
+                          timeZoneOffsetInMinutes={
+                            timeZoneOffsetInMinutes
+                              ? timeZoneOffsetInMinutes
+                              : null
+                          }
+                          style={[Style.datePicker, customStyles.datePicker]}
+                          locale={locale}
+                        />
+                      </View>
+                      <TouchableComponent
+                        underlayColor={"transparent"}
+                        onPress={this.onPressCancel}
+                        style={[
+                          Style.btnText,
+                          Style.btnCancel,
+                          customStyles.btnCancel,
+                        ]}
+                        testID={cancelBtnTestID}
                       >
-                        {confirmBtnText}
-                      </Text>
-                    </TouchableComponent>
-                  </Animated.View>
+                        <Text
+                          allowFontScaling={allowFontScaling}
+                          style={[
+                            Style.btnTextText,
+                            Style.btnTextCancel,
+                            customStyles.btnTextCancel,
+                          ]}
+                        >
+                          {cancelBtnText}
+                        </Text>
+                      </TouchableComponent>
+                      <TouchableComponent
+                        underlayColor={"transparent"}
+                        onPress={this.onPressConfirm}
+                        style={[
+                          Style.btnText,
+                          Style.btnConfirm,
+                          customStyles.btnConfirm,
+                        ]}
+                        testID={confirmBtnTestID}
+                      >
+                        <Text
+                          allowFontScaling={allowFontScaling}
+                          style={[
+                            Style.btnTextText,
+                            customStyles.btnTextConfirm,
+                          ]}
+                        >
+                          {confirmBtnText}
+                        </Text>
+                      </TouchableComponent>
+                    </Animated.View>
+                  </TouchableComponent>
                 </TouchableComponent>
-              </TouchableComponent>
-            </View>
-          </Modal>}
+              </View>
+            </Modal>
+          )}
+          {mode === "time" && this.state.isPicker ? (
+            <DateTimePicker
+              mode="time"
+              value={this.state.date}
+              onChange={this.onTimePicked}
+            />
+          ) : null}
+          {mode === "date" && this.state.isPicker ? (
+            <DateTimePicker
+              mode="date"
+              minimumDate={minDate && this.getDate(minDate)}
+              maximumDate={maxDate && this.getDate(maxDate)}
+              value={this.state.date}
+              onChange={this.onDatePicked}
+            />
+          ) : null}
         </View>
       </TouchableComponent>
     );
@@ -440,17 +427,17 @@ class DatePicker extends Component {
 }
 
 DatePicker.defaultProps = {
-  mode: 'date',
-  androidMode: 'default',
-  date: '',
+  mode: "date",
+  androidMode: "default",
+  date: "",
   // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
   height: 259,
 
   // slide animation duration time, default to 300ms, IOS only
   duration: 300,
-  confirmBtnText: '确定',
-  cancelBtnText: '取消',
-  iconSource: require('./date_icon.png'),
+  confirmBtnText: "确定",
+  cancelBtnText: "取消",
+  iconSource: require("./date_icon.png"),
   customStyles: {},
 
   // whether or not show the icon
@@ -458,15 +445,19 @@ DatePicker.defaultProps = {
   disabled: false,
   allowFontScaling: true,
   hideText: false,
-  placeholder: '',
+  placeholder: "",
   TouchableComponent: TouchableHighlight,
-  modalOnResponderTerminationRequest: e => true
+  modalOnResponderTerminationRequest: (e) => true,
 };
 
 DatePicker.propTypes = {
-  mode: PropTypes.oneOf(['date', 'datetime', 'time']),
-  androidMode: PropTypes.oneOf(['clock', 'calendar', 'spinner', 'default']),
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date), PropTypes.object]),
+  mode: PropTypes.oneOf(["date", "datetime", "time"]),
+  androidMode: PropTypes.oneOf(["clock", "calendar", "spinner", "default"]),
+  date: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date),
+    PropTypes.object,
+  ]),
   format: PropTypes.string,
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
@@ -488,7 +479,7 @@ DatePicker.propTypes = {
   modalOnResponderTerminationRequest: PropTypes.func,
   is24Hour: PropTypes.bool,
   getDateStr: PropTypes.func,
-  locale: PropTypes.string
+  locale: PropTypes.string,
 };
 
 export default DatePicker;
