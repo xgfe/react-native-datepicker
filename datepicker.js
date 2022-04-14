@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   View,
@@ -10,7 +10,7 @@ import {
   Animated,
   Keyboard
 } from 'react-native';
-import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import DateTimePicker, {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import Style from './style';
 import Moment from 'moment';
 
@@ -46,16 +46,16 @@ class DatePicker extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.date !== this.props.date) {
-      this.setState({ date: this.getDate(nextProps.date) });
+      this.setState({date: this.getDate(nextProps.date)});
     }
   }
 
   setModalVisible(visible) {
-    const { height, duration } = this.props;
+    const {height, duration} = this.props;
 
     // slide animation
     if (visible) {
-      this.setState({ modalVisible: visible });
+      this.setState({modalVisible: visible});
       return Animated.timing(
         this.state.animatedHeight,
         {
@@ -73,7 +73,7 @@ class DatePicker extends Component {
           useNativeDriver: true
         }
       ).start(() => {
-        this.setState({ modalVisible: visible });
+        this.setState({modalVisible: visible});
       });
     }
   }
@@ -112,7 +112,7 @@ class DatePicker extends Component {
   }
 
   getDate(date = this.props.date) {
-    const { mode, minDate, maxDate, format = FORMATS[mode] } = this.props;
+    const {mode, minDate, maxDate, format = FORMATS[mode]} = this.props;
 
     // date默认值
     if (!date) {
@@ -144,7 +144,7 @@ class DatePicker extends Component {
   }
 
   getDateStr(date = this.props.date) {
-    const { mode, format = FORMATS[mode] } = this.props;
+    const {mode, format = FORMATS[mode]} = this.props;
 
     if (date instanceof Date) {
       return Moment(date).format(format);
@@ -160,7 +160,7 @@ class DatePicker extends Component {
   }
 
   getTitleElement() {
-    const { date, placeholder, customStyles } = this.props;
+    const {date, placeholder, customStyles} = this.props;
 
     if (!date && placeholder) {
       return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
@@ -173,7 +173,11 @@ class DatePicker extends Component {
       allowPointerEvents: false,
       date: date
     });
-    this.datePicked();
+
+    if (Platform.OS !== 'ios') {
+      this.datePicked();
+    }
+
     const timeoutId = setTimeout(() => {
       this.setState({
         allowPointerEvents: true
@@ -198,7 +202,7 @@ class DatePicker extends Component {
       this.setModalVisible(true);
     } else {
 
-      const { mode, display, format = FORMATS[mode], minDate, maxDate, is24Hour = !format.match(/h|a/) } = this.props;
+      const {mode, display, format = FORMATS[mode], minDate, maxDate, is24Hour = !format.match(/h|a/)} = this.props;
 
       // 选日期
       if (mode === 'date') {
@@ -300,7 +304,7 @@ class DatePicker extends Component {
                 {this.getTitleElement()}
               </View>
               :
-              <View />
+              <View/>
           }
           {this._renderIcon()}
           {Platform.OS === 'ios' && <Modal
@@ -308,10 +312,12 @@ class DatePicker extends Component {
             animationType="none"
             visible={this.state.modalVisible}
             supportedOrientations={SUPPORTED_ORIENTATIONS}
-            onRequestClose={() => { this.setModalVisible(false); }}
+            onRequestClose={() => {
+              this.setModalVisible(false);
+            }}
           >
             <View
-              style={{ flex: 1 }}
+              style={{flex: 1}}
             >
               <TouchableComponent
                 style={Style.datePickerMask}
@@ -321,10 +327,10 @@ class DatePicker extends Component {
               >
                 <TouchableComponent
                   underlayColor={'#fff'}
-                  style={{ flex: 1 }}
+                  style={{flex: 1}}
                 >
                   <Animated.View
-                    style={[Style.datePickerCon, { height: this.state.animatedHeight }, customStyles.datePickerCon]}
+                    style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
                     useNativeDriver={true}
                   >
                     <View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
